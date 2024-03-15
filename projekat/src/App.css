@@ -1,38 +1,301 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+nav {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: normal;
+  background-color: rgb(255, 255, 255);
+  padding: 0 20px;
+}
+
+.navbar-logo {
+  height: 90%; /* Prilagođeno za bolje usklađivanje */
+  width: auto;
+  margin-right: 10px; /* Dodato malo margine desno */
+}
+
+.logo-and-search {
+  display: flex;
+  align-items: center;
+  margin-left: -10px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.dropbtn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px; /* Dodato malo margine levo */
+  color: #283C43;
+  background-color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  size: 5px;
+  color: #283C43;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: #283C43;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #f1f1f1;}
+
+.login-btn {
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #283C43;
+  background-color: white;
+}
+
+.register-btn {
+  background-color: #2EA7D3;
+  color: white;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border: none;
+  padding: 12px 30px; /* Povećan padding za veće dugme */
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 10px; /* Dodat border-radius za ovalniji oblik */
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 0;
+}
+
+.side-section {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
+  height: 1000px;
+  width: 500px;
+}
+
+.middle-section {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Tri reda: gornje slike, centralni box, donje slike */
+  width: 100%; /* Širina srednjeg dijela */
+  height: 1000px;
+}
+
+.images-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.central-box {
+  padding: 2rem; /* Dodavanje unutrašnjeg prostora */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.central-box h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 100px;
+  margin-left: 80px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.central-box p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100px;
+  margin-bottom: 30px;
+}
+
+.for-underline {
+  border-bottom: 3px solid #2EA7D3;
+}
+
+.central-box button {
+  display: block;
+  width: 70%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #283C43;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sticker {
+  margin-right: 5px;
+}
+
+.central-box a {
+  text-decoration: none;
+  color: #283C43;
+}
+
+.central-box .terms {
+  font-size: 12px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.image {
+  width: 100%;
+  max-height: 1000px;
+  object-fit: contain;
+  /* Stilovi za slike... */
+}
+
+.image-rb {
+  border-left: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 700px;
+}
+
+.image-ru {
+  border-left: 7px solid #283C43;
+  border-bottom: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 300px;
+}
+
+.image-lu {
+  height: 400px;
+  border-right: 7px solid #283C43;
+  border-bottom: 7px solid #283C43;
+  box-sizing: border-box;
+}
+
+.image-lb {
+  border-right: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 600px;
+}
+
+.image-mlu {
+  border-right: 7px solid #283C43;
+  border-bottom: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 200px;
+  width: 100%;
+}
+
+.image-mru {
+  border-bottom: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 200px;
+  width: 100%;
+}
+
+.image-mlb {
+  border-right: 7px solid #283C43;
+  border-top: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 200px;
+}
+
+.image-mrb {
+  border-top: 7px solid #283C43;
+  box-sizing: border-box;
+  height: 200px;
+}
+
+.feature-section {
+  background-color: #f8f8f8; /* Or any color you prefer */
+  padding: 40px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.feature-section h1 {
+  margin-bottom: 20px;
+  /* Styling for your heading */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.features-list {
+  list-style: none; /* Removes default list styling */
+  padding: 0;
+  margin-right: 150px;
+  text-align: left;
+  display: inline-block; /* For center alignment with text-align of parent */
+  color: #283C43;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.features-list li {
+  margin: 10px 10px; /* Add space between list items */
+  font-size: 25px; /* Adjust the size as needed */
+}
+
+.checkmark {
+  color: #2EA7D3; /* Color for the checkmark */
+  margin-right: 5px;
+}
+
+.feature-section {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 300px;
 }
 
-.App-link {
-  color: #61dafb;
+.title {
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  width: 40%;
+  color: #283C43;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.feature-h {
+  border-bottom: 5px solid #2EA7D3;
+}
+
+.mini-description {
+  font-size: 14px; /* Manja veličina fonta za mini opis */
+  color: #666; /* Tamnija boja za mini opis */
+  margin-top: 2px; /* Malo prostora između glavnog teksta i mini opisa */
 }
