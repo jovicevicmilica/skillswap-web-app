@@ -1,0 +1,65 @@
+/*čitava faq sekcija, sa pitanjima, odgovorima i glavnim headerom*/
+.faq-section {
+  background-color: #002333;
+  color: white;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/*samo header*/
+.faq-section h2 {
+  font-size: 2.8rem;
+}
+
+/*samo pitanja i odgovori*/
+.faq-container { /* New container for the inner content */
+  width: 80%; /* Or whatever maximum width you prefer */
+  max-width: 1000px; /* An absolute maximum width if necessary */
+  margin: 0 auto; /* This will center the container */
+}
+
+/*svaki item zasebno*/
+.faq-item {
+  margin-bottom: 10px; /*razmak među pitanjima/odgovorima, zavisno šta se prikazuje*/
+  border-bottom: 3px solid grey;
+}
+
+/*samo pitanja*/
+.faq-question {
+  cursor: pointer;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+/*samo odgovori*/
+.faq-answer {
+  padding: 10px 0;
+  text-align: left;
+}
+
+/*opcija za linkove koje sam postavila u odgovorima*/
+.faq-answer a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s; /*smoother prikazivanje hovera*/
+  border-bottom: 3px solid #2EA7D3;
+}
+
+/*kada prevučemo mišem*/
+.faq-answer:hover a {
+    color: #2EA7D3;
+}
+
+/*akcija okretanja ikonice koja simulira otvaranje/zatvaranje, okrećemo je za 180 stepeni*/
+.faq-question .fa-icon {
+  transition: transform 0.2s ease-in-out; 
+}
+
+.faq-item.active .faq-question .fa-icon {
+  transform: rotate(180deg);
+}

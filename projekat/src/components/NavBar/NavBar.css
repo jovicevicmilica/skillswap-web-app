@@ -1,0 +1,114 @@
+/*čitav nav - bar sa svim što sadrži*/
+nav {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: normal;
+  background-color: rgb(255, 255, 255);
+  padding: 0 10px;
+}
+
+.navbar-logo {
+  height: 100%;
+  width: auto;
+}
+
+.logo-and-search {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+/*pretraži dugme*/
+.dropbtn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  padding: 10px;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #002333;
+  background-color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  size: 5px;
+  color: #002333;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: #002333;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #f1f1f1;}
+
+/*prijavi se dugme*/
+.login-btn {
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #002333;
+  background-color: white;
+}
+
+/*registruj se dugme*/
+.register-btn {
+  background-color: #2EA7D3;
+  color: white;
+  font-size: 17px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border: none;
+  padding: 12px 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/*link da nas povede do about stranice*/
+.about-link {
+  padding: 10px 5px;
+  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: #002333;
+  cursor: pointer;
+}
+
+/*kada pređemo preko linka*/
+.about-link:hover {
+  color: #2EA7D3;
+  transition: color 0.3s; /*smoother prikazivanje hovera*/
+}
+

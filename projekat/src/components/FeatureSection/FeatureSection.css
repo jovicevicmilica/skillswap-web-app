@@ -1,0 +1,53 @@
+/*čitava sekcija gdje su pitanje i lista*/
+.feature-section {
+  background-color: #f8f8f8; /* Or any color you prefer */
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 350px;
+}
+
+/*čitav titl, "Zašto SkillSwap?"*/
+.title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.8rem;
+  width: 40%;
+  color: #002333;
+}
+
+/*samo SkillSwap dio titla, da dodam ispod border*/
+.feature-h {
+  border-bottom: 5px solid #2EA7D3;
+}
+
+/*lista sa štrikovima*/
+.features-list {
+  list-style: none; /*da maknemo default styling liste*/
+  padding: 0;
+  margin-right: 150px;
+  text-align: left;
+  display: inline-block; 
+  color: #002333;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+/*djelovi liste, mini description i ono pored štrika*/
+.features-list li {
+  margin: 10px 10px; /*razmak djelova liste*/
+  font-size: 25px;
+}
+
+.checkmark {
+  color: #2EA7D3; /*boja štrika*/
+  margin-right: 5px;
+}
+
+/*zasebno mini description*/
+.mini-description {
+  font-size: 15px; /* Manja veličina fonta za mini opis */
+  color: #666; /* Tamnija boja za mini opis */
+  margin-top: 2px; /* Malo prostora između glavnog teksta i mini opisa */
+}
