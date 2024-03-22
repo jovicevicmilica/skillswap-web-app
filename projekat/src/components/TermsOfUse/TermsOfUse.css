@@ -1,0 +1,44 @@
+.terms-container {
+  font-family: "Poppins", sans-serif; 
+  background-color: #002333; 
+  color: white; 
+  padding: 50px 0;
+}
+
+.terms-content {
+  max-width: 1200px; /*maksimalna širina kontenta*/
+  margin: 0 auto; /*centriranje unutrašnjeg sadržaja*/
+  padding: 20px;
+}
+
+.terms-container h1 {
+  font-size: 50px; 
+  margin-bottom: 10px; /*razmak ispod naslova*/
+}
+
+.terms-container p {
+  font-size: 20px; 
+  line-height: 1.6; /*razmak između linija*/
+  margin-bottom: 40px; /*razmak ispod paragrafa*/
+  font-weight: 100;
+}
+
+.terms-container h2 {
+  font-size: 40px;
+  margin-bottom: 10px; /*razmak ispod naslova*/
+}
+
+.terms-container ul li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.terms-container p a {
+  color: #2EA7D3;
+  text-decoration: none;
+  transition: color 0.3s ease; /*tranzicija da bude više smooth*/
+}
+
+.terms-container p a:hover {
+  color: white;
+}

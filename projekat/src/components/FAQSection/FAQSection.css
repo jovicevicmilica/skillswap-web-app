@@ -5,6 +5,8 @@
   padding: 20px;
   font-family: 'Poppins', sans-serif;
   text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
 /*samo header*/
@@ -13,10 +15,11 @@
 }
 
 /*samo pitanja i odgovori*/
-.faq-container { /* New container for the inner content */
-  width: 80%; /* Or whatever maximum width you prefer */
-  max-width: 1000px; /* An absolute maximum width if necessary */
-  margin: 0 auto; /* This will center the container */
+.faq-container { 
+  width: 80%; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  margin-bottom: 150px;
 }
 
 /*svaki item zasebno*/

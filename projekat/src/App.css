@@ -5,3 +5,34 @@ html, body {
   padding: 0;
   overflow-x: hidden;
 }
+
+.linija1 {
+  position: absolute;
+  z-index: 2;
+  display: block; /*da bude u svom redu*/
+  width: 100%; 
+  height: auto; 
+}
+
+.linija2 {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 100%; 
+  height: auto; 
+}
+
+/*dio gdje su nam testimonijali i footer kao jedan div, da bi linija pravilno isla preko*/
+.testimonials-and-footer {
+  position: relative; /*postavlja referentnu tačku za apsolutno pozicioniranu liniju3*/
+}
+
+.linija3 {
+  position: absolute; /*omogućava pozicioniranje u odnosu na roditelja*/
+  right: 0; 
+  bottom: 0; /*postavlja liniju pri dnu roditeljskog div-a*/
+  z-index: 10; /*osigurava da linija bude iznad ostalih elemenata*/
+  width: 20%; /*da je smanjimo i uklopimo sa ostalim linijama*/
+  height: auto;
+}
+

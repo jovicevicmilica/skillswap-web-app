@@ -1,0 +1,26 @@
+.scrollTop {
+  position: fixed;
+  right: 20px; 
+  bottom: 40px; 
+  height: 27px; 
+  width: 27px; 
+  background-color: #2EA7D3; 
+  border-radius: 10%; 
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /*sijenka*/
+}
+
+.scrollTop::before {
+  margin-top: 4px;
+  content: ''; /*pravljenje strelice koristeći :before pseudo-element */
+  border: solid #fff; 
+  border-width: 0 2px 2px 0; /*debljina linija koje prave strelicu*/
+  display: inline-block;
+  padding: 4px; 
+  transform: rotate(-135deg); /*rotacija strelice da gleda na gore*/
+  -webkit-transform: rotate(-135deg); /*rotacija za safari*/
+}

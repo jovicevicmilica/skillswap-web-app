@@ -1,0 +1,75 @@
+.skills-section {
+  padding: 50px;
+  background-color: #f2f2f2; 
+  text-align: center;
+}
+
+.skills-section h2 {
+  font-size: 2.8rem;
+  font-family: "Poppins", sans-serif;
+  color: #002333;
+  margin-bottom: 50px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.skills-categories {
+  font-family: "Poppins", sans-serif;
+  color: #002333;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 50px;
+  font-size: 16px;
+}
+
+.category {
+  margin: 2px;
+  background-color: white; 
+  padding: 10px;
+  border-radius: 5px;
+  width: 250px; /*širina kategorije*/
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /*sijenka kategorije*/
+  overflow: hidden; /*sprečava izlazak sadržaja iz boxa*/
+  transition: max-height 0.5s ease-in-out; /*animacija za rast/smanjenje, da izgleda smooth*/
+  max-height: 250px; /*osnovna maksimalna visina kada nije prošireno, prikazuje 5 elemenata*/
+}
+
+#category-Poslovanje.expanded { max-height: 620px; } /*maksimalna visina prvog box-a, da ne bi bio otvoren više/manje nego što treba*/
+#category-Kreativnost.expanded { max-height: 840px; } /*isto za ostale*/
+#category-Tehnologija.expanded { max-height: 590px; } 
+#category-Zivotni-Stil.expanded { max-height: 680px; } 
+
+.category h3 {
+  font-size: 20px;
+  color: #333; 
+  margin-bottom: 10px;
+}
+
+.category ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.category li {
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.more-btn {
+  color: #2EA7D3; /*više dugme*/
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.more-btn:hover { /*kada pređemo preko*/
+  text-decoration: underline;
+}
