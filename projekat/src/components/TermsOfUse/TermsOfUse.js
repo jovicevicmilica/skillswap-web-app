@@ -26,7 +26,7 @@ function TermsOfUse() {
   return (
     <div className="terms-container">
       <div className="terms-content"> {/*dodatni div za bojanje pozadine*/}
-        <h1>Uslovi korišćenja</h1>
+        <h1>SkillSwap Uslovi Korišćenja</h1>
         <p>Ažurirano: Mart 2024</p>
         <p>
           Hvala što posjećujete SkillSwap. 
@@ -103,7 +103,7 @@ function TermsOfUse() {
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <p>Našeg agenta za autorska prava možete kontaktirati putem emaila na <a href="mailto:jovicevicmilica72@gmail.com?subject=Autorska prava">jovicevicmilica72@gmail.com</a> s naznakom "Autorska prava" u predmetu poruke.</p>
+        <p>Našeg agenta za autorska prava možete kontaktirati putem emaila na <a href="mailto:skillswap24@gmail.com?subject=Autorska prava">skillswap24@gmail.com</a> s naznakom „Autorska prava“ u predmetu poruke.</p>
         {/*automatski stavljam titl i primaoca, sebe*/}
         <p>Nakon prijema takve obavijesti, istražit ćemo i ukloniti materijal po potrebi. Bićete obaviješteni o rezultatima takve istrage.</p>
 
@@ -119,7 +119,7 @@ function TermsOfUse() {
         <h2>Indemnizacija</h2>
         <p>Slažete se da ćete obeštetiti i držati SkillSwap i njegove treće licencore, dobavljače, klijente i dobavljače (zajednički naziv „Indemnizirane strane“) bez štete od bilo kojih zahtjeva, gubitaka, odgovornosti, potraživanja ili troškova (uključujući advokatske honorare), napravljenih protiv Indemnizirane strane od strane bilo koje treće strane zbog ili u vezi sa (1) vašim pristupom ili korištenjem Sajta; (2) vašim kršenjem ovih Uslova korišćenja ili bilo kojeg primjenjivog zakona ili propisa, (3) vašim kršenjem bilo kojih prava bilo koje treće strane; ili (4) bilo kojim sporovima ili problemima između vas i bilo koje treće strane.</p>
         
-        <h2>Kršenje Uslova korišćenja</h2>
+        <h2>Kršenje Uslova Korišćenja</h2>
         <p>SkillSwap može otkriti bilo koje informacije koje imamo o vama (uključujući vaš identitet) ako utvrdimo da je takvo otkrivanje neophodno u vezi sa bilo kojom istragom ili pritužbom u vezi s vašom upotrebom Sajta, ili da identifikuje, kontaktira ili preduzme pravne radnje protiv nekoga ko može nanositi povredu ili ometati (bilo namjerno ili nenamjerno) prava ili imovinu SkillSwap-a, ili prava ili imovinu posjetilaca ili korisnika Sajta. SkillSwap zadržava pravo u svakom trenutku da otkrije bilo koje informacije koje SkillSwap smatra neophodnim da se uskladi sa bilo kojim primjenjivim zakonom, propisom, pravnim postupkom ili vladinim zahtjevom. SkillSwap može takođe otkriti vaše informacije kada SkillSwap utvrdi da primjenjivi zakon zahtijeva ili dozvoljava takvo otkrivanje, uključujući razmjenu informacija s drugim kompanijama i organizacijama u svrhu zaštite od prevara.</p>
         <p>Slažete se da SkillSwap može, po svom isključivom nahođenju, bez prethodnog obavještenja i u mjeri koja je primjenjiva, prekinuti vaš pristup Sajtu i/ili blokirati vaš budući pristup Sajtu ako utvrdimo da ste prekršili ove Uslove korišćenja ili druge sporazume ili smjernice koje mogu biti povezane s vašom upotrebom Sajta. Takođe se slažete da bilo koje vaše kršenje ovih Uslova korišćenja može prouzrokovati nenadoknadivu štetu SkillSwap-u za koju bi novčana odšteta bila neadekvatna, i dajete pristanak SkillSwap-u da dobije bilo koju zabranu ili pravično olakšanje koje SkillSwap smatra neophodnim ili prikladnim u takvim okolnostima. Ovi lijekovi su dodatak bilo kojim drugim lijekovima koje SkillSwap može imati po zakonu ili u pravičnosti.</p>
 
@@ -133,9 +133,9 @@ function TermsOfUse() {
         <p>Možete sačuvati ove Uslove korišćenja u pisanom obliku štampanjem za vaše zapise, i odričete se bilo kojeg drugog zahtjeva da ovi Uslovi korišćenja budu dokazani pismenim dokumentom. Ne smijete koristiti ili izvoziti ili reizvoziti bilo koji Sadržaj ili bilo koju kopiju ili adaptaciju takvog Sadržaja, ili bilo koji proizvod ili uslugu ponuđenu ili opisanu na Sajtu, u suprotnosti sa bilo kojim primjenjivim zakonima ili propisima, uključujući bez ograničenja izvozne zakone i propise Crne Gore.</p>
         <p>Sve odredbe ovih Uslova korišćenja su razdvojive, i neprimjenjivost ili nevažećnost bilo koje od odredbi neće uticati na primjenjivost ili važećnost preostalih odredbi. Ovi Uslovi korišćenja, zajedno sa Politikom privatnosti i bilo kojim drugim pravnim obavještenjima objavljenim od strane SkillSwap-a, čine cjelokupan sporazum između vas i SkillSwap-a u vezi sa vašim korišćenjem Sajta. Neuspeh SkillSwap-a da insistira ili sprovede strogo izvršenje ovih Uslova korišćenja neće se smatrati odricanjem od strane SkillSwap-a bilo koje odredbe ili bilo kog prava koje ima da sprovede ove Uslove korišćenja. Bilo koje takvo odricanje mora biti u pisanom obliku da bi bilo efikasno. Ovi Uslovi korišćenja neće se tumačiti niti konstruisati da daju bilo kakva prava ili pravna sredstva bilo kojim trećim stranama.</p>
 
-        <h2>Pitanja i Kontakt Informacije</h2>
-        <p>Ako imate bilo kakvih pitanja, molimo vas da nas kontaktirate na <a href="mailto:jovicevicmilica72@gmail.com">jovicevicmilica72@gmail.com</a>.</p>
-        {/*ovo mailto je da bi se na moj mejl direktno uputila sva pitanja*/}
+        <h2>Pitanja i Kontakt informacije</h2>
+        <p>Ako imate bilo kakvih pitanja, molimo vas da nas kontaktirate na <a href="mailto:skillswap24@gmail.com">skillswap24@gmail.com</a>.</p>
+        {/*ovo mailto je da bi se na moj mejl (mejl za "firmu") direktno uputila sva pitanja*/}
       </div>
     </div>
   );

@@ -9,6 +9,11 @@ nav {
 }
 
 .navbar-logo {
+  width: auto;
+  height: 100%;
+}
+
+.navbar-logo-link {
   height: 70%;
   width: auto;
 }

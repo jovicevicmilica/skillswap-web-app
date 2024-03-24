@@ -1,12 +1,13 @@
 import React from 'react';
 import './NavBar.css';
+import { Link } from 'react-router-dom'; 
 import logo from '../../images/logofinal.png'; //slika logo - a
 
 function NavBar() {
   return (
     <nav>
       <div className="logo-and-search">
-        <img src={logo} alt="Logo" className="navbar-logo"/>
+        <Link to="/" className="navbar-logo-link"><img src={logo} alt="Logo" className="navbar-logo"/></Link>
         <div className="dropdown">
           <button className="dropbtn">Pretraži</button>
           <div className="dropdown-content">

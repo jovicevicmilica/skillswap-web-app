@@ -1,0 +1,107 @@
+.outer-container {
+  display: flex;
+  justify-content: center;
+  background-color: #002333; /*boja za cjelokupan container*/
+  padding: 0;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px; /*maksimalna širina unutrašnjeg sadržaja*/
+  width: 100%; /*širina će biti 100% ali ograničena max-width vrijednošću*/
+  margin: 150px 20px; 
+  font-family: "Poppins", sans-serif; /*font svega*/
+}
+
+.contact-form {
+  width: 50%;
+}
+
+.contact-form-header {
+  color: white; 
+  font-family: "Poppins", sans-serif;
+  text-align: left; 
+  background-color: #002333; 
+  padding: 0px 0; 
+}
+
+.contact-form-header h2 {
+  font-size: 50px; 
+  margin: 0; /*uklanja default margine*/
+  line-height: 1.4; /*linija visina za bolje poravnanje teksta*/
+  display: inline; /*omogućava da h2 elementi budu u istom redu*/
+}
+.contact-form p {
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.contact-form h2, .contact-form p {
+  color: white; 
+}
+
+.contact-form input, .contact-form textarea {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+  resize: vertical; /*širi se samo vertikalno polje za poruku, horizontalno ne*/
+}
+
+.contact-form button {
+  width: 30%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
+  padding: 8px 0; /*dodaje veći padding na vrhu i dnu za veću visinu*/
+  font-size: 18px; 
+  background-color: #2EA7D3; /*boja pozadine dugmeta*/
+  color: white;
+  border: none; /*uklanja ivicu*/
+  border-radius: 4px; /*zaobljeni uglovi*/
+  cursor: pointer; /*pokazivač miša se menja u pokazivač kada se pređe preko dugmeta*/
+  font-family: "Poppins", sans-serif; 
+  transition: background-color 0.3s ease; /*animacija za hover efekat*/
+}
+
+.contact-form button:hover {
+  background-color: #1C89B3; /*tamnija boja za hover efekat*/
+}
+
+.contact-map {
+  /*još dodatnog podešavanja mape*/
+  width: 40%;
+  height: auto;
+  margin-left: 50px;
+}
+
+.contact-form .bottom-text {
+  font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+/*custom stilovi za toast*/
+.Toastify__toast-body { /*font tijela*/
+  font-family: "Poppins", sans-serif !important;
+}
+
+/*promjena boje ikonice za success*/
+.Toastify__toast--success .Toastify__toast-body svg {
+  fill: #2EA7D3 !important; /*ide important da bi override-ovali glavne osobine toastify-ja*/
+}
+
+/*promjena boje progress bara*/
+.Toastify__progress-bar--success {
+  background: #2EA7D3 !important;
+}
+
+/*isto to ali za error da bi ih vizuelno razlikovali, pošto neki ljudi ne čitaju tekst intuitivno*/
+.Toastify__toast--error .Toastify__toast-body svg {
+  fill: #002333 !important; /* Zamijenite #vaša_boja sa željenom bojom */
+}
+
+/*boje da se slažu sa sajtom*/
+.Toastify__progress-bar--error {
+  background: #002333 !important;
+}
