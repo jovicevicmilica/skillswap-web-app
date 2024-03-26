@@ -16,6 +16,7 @@
 
 .contact-form {
   width: 50%;
+  position: relative;
 }
 
 .contact-form-header {
@@ -61,24 +62,28 @@
   border-radius: 4px; /*zaobljeni uglovi*/
   cursor: pointer; /*pokazivač miša se menja u pokazivač kada se pređe preko dugmeta*/
   font-family: "Poppins", sans-serif; 
-  transition: background-color 0.3s ease; /*animacija za hover efekat*/
+  transition: background-color 0.3s ease, transform 0.3s; /*animacija za hover efekat*/
 }
 
 .contact-form button:hover {
   background-color: #1C89B3; /*tamnija boja za hover efekat*/
 }
 
+.contact-form button:disabled {
+  background-color: #ccc;
+  transform: scale(0.95) /*blago smanjimo dugme*/
+}
+
 .contact-map {
   /*još dodatnog podešavanja mape*/
-  width: 40%;
+  width: 45%;
   height: auto;
-  margin-left: 50px;
 }
 
 .contact-form .bottom-text {
   font-size: 15px;
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 /*custom stilovi za toast*/
@@ -98,10 +103,49 @@
 
 /*isto to ali za error da bi ih vizuelno razlikovali, pošto neki ljudi ne čitaju tekst intuitivno*/
 .Toastify__toast--error .Toastify__toast-body svg {
-  fill: #002333 !important; /* Zamijenite #vaša_boja sa željenom bojom */
+  fill: #002333 !important;
 }
 
 /*boje da se slažu sa sajtom*/
 .Toastify__progress-bar--error {
   background: #002333 !important;
+}
+
+.email-input-container {
+  position: relative;
+}
+
+/*dropdown za predložene e-mailove*/
+.suggested-emails {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  opacity: 90%; /*da bude ljepše, smanjimo vidljivost*/
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 999;
+  bottom: 100%; /*da se pojavi iznad, jer ispod remeti unos*/
+  left: 0;
+  width: 98%; /*da se širi preko cijelog inputa*/
+}
+
+.suggested-emails.active {
+  display: block; /*da se prikazuju u bloku*/
+}
+
+.suggested-emails li {
+  padding: 8px 12px;
+  cursor: pointer; /*da bi se znalo da možemo da odaberemo neki mail*/
+  font-size: 12px; /*radi preglednosti*/
+}
+
+.suggested-emails li:hover {
+  background-color: #f2f2f2;
+}
+
+.suggested-email-selected {
+  background-color: #E8F0FE; /*selektovano polje će da potamni kada odaberemo neki mail*/
 }

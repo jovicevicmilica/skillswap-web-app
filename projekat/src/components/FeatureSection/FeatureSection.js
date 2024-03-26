@@ -20,7 +20,7 @@ function FeatureSection() {
         </li>
         <li>
           <span class="checkmark"><FontAwesomeIcon icon={faCheck} /></span> Bogatstvo različitosti, zajednica koja inspiriše.
-          <p className="mini-description">Razmenjujte veštine iz različitih kultura i proširite svoje vidike.</p>
+          <p className="mini-description">Razmjenjujte veštine iz različitih kultura i proširite svoje vidike.</p>
         </li>
         <li>
           <span class="checkmark"><FontAwesomeIcon icon={faCheck} /></span> Jedinstvena prilika za učenje kroz upoznavanje.

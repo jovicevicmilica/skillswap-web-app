@@ -14,6 +14,7 @@ import ScrollToTopArrow from './components/ScrollToTopArrow/ScrollToTopArrow';
 import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import TermsOfUse from './components/TermsOfUse/TermsOfUse'; 
 import Contact from './components/Contact/Contact';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import linija1 from './images/linija1.png';
 import linija2 from './images/linija2.png';
 import linija3 from './images/linija3.png';
@@ -21,6 +22,7 @@ import linija3 from './images/linija3.png';
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/*vraće nas na početak svaki put kada pređemo na drugu stranicu*/}
       <div className="App">
         <NavBar />
         <ScrollToTopArrow />
