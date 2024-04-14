@@ -1,0 +1,91 @@
+.div {
+  display: block;
+}
+
+.discover-block {
+  width: 100%;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.discover-container {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
+  max-width: 1800px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10vw;
+  display: flex;
+}
+
+.title {
+  font-size: 18px; 
+  font-weight: 1000;
+}
+
+.discover-block-inner {
+  max-width: 1440px;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+  flex: 1;
+  padding-bottom: 54px;
+}
+
+.discover-header {
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 14px;
+  display: flex;
+}
+
+.decorative-line {
+  width: 3vw;
+  height: 3px;
+  max-width: 40px;
+  background-color: var(--skillswap-skyblue);
+  margin-right: 1vw;
+}
+
+.discover-boxes {
+  max-width: 900px;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.discover-box-inner {
+  border-left: 2px solid var(--skillswap-skyblue);
+  padding-left: 42px;
+  padding-right: 60px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.discover-links {
+  margin-top: 18px;
+  line-height: 1.5;
+}
+
+.discover-link {
+  color: var(--white);
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.discover-link:hover {
+  color: var(--skillswap-blue);
+  transition: all .5s;
+}

@@ -18,9 +18,9 @@ const testimonials = [ /*ovako možemo lakše da ih dodajemo ili maknemo*/
 
 function Testimonials() {
   return (
-    <div className="testimonials-section">
-      <h2>Zašto korisnici vole našu platformu</h2>
-      <p>Na SkillSwap-u, svako učenje je interakcija, a svaka vještina je valuta. 
+    <div className="testimonials-section" id="testimonials">
+      <h1 className="testimonials-header">Zašto korisnici vole našu platformu</h1>
+      <p className="testimonials-description">Na SkillSwap-u, svako učenje je interakcija, a svaka vještina je valuta. 
          Prijavite se, postavite svoju ponudu i krenite u avanturu gdje se obrazovanje dešava na najpraktičniji i najzanimljiviji način.
       </p>
       <div className="testimonials-container">
@@ -33,6 +33,7 @@ function Testimonials() {
           </div>
         ))}
       </div>
+      <div className="divider-section"></div>
     </div>
   );
 }

@@ -1,64 +1,259 @@
 .footer {
-  background-color: white; 
-  color: #002333; 
-  padding: 30px 0; 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100px;
-  overflow: hidden;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-around; /*ravnomjerno raspoređivanje sadržaja*/
-  align-items: center;
   width: 100%;
+  color: var(--white);
+  background-color: var(--black);
+  position: relative;
 }
 
-.footer-logo {
-  margin-left: 30px; /*odvojimo logo od lijeve strane*/
-  width: auto;
-  height: 100%;
+div {
+  display: block;
 }
 
-.footer-logo-link {
-  width: auto;
-  height: 70%;
-}
-
-.footer-center {
-  display: flex;
-  justify-content: center;
-  gap: 50px; /*razmak*/
-  flex-grow: 1;
-  margin-left: -100px; /*da malo primaknemo logo-u*/
-}
-
-.footer-link {
-  font-weight: 600;
-  color: #002333;
-  text-decoration: none;
+* {
   font-family: "Poppins", sans-serif;
-  font-size: large;
+  box-sizing: border-box;
 }
 
-.instagram-link {
-  font-size: 2em;
-  color: #002333;
-  margin-right: 50px; /*održava prostor sa desne strane*/
+.footer-container {
+  min-height: 0;
+  background-color: var(--black);
+  background-image: none;
+  display: block;
+  width: 100%;
+  color: var(--white);
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 10vw;
+  padding-left: 10vw;
+  margin-top: -30px;
+}
+
+.newsletter-block {
+  width: 100%;
+  background-color: var(--skillswap-blue);
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -2px;
+  padding: 4vw 13vw;
+  display: flex;
+  position: relative;
+}
+
+.footer-text {
+  max-width: 490px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  font-size: 18px;
+  line-height: 28px;
+  display: flex;
+}
+
+.footer-header {
+  max-width: 330px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 23px;
+  line-height: 38px;
+}
+
+.footer-form {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 0;
+  margin: 0 0 15px;
+}
+
+form {
+  display: block;
+  margin-top: 0em;
+  unicode-bidi: isolate;
+}
+
+.form-container {
+  align-items: stretch;
+  display: flex;
+}
+
+.form-input {
+  min-height: 55px;
+  color: var(--black);
+  border: 1px var(--black);
+  margin-bottom: 0;
+  padding: 32px 25px 30px 35px;
+  font-weight: 500;
+  transition: border-color .3s;
+  width: 100%;
+  height: 38px;
+  background-color: var(--white);
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+.input {
+  cursor: text;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+}
+
+.form-button {
+  color: var(--white);
+  transition: background-color .4s;
+  background-color: var(--skillswap-skyblue);
+  text-align: center;
+  padding: 17px 45px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  text-decoration: none;
+  display: inline-block;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: var(--black);
+  transition: all .5s;
 }
 
 .footer-bottom {
-  width: 100%; 
-  text-align: center; 
-  position: absolute; /*apsolutno u odnosu na container*/
-  bottom: 10px; /*pozicija ispod linkova*/
-  left: 50%; /*horizontalno centriranje*/
-  transform: translateX(-50%); /*ispravlja centriranje*/
-  font-family: "Poppins", sans-serif;
-  font-size: small;
-  color: gray; /*da bude manje vidljivo radi efekta*/
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 5vw;
+  padding-bottom: 3vw;
+  padding-right: 2vw;
+  display: flex;
+}
+
+.footer-bottom-inner {
+  align-items: center;
+  display: flex;
+}
+
+.logo-block {
+  margin-right: 6.25vw;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 25px;
+}
+
+.footer-logo {
+  width: 15vw;
+  height: 10vw;
+  max-height: 50px;
+  max-width: 150px;
+  background-color: var(--black);
+  background-image: url("../../images/logowhite.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.logo-block-inner {
+  align-items: center;
+  display: flex;
+}
+
+.copyright-block {
+  margin-bottom: 0;
+  display: block;
+}
+
+.divider {
+  width: 2px;
+  height: 15px;
+  background-color: var(--white);
+  margin-bottom: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.legal-link {
+  color: var(--skillswap-skyblue);
+  flex: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.email-block {
+  color: var(--white);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+.email-h {
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  display: flex;
+}
+
+.email-link {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.decorative-line {
+  width: 3vw;
+  height: 3px;
+  max-width: 40px;
+  background-color: var(--skillswap-skyblue);
+  margin-right: 1vw;
+}
+
+.follow-container {
+  text-align: right;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  display: flex;
+  padding-top: 2vw;
+}
+
+.instagram-link {
+  align-items: center;
+  margin-top: 13px;
+  display: flex;
+}
+
+.social-link {
+  width: 25px;
+  height: 25px;
+  background-image: url("https://assets-global.website-files.com/654cce8ded0320abfd6ae581/654cce8ded0320abfd6ae62c_instagram-icon.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 20px;
+  transition: transform .3s;
+  max-width: 100%;
+  display: inline-block;
+  cursor: pointer;
 }

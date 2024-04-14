@@ -1,158 +1,216 @@
 /*čitav container*/
 .container {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  gap: 0;
-}
-
-/*sekcija sa strane, lijeva i desna sa po dvije slike*/
-.side-section {
-  display: flex;
-  flex-direction: column;
-  grid-template-columns: 1fr 1fr;
-  height: 1000px;
-  width: 500px;
-}
-
-/*srednja sekcija sa centralnim box - em*/
-.middle-section {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /*dijelimo srednju sekciju na tri dodatne*/
-  width: 100%; 
-  height: 1000px;
-}
-
-/*za middle box gornji i donji*/
-.images-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-/*centralni dio sa prijavama*/
-.central-box {
-  padding: 2rem; /*unutrašnji dio*/
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-}
-
-.central-box h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 35px;
-  font-weight: 100px;
-  margin-left: 80px;
-  margin-right: 20px;
-  margin-bottom: 10px;
-}
-
-.central-box p {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 100px;
-  margin-bottom: 30px;
-}
-
-.for-underline {
-  border-bottom: 3px solid #2EA7D3;
-}
-
-.central-box button {
+  height: 100%;
+  max-width: 1440px;
   display: block;
-  width: 70%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 1px solid #002333;
-  background-color: rgb(255, 255, 255);
-  cursor: pointer;
-  font-weight: bold;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
 }
 
-/*stikeri za prijavu*/
-.sticker {
-  margin-right: 5px;
+.container-inner {
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  position: relative;
 }
 
-.central-box a {
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.container-text-wrapper {
+  z-index: 1;
+  max-width: 750px;
+  grid-row-gap: 40px;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 1000;
+  line-height: 1.2;
+  display: flex;
+  position: relative;
+}
+
+.blue-text {
+  color: var(--skillswap-blue);
+}
+
+.black-button {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 17px 45px;
+  line-height: 18px;
   text-decoration: none;
-  color: #002333;
+  transition: all .5s;
+  display: inline-block;
+  max-width: 100%;
+  border: none;
+  cursor: pointer;
 }
 
-.central-box .terms {
-  font-size: 12px;
-  color: #666;
-  margin-top: 20px;
+.black-button:hover {
+  background-color: var(--skillswap-blue);
 }
 
-.image {
-  width: 100%;
-  max-height: 1000px;
-  object-fit: contain;
-}
-
-/*svaka slika zasebno skalirana*/
-
-/*slika desno dolje*/
-.image-rb {
-  border-left: 7px solid #002333;
-  box-sizing: border-box;
-  height: 700px;
-}
-
-/*slika desno gore*/
-.image-ru {
-  border-left: 7px solid #002333;
-  border-bottom: 7px solid #002333;
-  box-sizing: border-box;
-  height: 300px;
-}
-
-/*slika lijevo gore*/
-.image-lu {
+.container-img {
+  width: 950px;
   height: 400px;
-  border-right: 7px solid #002333;
-  border-bottom: 7px solid #002333;
-  box-sizing: border-box;
+  position: relative;
 }
 
-/*slika lijevo dolje*/
-.image-lb {
-  border-right: 7px solid #002333;
-  box-sizing: border-box;
-  height: 600px;
+@keyframes moveUpDown {
+  0% {
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Početna transformacija */
+  }
+  50% {
+    transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Transformacija u sredini, gore */
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Krajnja transformacija, vraćanje na početak */
+  }
 }
 
-/*srednja lijeva gornja slika*/
-.image-mlu {
-  border-right: 7px solid #002333;
-  border-bottom: 7px solid #002333;
-  box-sizing: border-box;
-  height: 200px;
-  width: 100%;
+.float {
+  animation: moveUpDown 2s infinite; /* 2s - trajanje animacije, infinite - beskonačna animacija */
 }
 
-/*srednja desna gornja slika*/
-.image-mru {
-  border-bottom: 7px solid #002333;
-  box-sizing: border-box;
-  height: 200px;
-  width: 100%;
+.code {
+  z-index: 1;
+  width: 105px;
+  height: 105px;
+  background-image: url("../../images/program.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: auto;
+  bottom: 29%;
+  left: 21%;
+  right: auto;
 }
 
-/*srednja lijeva donja slika*/
-.image-mlb {
-  border-right: 7px solid #002333;
-  border-top: 7px solid #002333;
-  box-sizing: border-box;
-  height: 200px;
+.guitar {
+  width: 105px;
+  height: 105px;
+  background-image: url("../../images/guitar.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 0%;
+  bottom: auto;
+  left: -14%;
+  right: auto;
 }
 
-/*srednja desna donja slika*/
-.image-mrb {
-  border-top: 7px solid #002333;
-  box-sizing: border-box;
-  height: 200px;
+.book {
+  width: 700px;
+  height: 270px;
+  background-image: url("../../images/book.svg");
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: auto;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.cook {
+  width: 120px;
+  height: 105px;
+  background-image: url("../../images/chef_cap.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -13%;
+  bottom: auto;
+  left: auto;
+  right: -16%;
+}
+
+.paint {
+  width: 70px;
+  height: 70px;
+  background-image: url("../../images/brush.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: auto;
+  bottom: 6%;
+  left: auto;
+  right: 15%;
+}
+
+.game {
+  width: 74px;
+  height: 58px;
+  background-image: url("../../images/game_controller.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -20%;
+  bottom: auto;
+  left: auto;
+  right: 11%;
+}
+
+.shine {
+  width: 60px;
+  height: 30px;
+  background-image: url("../../images/shine_one.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -40%;
+  bottom: auto;
+  left: auto;
+  right: -18%;
+}
+
+.shine.two {
+  background-image: url("../../images/shine_two.svg");
+  top: -62%;
+  bottom: auto;
+  left: -8%;
+  right: auto;
+}
+
+.shine.three {
+  width: 80px;
+  height: 40px;
+  background-image: url("../../images/shine_three.svg");
+  top: -51px;
+  bottom: 0%;
+  left: 18%;
+  right: auto;
+}
+
+.shine.four {
+    width: 90px;
+    height: 45px;
+    background-image: url("../../images/shine_four.svg");
+    top: 36%;
+    left: 55%;
+    right: auto;
 }

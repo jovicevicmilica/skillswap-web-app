@@ -1,53 +1,106 @@
 /*čitava sekcija gdje su pitanje i lista*/
 .feature-section {
-  background-color: #f8f8f8; 
-  padding: 40px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 350px;
+  background-color: rgba(0, 207, 255, .05);
 }
 
-/*čitav titl, "Zašto SkillSwap?"*/
-.title {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.8rem;
-  width: 40%;
-  color: #002333;
-}
-
-/*samo SkillSwap dio titla, da dodam ispod border*/
-.feature-h {
-  border-bottom: 5px solid #2EA7D3;
-}
-
-/*lista sa štrikovima*/
-.features-list {
-  list-style: none; /*da maknemo default styling liste*/
+.feature-container {
+  height: 100%;
+  max-width: 1440px;
   padding: 0;
-  margin-right: 150px;
-  text-align: left;
-  display: inline-block; 
-  color: #002333;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-/*djelovi liste, mini description i ono pored štrika*/
-.features-list li {
-  margin: 10px 10px; /*razmak djelova liste*/
-  font-size: 25px;
+.feature-container-inner {
+  flex-direction: column;
+  align-items: center;
+  padding: 90px;
+  display: flex;
 }
 
-.checkmark {
-  color: #2EA7D3; /*boja štrika*/
-  margin-right: 5px;
+.feature-heading {
+  max-width: 850px;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 1000;
+  line-height: 1.3;
 }
 
-/*zasebno mini description*/
-.mini-description {
-  font-size: 15px; 
-  color: #666; 
-  margin-top: 2px; /*prostor između glavnog teksta i mini opisa*/
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.feature-subheading {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.7;
+}
+
+.blocks {
+  width: 100%;
+  grid-column-gap: 70px;
+  grid-row-gap: 70px;
+  justify-content: space-between;
+  margin-top: 54px;
+  display: flex;
+}
+
+.feature-block {
+  width: 33.33%;
+  background-color: var(--white);
+  position: relative;
+}
+
+.feature-block-inner {
+  width: 100%;
+  height: 100%;
+  padding: 48px 30px 30px 48px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.36;
+}
+
+.feature-block-img {
+  width: 140px;
+  height: 56px;
+  position: absolute;
+  top: -20px;
+  bottom: auto;
+  left: -30px;
+  right: auto;
+}
+
+.feature-block-img.swap {
+  background-image: url("../../images/swap.png");
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: auto;
+  right: auto;
+  max-height: none;
+  max-width: none;
+}
+
+.feature-block-img.communication {
+  background-image: url("../../images/communication.png");
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: auto;
+  right: auto;
+  max-height: none;
+  max-width: none;
+}
+
+.feature-block-img.friendship {
+  background-image: url("../../images/friendship.png");
+  max-height: none;
+  max-width: none;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

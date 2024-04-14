@@ -66,7 +66,7 @@ function PrivacyPolicy() {
         <p>Međutim, ni jedan Internet ili e-mail prenos nikada nije potpuno siguran niti bez grešaka. Stoga ne možemo garantovati apsolutnu sigurnost vaših podataka, i nismo odgovorni za procese i mreže koje ne kontrolišemo. Korisnici preuzimaju rizik od bezbjednosnih propusta i posljedica koje proizilaze iz njih. Budite pažljivi pri odlučivanju koje informacije šaljete nama putem e-maila ili preko Interneta.</p>
 
         <h2>Vaša prava, izbori i obavještenja</h2>
-        <p>Posvećeni smo olakšavanju ostvarivanja vaših prava koje vam daju zakoni vaše jurisdikcije, što može uključivati pravo da tražite ispravku, modifikaciju ili brisanje vaših ličnih informacija i pravo da se odjavite od prodaje vaših ličnih informacija (ako je primjenjivo). Učinićemo sve što je u našoj moći da ispoštujemo vaše zahtjeve podložno bilo kojim pravnim i ugovornim obavezama. Ako želite da podnesete zahtjev, kontaktirajte nas na <a href="mailto:jovicevicmilica72@gmail.com?">jovicevicmilica72@gmail.com</a>.</p>
+        <p>Posvećeni smo olakšavanju ostvarivanja vaših prava koje vam daju zakoni vaše jurisdikcije, što može uključivati pravo da tražite ispravku, modifikaciju ili brisanje vaših ličnih informacija i pravo da se odjavite od prodaje vaših ličnih informacija (ako je primjenjivo). Učinićemo sve što je u našoj moći da ispoštujemo vaše zahtjeve podložno bilo kojim pravnim i ugovornim obavezama. Ako želite da podnesete zahtjev, kontaktirajte nas na <a href="mailto:skillswap24@gmail.com?">skillswap24@gmail.com</a>.</p>
 
         <h2>Korisnici izvan Crne Gore</h2>
         <p>Sajt se kontroliše i upravlja iz Crne Gore. Ako ste pojedinac iz Evropske Unije ili bilo koje druge jurisdikcije sa zakonima ili propisima koji upravljaju prikupljanjem, korišćenjem i otkrivanjem ličnih podataka koji se razlikuju od zakona Crne Gore, budite obavješteni da možemo čuvati informacije koje prikupimo u Crnoj Gori koje nisu smatrane „adekvatnom jurisdikcijom“ od strane evropskih regulatornih tijela. Lični podaci se takođe mogu prenijeti iz zemlje vašeg boravišta u druge zemlje.</p>
@@ -78,9 +78,10 @@ function PrivacyPolicy() {
         <p>Mi možemo ažurirati ovu Politiku Privatnosti s vremena na vrijeme i to bez prethodne najave kako bismo odražali promjene u našim praksama informisanja, i bilo koja takva izmjena će se primjenjivati na informacije koje su već prikupljene i koje će biti prikupljene. Vaša kontinuirana upotreba sajta nakon bilo kakvih promjena u našoj Politici Privatnosti ukazuje na vašu saglasnost sa uslovima revidirane Politike Privatnosti. Molimo vas da povremeno pregledate ovu Politiku Privatnosti i posebno prije nego što nam pružite lične podatke. Ako napravimo materijalne promjene u ovoj Politici Privatnosti, obavijestićemo vas ovdje, putem e-maila ili putem obavještenja na našoj početnoj stranici. Datum posljednjeg ažuriranja Politike Privatnosti je naveden na vrhu ove Politike Privatnosti.</p>
 
         <h2>Pitanja i Kontakt informacije</h2>
-        <p>Ako imate bilo kakvih pitanja, molimo vas da nas kontaktirate na <a href="mailto:jovicevicmilica72@gmail.com">jovicevicmilica72@gmail.com</a>.</p>
+        <p>Ako imate bilo kakvih pitanja, molimo vas da nas kontaktirate na <a href="mailto:skillswap24@gmail.com">skillswap24@gmail.com</a>.</p>
         {/*ovo mailto je da bi se na moj mejl (mejl za "firmu") direktno uputila sva pitanja*/}
       </div>
+      <div className="black-block"></div>
     </div>
   );
 }

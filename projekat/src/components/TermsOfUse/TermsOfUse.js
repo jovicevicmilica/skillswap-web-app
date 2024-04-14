@@ -137,6 +137,7 @@ function TermsOfUse() {
         <p>Ako imate bilo kakvih pitanja, molimo vas da nas kontaktirate na <a href="mailto:skillswap24@gmail.com">skillswap24@gmail.com</a>.</p>
         {/*ovo mailto je da bi se na moj mejl (mejl za "firmu") direktno uputila sva pitanja*/}
       </div>
+      <div className="black-block"></div>
     </div>
   );
 }

@@ -1,75 +1,170 @@
-.skills-section {
-  padding: 50px;
-  background-color: #f2f2f2; 
-  text-align: center;
-}
-
-.skills-section h2 {
-  font-size: 2.8rem;
-  font-family: "Poppins", sans-serif;
-  color: #002333;
-  margin-bottom: 50px;
-  text-align: center;
-  max-width: 800px;
-  margin-left: auto; 
-  margin-right: auto; 
-}
-
-.skills-categories {
-  font-family: "Poppins", sans-serif;
-  color: #002333;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 50px;
-  font-size: 16px;
-}
-
-.category {
-  margin: 2px;
-  background-color: white; 
-  padding: 10px;
-  border-radius: 5px;
-  width: 250px; /*širina kategorije*/
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /*sijenka kategorije*/
-  overflow: hidden; /*sprečava izlazak sadržaja iz boxa*/
-  transition: max-height 0.5s ease-in-out; /*animacija za rast/smanjenje, da izgleda smooth*/
-  max-height: 250px; /*osnovna maksimalna visina kada nije prošireno, prikazuje 5 elemenata*/
-}
-
-#category-Poslovanje.expanded { max-height: 620px; } /*maksimalna visina prvog box-a, da ne bi bio otvoren više/manje nego što treba*/
-#category-Kreativnost.expanded { max-height: 840px; } /*isto za ostale*/
-#category-Tehnologija.expanded { max-height: 590px; } 
-#category-Zivotni-Stil.expanded { max-height: 680px; } 
-
-.category h3 {
-  font-size: 20px;
-  color: #333; 
-  margin-bottom: 10px;
-}
-
-.category ul {
-  list-style-type: none;
+.skills-container {
+  height: 100%;
+  max-width: 1440px;
   padding: 0;
-  margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-.category li {
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 4px;
+.skills-section-inner {
+  width: 100%;
+  height: 100%;
+  padding: 90px 120px;
+  position: relative;
 }
 
-.more-btn {
-  color: #2EA7D3; /*više dugme*/
-  background: none;
-  border: none;
-  padding: 5px;
+.skills-header {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.skills-box {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.skill-box {
+  min-height: 200px;
+  grid-column-gap: 90px;
+  grid-row-gap: 16px;
+  background-color: var(--skillswap-blue);
+  color: var(--white);
+  grid-template-rows: auto;
+  grid-template-columns: .5fr 1fr;
+  grid-auto-columns: 1fr;
+  padding: 48px 80px 48px 50px;
+  display: grid;
+}
+
+.skill-box.black {
+  background-color: var(--black);
+}
+
+.skill-box.lightblue {
+  background-color: var(--skillswap-skyblue);
+  color: var(--black);
+}
+
+.skill-heading {
+  max-width: 285px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.skill-details {
+  grid-row-gap: 40px;
+  flex-direction: column;
+  display: flex;
+}
+
+.skill-text {
+  font-size: 15px;
+}
+
+.dropdown-box {
+  grid-column-gap: 24px;
+  display: flex;
+  grid-column-gap: 4px;
   cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.18;
+  display: flex;
+  border: none;
+  background: none;
+}
+
+.dropdown-title {
+  color: var(--white);
   font-weight: bold;
 }
 
-.more-btn:hover { /*kada pređemo preko*/
-  text-decoration: underline;
+.dropdown-title.black {
+  color: var(--black);
+}
+
+.dropdown-icon {
+  cursor: pointer;
+  width: 17px; 
+  height: 17px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 3px;
+  color: var(--white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.dropdown-icon.black {
+  color: var(--black);
+}
+
+.rotate {
+  transform: rotate(180deg); /*rotira ikonu za 180 stepeni*/
+}
+
+.skill-dropdown {
+  flex-wrap: wrap; /*omogućava elementima da pređu u novi red*/
+  justify-content: center; 
+  align-items: center; 
+  background: var(--skillswap-lightblue); 
+  top: 100%; /*direktno ispod roditeljskog div - a*/
+  left: 0;
+  right: 0;
+  margin-top: 0; 
+  border: none; 
+  box-shadow: none; 
+  z-index: 10; 
+  overflow: hidden; 
+  max-height: 0; /*početna visina kada je zatvoreno*/
+  transition: max-height 0.3s ease-in-out; /*animacija visine*/
+}
+
+.skill-tag {
+  background-color: var(--white); 
+  color: var(--skillswap-lightblue); 
+  padding: 10px 20px; 
+  margin: 5px; 
+  border-radius: 20px;
+  border: none;
+  cursor: pointer; 
+  font-weight: bold; 
+}
+
+.skill-tag:hover {
+  background-color: var(--black); 
+  color: var(--skillswap-lightblue);
+}
+
+.skill-dropdown.open {
+  flex-wrap: wrap; /*omogućava wrapovanje dugmadi*/
+  justify-content: center; 
+  align-items: center; 
+  padding: 20px; 
+  max-height: 500px;
+}
+
+.close-dropdown {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: black; 
+  cursor: pointer;
+  padding: 10px; 
+}
+
+.close-dropdown:hover {
+  color: #ccc; 
 }

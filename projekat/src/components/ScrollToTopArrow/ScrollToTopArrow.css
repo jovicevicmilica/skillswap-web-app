@@ -4,7 +4,7 @@
   bottom: 40px; 
   height: 27px; 
   width: 27px; 
-  background-color: #2EA7D3; 
+  background-color: var(--skillswap-blue); 
   border-radius: 10%; 
   cursor: pointer;
   z-index: 1000;

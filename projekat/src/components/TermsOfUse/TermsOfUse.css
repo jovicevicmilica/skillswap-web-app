@@ -1,8 +1,8 @@
 .terms-container {
   font-family: "Poppins", sans-serif; 
-  background-color: #002333; 
+  background-color: var(--skillswap-lightblue); 
   color: white; 
-  padding: 50px 0;
+  padding-top: 50px;
 }
 
 .terms-content {
@@ -34,11 +34,18 @@
 }
 
 .terms-container p a {
-  color: #2EA7D3;
+  color: var(--white);
   text-decoration: none;
   transition: color 0.3s ease; /*tranzicija da bude više smooth*/
 }
 
 .terms-container p a:hover {
-  color: white;
+  color: var(--skillswap-blue);
+}
+
+.black-block {  
+  min-height: 10vw;
+  width: 100%;
+  background-color: var(--black);
+  position: relative;
 }

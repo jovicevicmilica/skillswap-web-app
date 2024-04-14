@@ -1,119 +1,116 @@
 /*čitav nav - bar sa svim što sadrži*/
-nav {
-  height: 100px;
-  display: flex;
+.nav-about {
+  z-index: auto;
+  color: #000;
+  z-index: 10;
+  width: 100%;
   justify-content: space-between;
-  align-items: normal;
-  background-color: rgb(255, 255, 255);
-  padding: 0 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  display: flex;
+  top: 0%;
+  bottom: auto;
+  left: 0%;
+  right: 0%;
+  unicode-bidi: isolate;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.nav-inner {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  unicode-bidi: isolate;
 }
 
 .navbar-logo {
-  width: auto;
-  height: 100%;
-}
-
-.navbar-logo-link {
-  height: 70%;
-  width: auto;
-}
-
-.logo-and-search {
-  display: flex;
-  align-items: center;
-}
-
-.menu {
-  display: flex;
-  align-items: center;
-}
-
-/*pretraži dugme*/
-.dropbtn {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  padding: 10px;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-  margin-left: 5px;
-  color: #002333;
-  background-color: white;
-}
-
-.dropdown {
-  position: relative;
+  background-image: url(../../images/logoblue.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
   display: inline-block;
+  width: 15vw;
+  height: 10vw;
+  max-height: 100px;
+  max-width: 200px;
+  flex: none;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  size: 5px;
-  color: #002333;
+.nav-links-wrapper {
+  flex: 1;
+  align-items: center;
+  display: flex;
+  unicode-bidi: isolate;
+  box-sizing: border-box;
 }
 
-.dropdown-content a {
-  padding: 12px 16px;
+.nav-link {
+  color: var(--black);
+  margin-left: 2vw;
+  margin-right: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
   text-decoration: none;
-  display: block;
-  color: #002333;
+  transition: color .4s;
+  display: inline-block;
+  max-width: 100%;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
+.nav-link:hover {
+  color: var(--skillswap-lightblue);
+}
 
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #f1f1f1;}
-
-/*prijavi se dugme*/
-.login-btn {
-  border: none;
-  padding: 10px 15px;
-  margin-left: 10px;
+Link {
+  background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  color: #002333;
-  background-color: white;
 }
 
-/*registruj se dugme*/
-.register-btn {
-  background-color: #2EA7D3;
-  color: white;
-  font-size: 17px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+.right-side {
+  margin-left: auto;
+  align-items: center;
+}
+
+.login {
+  margin-right: 20px;
+}
+
+.nav-button {
+  background-position: 90% 46%;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  padding-right: 70px;
+  z-index: 30;
+  min-width: 130px;
+  background-color: var(--skillswap-blue);
+  color: #fff;
+  position: relative;
+  max-width: 100%;
+  color: var(--white);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 45px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration: none;
+  transition: all .5s;
+  display: inline-block;
   border: none;
-  padding: 12px 30px;
-  margin-left: 10px;
-  margin-right: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-/*link da nas povede do about stranice*/
-.about-link {
-  padding: 10px 5px;
-  font-size: 17px;
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  text-decoration: none;
-  color: #002333;
-  cursor: pointer;
 }
 
-/*kada pređemo preko linka*/
-.about-link:hover {
-  color: #2EA7D3;
-  transition: color 0.3s; /*smoother prikazivanje hovera*/
+.nav-button:hover {
+  background-color: var(--black);
+  transition: all .5s;
 }
 
+.blue-button {
+  margin-left: auto;
+}

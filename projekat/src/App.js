@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import NavBar from './components/NavBar/NavBar';
 import Container from './components/Container/Container';
 import FeatureSection from './components/FeatureSection/FeatureSection';
-import AboutSection from './components/AboutSection/AboutSection';
 import FAQSection from './components/FAQSection/FAQSection';
 import SkillsDirectory from './components/SkillsDirectory/SkillsDirectory';
 import Testimonials from './components/Testimonials/Testimonials';
@@ -15,9 +14,8 @@ import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import TermsOfUse from './components/TermsOfUse/TermsOfUse'; 
 import Contact from './components/Contact/Contact';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import linija1 from './images/linija1.png';
-import linija2 from './images/linija2.png';
-import linija3 from './images/linija3.png';
+import Discover from './components/Discover/Discover';
+import Legal from './components/Legal/Legal';
 
 function App() {
   return (
@@ -27,60 +25,52 @@ function App() {
         <NavBar />
         <ScrollToTopArrow />
         <Routes>
-          <Route
-            path="/"
+          <Route 
+            path="/" 
             element={
               <>
                 <Helmet>
                   <title>Početna - SkillSwap</title>
                 </Helmet>
-                <Container />
+                <Container/>
                 <FeatureSection />
-                <img src={linija1} className="linija1" alt="Decorative line" />
-                <AboutSection />
+                <SkillsDirectory/>
+                <ScrollToTopArrow />
+                <Testimonials/>
                 <FAQSection />
-                <SkillsDirectory />
-                <img src={linija2} className="linija2" alt="Decorative line" />
-                <div className="testimonials-and-footer">
-                  <Testimonials />
-                  <img src={linija3} className="linija3" alt="Decorative line" />
-                </div>
+                <Discover/>
               </>
-            }
-          />
-          <Route
-            path="/privacy-policy"
+            }/>
+          <Route 
+            path="/legal" 
             element={
               <>
                 <Helmet>
-                  <title>Politika privatnosti - SkillSwap</title>
+                  <title>Pravni uslovi - SkillSwap</title>
+                </Helmet>
+                <Legal />
+              </>
+            }/>
+            <Route 
+            path="/privacy-policy" 
+            element={
+              <>
+                <Helmet>
+                  <title>Politika Privatnosti - SkillSwap</title>
                 </Helmet>
                 <PrivacyPolicy />
               </>
-            }
-          />
-          <Route
-            path="/terms-of-use"
+            }/>
+            <Route 
+            path="/terms-of-use" 
             element={
               <>
                 <Helmet>
-                  <title>Uslovi korišćenja - SkillSwap</title>
+                  <title>Uslovi Korišćenja - SkillSwap</title>
                 </Helmet>
                 <TermsOfUse />
               </>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <>
-                <Helmet>
-                  <title>Kontakt - SkillSwap</title>
-                </Helmet>
-                <Contact />
-              </>
-            }
-          />
+            }/>
         </Routes>
         <Footer /> 
       </div>
