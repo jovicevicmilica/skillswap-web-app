@@ -71,6 +71,16 @@ function App() {
                 <TermsOfUse />
               </>
             }/>
+            <Route 
+            path="/contact" 
+            element={
+              <>
+                <Helmet>
+                  <title>Kontakt - SkillSwap</title>
+                </Helmet>
+                <Contact />
+              </>
+            }/>
         </Routes>
         <Footer /> 
       </div>

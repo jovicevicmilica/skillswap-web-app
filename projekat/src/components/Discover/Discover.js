@@ -40,7 +40,6 @@ function Discover() {
                     <div className="discover-links">
                       <a href="#faq" className="discover-link">FAQ</a>
                       <a href="/contact" className="discover-link">Kontakt</a>
-                      <a href='#newsletter' className="discover-link">Novosti</a>
                     </div> 
                   </div>  
                 </div>

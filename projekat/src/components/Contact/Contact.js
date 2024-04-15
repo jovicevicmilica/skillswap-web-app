@@ -12,8 +12,6 @@ function Contact() {
   const [captchaValue, setCaptchaValue] = useState(null); //za recaptchu
   const [isLoading, setIsLoading] = useState(false); //za loading bar
   const recaptchaRef = useRef(); /*zapamtimo recaptcha referencu da bi je kasnije vratili na to stanje*/
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isSuggestedEmailSelected, setIsSuggestedEmailSelected] = useState(false); //ovo mi treba za css uređivanje
 
   const handleKeyDown = (e, field) => {
     if (e.key === 'ArrowDown') {
@@ -33,47 +31,6 @@ function Contact() {
         document.querySelector('input[name="email"]').focus();
       }
     }
-  };
-
-  //koristimo useState kako bismo pratili listu predloženih e-mail adresa
-  const [suggestedEmails, setSuggestedEmails] = useState(() => {
-    //kada komponenta bude montirana, učitaćemo spremljene e-mail adrese iz localStorage-a
-    //koristimo funkciju kako bismo osigurali da se ovo desi samo jednom
-    const savedEmails = localStorage.getItem('emails');
-    return savedEmails ? JSON.parse(savedEmails) : [];
-  });
-
-  //ova funkcija se poziva svaki put kada se promijeni sadržaj polja za unos e-maila
-  const handleEmailChange = (e) => {
-    //filtrira listu e-mail adresa na osnovu unesenog teksta i ažurira stanje suggestedEmails kako bi prikazao samo one e-mail adrese koje odgovaraju unesenom tekstu
-    const value = e.target.value;
-    setEmail(value);
-
-    setShowSuggestions(true);
-
-    if (!value) {
-      //ako nema unosa, vratite sve prethodno unesene e-mailove
-      setSuggestedEmails(JSON.parse(localStorage.getItem('emails')) || []);
-    } else {
-      //ako postoji unos, filtrirajte listu na osnovu unosa, da bi predlagalo samo ono što sadrži naš unos, kao pretraga
-      setSuggestedEmails(prevEmails =>
-        (JSON.parse(localStorage.getItem('emails')) || []).filter(suggestedEmail =>
-          suggestedEmail.toLowerCase().includes(value.toLowerCase())
-        )
-      );
-    }
-  };
-
-  //ova funkcija će se pozvati kada korisnik izabere predloženi email
-  const handleSuggestedEmailClick = (selectedEmail) => {
-    setEmail(selectedEmail);
-    setShowSuggestions(false); //sakrijemo sugestije, jer je korisnik odabrao
-    setIsSuggestedEmailSelected(true); //izabran je, potamnimo polje da se zna da je sugerisan kasnije u css-u
-
-    //ažurira listu posljednje unesenih e-mail adresa tako što dodaje odabrani e-mail na početak liste, ali prvo uklanja eventualne duplikate i ograničava broj e-mail adresa na posljednje tri unesene
-    const savedEmails = JSON.parse(localStorage.getItem('emails')) || [];
-    const updatedEmails = Array.from(new Set([selectedEmail, ...savedEmails])).slice(0, 3); //poslednje tri unesene, radi preglednosti
-    localStorage.setItem('emails', JSON.stringify(updatedEmails));
   };
 
   //poziva se prilikom slanja forme za slanje e-maila
@@ -122,7 +79,8 @@ function Contact() {
   };
 
   return (
-    <div className="outer-container"> {/*dodatni div za centriranje sadržaja unutar*/}
+    <div className="contact-positioner">
+      <div className="outer-container"> {/*dodatni div za centriranje sadržaja unutar*/}
         <ToastContainer transition={Slide} closeOnClick /> {/*aktiviramo toast sa slide tranzicijom koji se zatvara na klik*/}
         <div className="contact-container">
             <div className="contact-form">
@@ -130,7 +88,7 @@ function Contact() {
                 koja se pokreće kad kliknemo pošalji*/}
                 <div class="contact-form-header">
                     <h2>Imate pitanja?</h2>
-                    <h2> Kontaktirajte nas.</h2>
+                    <h2 className="contact-blue"> Kontaktirajte nas.</h2>
                 </div>
                 <p>Spremni da otkrijete kako SkillSwap može pomoći u razvoju vaše organizacije kroz razmjenu vještina i primjenu tehnologije? Kontaktirajte nas da zakažemo razgovor ili demonstraciju.</p>
                 <div className="email-input-container">
@@ -140,22 +98,10 @@ function Contact() {
                     placeholder="Unesite e-mail*"
                     required
                     value={email}
-                    onChange={handleEmailChange}
-                    onFocus={() => setShowSuggestions(true)} //ako je fokusirano na e-mail
-                    onBlur={() => setTimeout(() => setShowSuggestions(false), 300)}
+                    onChange={(e) => setEmail(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, 'email')} //realizacija key up and down
-                    autoComplete='off' //da mi pretraživač ne pamti sam, jer sam već implementirala to
-                    className={isSuggestedEmailSelected ? "suggested-email-selected" : ""}
+                    autocomplete="email"
                   />
-                  {showSuggestions && ( //da prikažemo predložene
-                    <ul className="suggested-emails">
-                      {suggestedEmails.map((suggestedEmail) => (
-                        <li key={suggestedEmail} onClick={() => handleSuggestedEmailClick(suggestedEmail)}>
-                          {suggestedEmail}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
                 <input
                     type="text"
@@ -200,6 +146,8 @@ function Contact() {
                 </iframe>
             </div>
         </div>
+      </div>
+      <div className="black-block"></div>
     </div>
   );
 };
