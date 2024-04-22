@@ -1,12 +1,8 @@
-const express = require("express"); //uključimo express, framework za izgradnju web aplikacija u node.js
-const nodemailer = require("nodemailer"); //biblioteka za slanje e-mailova
-const cors = require("cors"); //middleware koji pomaže pristupitanju resursima na serveru sa drugih domena
-const app = express();
-const port = 3001; //port na kom server sluša zahtjeve
-
-//pravimo express aplikaciju
-app.use(cors()); 
-app.use(express.json());
+const express = require("express");
+const cors = require("cors");
+const router = express.Router();
+const nodemailer = require("nodemailer");
+router.use(cors());
 
 //ovo nije neophodno ipak jer koristimo cors, pa se ne mora manuelno postavljati zaglavlje
 // app.use((req, res, next) => {
@@ -14,15 +10,15 @@ app.use(express.json());
 //     next();
 // });
 
-app.post("/send-email", (req, res) => { //kada se izvrši HTTP POST zahtjev na ovu rutu, express će izvršiti odgovarajuću funkciju koja je zadužena za slanje e-maila
+router.post("/send-email", (req, res) => { //kada se izvrši HTTP POST zahtjev na ovu rutu, express će izvršiti odgovarajuću funkciju koja je zadužena za slanje e-maila
     //preuzimamo podatke iz tijela zahtjeva (req.body)
     const { email, subject, message } = req.body;
 
     var transporter = nodemailer.createTransport({ //kreira se transporter našeg e-maila
         service: "gmail", //servis za slanje
         auth: { //autentifikacija, u ovom slučaju će se s mog mejla i slati i primati poruke, ali će se napraviti simulacija koju ću objasniti ispod
-            user: "skillswap24@gmail.com",
-            pass: "remx lerr hjiy vaog", 
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     });
 
@@ -44,6 +40,5 @@ app.post("/send-email", (req, res) => { //kada se izvrši HTTP POST zahtjev na o
     });
 });
 
-app.listen(port, () => { //pokretanje express servera koji sluša na određenom portu koji smo postavili, ako je uspješno povezano štampa poruku u konzoli da nas obavijesti
-  console.log(`Server sluša na http://localhost:${port}`);
-});
+//da bi ukljucili ruter u server.js
+module.exports = router;

@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
+import axios from 'axios';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3001/api/newsletter/subscribe", { email });
+      if (response.status === 200) {
+        toast.success('Uspješno ste se pretplatili na newsletter.');
+      } else {
+        throw new Error('Greška prilikom pretplate na newsletter.');
+      }
+    } catch (error) {
+      toast.error('Došlo je do greške prilikom pretplate na newsletter.');
+      console.error('Greška prilikom pretplate na newsletter:', error);
+    }
+  };
+
+  //odjava sa mjesečnih novosti
+  const handleUnsubscribe = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/api/newsletter/unsubscribe", { email });
+      if (response.status === 200) {
+        toast.success('Uspješno ste se odjavili.');
+      } else {
+        throw new Error('Greška prilikom odjave.');
+      }
+    } catch (error) {
+      toast.error('Greška prilikom odjave.');
+      console.error('Greška odjave:', error);
+    }
+  };
 
   return (
     <div className="footer">
@@ -14,15 +54,20 @@ function Footer() {
             <div>Budite među prvima koji će saznati šta je novo na SkillSwap-u. Prijavite se već sada i otkrijte inspirativne priče članova, korisne savete za razvoj veština, najave ekskluzivnih događaja, i još mnogo toga.</div>
           </div>
           <div className="footer-form">
-            <form>
+            <ToastContainer transition={Slide} closeOnClick />
+            <form onSubmit={handleSubmit}>
               <div className="form-container">
-                <input className="form-input"
+                <input 
+                  name="email"
+                  className="form-input"
                   placeholder="E-mail adresa"
                   type="email"
                   required
                   maxLength={256}
-                />
-                <input type="submit" data-wait="Molim sačekajte..." class="form-button" value="Prijavi se"/>
+                  value={email}
+                  onChange={handleEmailChange}
+                /> 
+                <input type="submit" class="form-button" value="Prijavi se"/>
               </div>
             </form>
           </div>
@@ -48,7 +93,7 @@ function Footer() {
           <div className="follow-container">
             <div>Zaprati nas</div>
             <div className="instagram-link">
-              <a id="instagram" href="https://instagram.com/" target="_blank" class="social-link"></a>
+              <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="social-link"></a>
             </div>
           </div>
         </div>

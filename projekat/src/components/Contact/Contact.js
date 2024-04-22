@@ -43,7 +43,8 @@ function Contact() {
 
     setIsLoading(true); //da bi realizovali ponovno korišćenje forme
     //ako je odgovor na reCAPTCHA validan, šalje se POST zahtjev na server sa unesenim podacima
-    axios.post("http://localhost:3001/send-email", { /*jer se poruke šalju meni, ide post*/
+    axios.post("http://localhost:3001/api/mail/send-email", { /*jer se poruke šalju meni, ide post*/
+      //promijenjeno u api/mail jer sam odvojila server.js i mail.js, pa da mi server bude glavni, a mail samo za kontakt
       email,
       subject,
       message, /*poruka se od ovih polja sastoji*/
@@ -53,10 +54,6 @@ function Contact() {
       //provjerimo statusni kod, 200 je uspješan
       //resetujemo formu i ostalo nakon uspješnog slanja
       if (response.status === 200) {
-        const savedEmails = JSON.parse(localStorage.getItem('emails')) || [];
-        const updatedEmails = Array.from(new Set([email, ...savedEmails])).slice(0, 2); //posljednjih 3 mejla se čuvaju
-        localStorage.setItem('emails', JSON.stringify(updatedEmails));
-        localStorage.setItem('emails', JSON.stringify(updatedEmails));
         setCaptchaValue(null);
         setEmail('');
         setSubject('');
@@ -81,16 +78,15 @@ function Contact() {
   return (
     <div className="contact-positioner">
       <div className="outer-container"> {/*dodatni div za centriranje sadržaja unutar*/}
-        <ToastContainer transition={Slide} closeOnClick /> {/*aktiviramo toast sa slide tranzicijom koji se zatvara na klik*/}
         <div className="contact-container">
             <div className="contact-form">
                 <form onSubmit={handleSubmit}> {/*onSubmit atribut je povezan sa handleSubmit funkcijom,
                 koja se pokreće kad kliknemo pošalji*/}
-                <div class="contact-form-header">
+                <div className="contact-form-header">
                     <h2>Imate pitanja?</h2>
                     <h2 className="contact-blue"> Kontaktirajte nas.</h2>
                 </div>
-                <p>Spremni da otkrijete kako SkillSwap može pomoći u razvoju vaše organizacije kroz razmjenu vještina i primjenu tehnologije? Kontaktirajte nas da zakažemo razgovor ili demonstraciju.</p>
+                <p>Ako imate tehnička pitanja ili ukoliko posjedujete vještinu koja bi bila od koristi zajednici, a nije već prisutna na našem spisku vještina, slobodno nas kontaktirajte putem donje forme. Vaša povratna informacija nam je od izuzetnog značaja. Hvala vam što ste dio naše zajednice!</p>
                 <div className="email-input-container">
                   <input
                     type="email"
@@ -121,7 +117,7 @@ function Contact() {
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, 'message')}
                 ></textarea>
-                <p className="bottom-text">Jednostavno i besplatno nas obavijestite da ste zainteresovani da saznate više.</p>
+                <p className="bottom-text">Kontaktiranje je jednostavno, brzo i besplatno. Potrudićemo se da odgovorimo u što bržem roku!</p>
                 <ReCAPTCHA 
                   ref={recaptchaRef} /*postavimo je na referencu*/
                   sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" //dobijen sa oficijalnog sajta

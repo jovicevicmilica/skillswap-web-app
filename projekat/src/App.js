@@ -16,6 +16,8 @@ import Contact from './components/Contact/Contact';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Discover from './components/Discover/Discover';
 import Legal from './components/Legal/Legal';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -79,6 +81,26 @@ function App() {
                   <title>Kontakt - SkillSwap</title>
                 </Helmet>
                 <Contact />
+              </>
+            }/>
+            <Route 
+            path="/login" 
+            element={
+              <>
+                <Helmet>
+                  <title>Prijavi se - SkillSwap</title>
+                </Helmet>
+                <Login />
+              </>
+            }/>
+            <Route 
+            path="/sign-up" 
+            element={
+              <>
+                <Helmet>
+                  <title>Registruj se - SkillSwap</title>
+                </Helmet>
+                <Register />
               </>
             }/>
         </Routes>

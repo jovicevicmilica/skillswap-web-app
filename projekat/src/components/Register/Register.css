@@ -1,0 +1,169 @@
+.register-main {
+    z-index: auto;
+    color: #000;
+    background-color: var(--skillswap-aliceblue);
+    background-image: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0vw 9.5vw 9.5vw;
+    display: block;
+}
+
+.register-title {
+    padding-top: 80px;
+}
+
+.register-title-h1 {
+    font-size: 50px;
+    line-height: 55px;
+    font-weight: 600;
+}
+
+.register-inner {
+    width: 100%;
+    margin-top: 5vw;
+    display: flex;
+}
+
+.register-left {
+    width: 46%;
+    max-width: 518px;
+    background-color: var(--skillswap-blue);
+    color: #fff;
+    background-image: url('../../images/puzzle.svg');
+    background-position: top right;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: 65%;
+    align-items: flex-end;
+    padding-bottom: 4vw;
+    padding-left: 4vw;
+    display: flex;
+    position: relative;
+}
+
+.register-text {
+    margin-bottom: 30px;
+}
+
+.register-text h1 {
+    max-width: 250px;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 55px;
+}
+
+.register-text p {
+    max-width: 400px;
+}
+
+.register-right {
+    width: 54%;
+    background-color: #fff;
+    flex-direction: column;
+    flex: none;
+    padding: 6vw;
+    display: flex;
+}
+
+.register-forms {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.register-form {
+    display: block;
+}
+
+.form-inner {
+    margin-bottom: 2vw;
+}
+
+.register-form-label {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    display: block;
+    margin-bottom: 5px;
+    cursor: default;
+}
+
+.register-form-input {
+    min-height: 50px;
+    color: #000;
+    background-color: rgba(0, 69, 246, .1);
+    border: 1px rgba(0, 0, 0, 0);
+    padding: 15px 25px 12px;
+    font-weight: 500;
+    transition: border-color .3s;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.42857;
+    display: block;
+    border-radius: 0;
+}
+
+.register-button {
+    width: 40%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
+    padding: 15px 30px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
+    font-size: 18px; 
+    background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
+    color: white;
+    border: none; /*uklanja ivicu*/
+    cursor: pointer; /*pokazivač miša se menja u pokazivač kada se pređe preko dugmeta*/
+    font-family: "Poppins", sans-serif; 
+    transition: background-color 0.3s ease, transform 0.3s; /*animacija za hover efekat*/
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+}
+
+.register-button:hover {
+    background-color: var(--black); /*tamnija boja za hover efekat*/
+}
+
+.log-reg-button {
+    padding: 10px 20px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
+    font-size: 18px; 
+    background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
+    color: white;
+    border: none; /*uklanja ivicu*/
+    cursor: pointer; /*pokazivač miša se menja u pokazivač kada se pređe preko dugmeta*/
+    font-family: "Poppins", sans-serif; 
+    transition: background-color 0.3s ease, transform 0.3s; /*animacija za hover efekat*/
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.log-reg-button:hover {
+    background-color: var(--black);
+}
+
+.register-remember {
+    font-size: 15px;
+}
+
+.register-checkbox-block {
+    margin-bottom: 2vw;
+    display: flex;
+    align-items: center; /*da bi zapamti me bilo u ravni sa checkboxom, tj. po sredini*/
+}
+
+.register-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px; /*da ga malo odaljimo od teksta desno*/
+}
+
+.required-info {
+    font-size: 0.7em;
+    color: #a9a9a9;
+    margin-left: 5px;
+}
