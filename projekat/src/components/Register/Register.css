@@ -167,3 +167,46 @@
     color: #a9a9a9;
     margin-left: 5px;
 }
+
+.register-checkbox-block {
+    margin-bottom: 2vw;
+    display: flex;
+    align-items: center; /*da bi zapamti me bilo u ravni sa checkboxom, tj. po sredini*/
+    font-size: 15px;
+}
+
+.register-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px; /*da ga malo odaljimo od teksta desno*/
+}
+
+.skill-suggestion-text {
+    font-size: 18px;
+}
+
+.register-contact {
+    color: var(--skillswap-blue);
+    text-decoration: none;
+}
+
+.reg-log-button {
+    padding: 10px 20px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
+    font-size: 18px; 
+    background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
+    color: white;
+    border: none; /*uklanja ivicu*/
+    cursor: pointer; /*pokazivač miša se menja u pokazivač kada se pređe preko dugmeta*/
+    font-family: "Poppins", sans-serif; 
+    transition: background-color 0.3s ease, transform 0.3s; /*animacija za hover efekat*/
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.reg-log-button:hover {
+    background-color: var(--black);
+}

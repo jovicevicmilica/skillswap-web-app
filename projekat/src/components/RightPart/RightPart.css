@@ -1,0 +1,86 @@
+.right-part {
+    flex: 3;
+    position: sticky; /*isto kao navbar, da se ne bi pomjerao*/
+    top: 90px; /*90px od navbara, i 20 od paddinga gore i dolje*/
+    height: calc(100vh - 90px); /*računamo koliko je visok da bi se toliko zadržao*/
+    overflow: auto;
+}
+
+.right-part::-webkit-scrollbar{
+    display: none; /*mičemo ugrađeni skrol bar*/
+}
+
+.rp-container {
+    padding: 20px;
+}
+
+.rp-item {
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09); /*da bude ljepši prelaz i sijenka ispod boxa*/
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: var(--white);
+}
+
+.rp-item span {
+    color: gray;
+}
+
+.rp-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.rp-user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative; /*ovo je neophodno da bi zeleni kružić bio preko slike*/
+}
+
+.rp-user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rp-user-info span {
+    font-weight: 500;
+    color: var(--black);
+}
+
+.rp-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rp-button {
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.rp-button:first-child {
+    background-color: var(--skillswap-blue);
+}
+
+.rp-button:last-child {
+    background-color: var(--black);
+}
+
+/*pravimo zeleni kružić koji simulira da je neko aktivan*/
+.rp-online {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: limegreen;
+    position: absolute; /*da bi bio preko slike*/
+    top: 0; /*da bi bio gore*/
+    left: 30px; /*da bi bio desno*/
+}

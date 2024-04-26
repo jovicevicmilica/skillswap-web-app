@@ -1,9 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import "./Login.css"
 import ReCAPTCHA from 'react-google-recaptcha';
+import { AuthContext } from '../../context/authContext';
 
 function Login() {
   const recaptchaRef = useRef(); /*zapamtimo recaptcha referencu da bi je kasnije vratili na to stanje*/
+  const {login} = useContext(AuthContext);
+  const handleLogin = () => {
+    login();
+  };
 
   return (
     <div className="login-outer">
@@ -14,7 +19,7 @@ function Login() {
                     <div className="login-text">
                         <h1>Dobrodošli u SkillSwap!</h1>        
                         <span>Nemate nalog?</span>
-                        <a href="/sign-up" className="log-reg-button">Registrujte se</a>
+                        <a href="/register" className="log-reg-button">Registrujte se</a>
                     </div>
                 </div>
                 <div className="login-right">
@@ -43,7 +48,7 @@ function Login() {
                                 <label for="remember" className="login-remember">Zapamti me</label>
                             </div>
                         </form>
-                        <button type="submit" className="login-button">Prijavi se</button> {/*dugme prijave*/}
+                        <button type="submit" className="login-button" onClick={handleLogin}>Prijavi se</button> {/*dugme prijave*/}
                     </div>
                 </div>
             </div>

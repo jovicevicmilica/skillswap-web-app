@@ -1,0 +1,60 @@
+.left-part {
+    flex: 2; /*lijeva strana neka bude 2, desna ce biti tri, da bude veca*/
+    position: sticky; /*isto kao navbar, da se ne bi pomjerao*/
+    top: 90px; /*90px od navbara*/
+    height: calc(100vh - 90px); /*računamo koliko je visok da bi se toliko zadržao*/
+    overflow: auto;
+    background-color: var(--white);
+}
+
+.left-part::-webkit-scrollbar{
+    display: none; /*mičemo ugrađeni skrol bar*/
+}
+
+.left-part hr { /*linija prelaza između sekcija*/
+    margin: 20px 0px;
+    border: none;
+    height: 0.5px;
+    background-color: lightgrey;
+}
+
+.lp-container {
+    padding: 20px;
+}
+
+.lp-menu {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+}
+
+.lp-menu span {
+    font-size: 12px;
+}
+
+.lp-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lp-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lp-item span {
+    font-size: 14px;
+}
+
+.lp-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    object-fit: cover;
+}
+
+.lp-user span {
+    font-size: 14px;
+}

@@ -24,4 +24,9 @@ html, body {
 div {
   display: block;
   unicode-bidi: isolate;
+  margin: 0;
+}
+
+.full-homepage {
+  background-color: var(--skillswap-aliceblue);
 }

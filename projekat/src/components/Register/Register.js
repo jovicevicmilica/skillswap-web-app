@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import "./Register.css";
 import Select from 'react-select';
+import { Slide, toast, ToastContainer } from 'react-toastify'; /*za alert poruke*/
+import 'react-toastify/dist/ReactToastify.css';
 
 const skillOptions = {
   'Poslovanje': [
@@ -59,9 +61,23 @@ const customStyles = {
 function Register() {
   const recaptchaRef = useRef();
   const [selectedSkill, setSelectedSkill] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleSkillChange = selectedOption => {
     setSelectedSkill(selectedOption);
+  };
+
+  const handleTermsChange = () => {
+    setTermsAccepted(!termsAccepted);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!termsAccepted) {
+      toast.error("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
+      return;
+    }
+    console.log('Forma poslana', { selectedSkill });
   };
 
   return (
@@ -74,7 +90,9 @@ function Register() {
                         <h1>Dobrodošli u SkillSwap!</h1> 
                         <p>Registrujte se i budite dio zajednice koja raste svakim danom!</p>
                         <p>Otključajte pristup kursevima, radionicama i izvještajima znalaca i poboljšajte svoje vještine.</p>
-                        <p>Vaša privatnost i sigurnost su nam na prvom mjestu.</p>       
+                        <p>Vaša privatnost i sigurnost su nam na prvom mjestu.</p>
+                        <span>Već imate nalog?</span>
+                        <a href="/login" className="reg-log-button">Prijavite se</a>       
                     </div>
                 </div>
                 <div className="register-right">
@@ -106,6 +124,10 @@ function Register() {
                                 required
                             />
                         </div>
+                        <div className="register-checkbox-block">
+                            <input type="checkbox" id="terms" checked={termsAccepted} onChange={handleTermsChange} className="register-checkbox"/>
+                            <label htmlFor="terms">Prihvatam uslove korišćenja i politiku privatnosti*</label>
+                        </div>
                         <div className="form-inner">
                             <ReCAPTCHA ref={recaptchaRef} sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" style={{ marginBottom: '20px' }} />
                         </div>
@@ -113,6 +135,9 @@ function Register() {
                     </form>
                 </div>
             </div>
+            <p className="skill-suggestion-text">
+                Ako ne možete da pronađete željenu veštinu, molimo Vas da nas <a href="/contact" className="register-contact">kontaktirate</a>.
+            </p>
         </div>
         <div className="black-block"></div>
     </div>

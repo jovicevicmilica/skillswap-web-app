@@ -1,0 +1,69 @@
+/*lakše uređivati ovako direktno pristupanjem, nalik na scss, nego da modelujem zasebno svako polje*/
+.home-navbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20x;
+    height: 90px;
+    border-bottom: 1px solid lightgrey;
+    position: sticky; /*biće na vrhu čak i kada skrolujemo*/
+    top: 0;
+    background-color: var(--white);
+    z-index: 999; /*iznad svega*/
+}
+
+.home-left {
+    margin-left: 20px;
+    align-items: center;
+    display: flex;
+    gap: 30px;
+}
+
+.homenav-logo {
+    background-image: url(../../images/logoblue.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    width: 12vw;
+    height: 12vw;
+    max-height: 100px;
+    max-width: 200px;
+    flex: none;
+    margin-right: 10px;
+}
+
+.home-search {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 0%;
+    padding: 5px;
+}
+
+.home-search input {
+    border: none;
+    width: 500px;
+}
+
+.home-right {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.home-user {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.home-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}

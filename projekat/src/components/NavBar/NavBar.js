@@ -11,7 +11,7 @@ function NavBar() {
           <Link to="/contact" className="nav-link">Kontakt</Link>
           <div className="right-side">
             <Link to="/login" className="nav-link login">Prijavi se</Link>
-            <Link to="/sign-up" className="blue-button"><button className="nav-button">Registruj se</button></Link>
+            <Link to="/register" className="blue-button"><button className="nav-button">Registruj se</button></Link>
           </div>
         </div>
       </div>
