@@ -1,5 +1,7 @@
 import React from 'react'
 import './RightPart.css';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const RightPart = () => {
   return (
@@ -13,8 +15,8 @@ const RightPart = () => {
               <span>Nikolina Todorović</span>
             </div>
             <div className="rp-buttons">
-              <button className="rp-button">Prihvati</button>
-              <button className="rp-button">Odbij</button>
+              <button className="rp-button"><CheckCircleIcon className="icon-color-blue"/></button>
+              <button className="rp-button"><CancelIcon /></button>
             </div>
           </div>
           <div className="rp-user">
@@ -23,8 +25,8 @@ const RightPart = () => {
               <span>Milena Janković</span>
             </div>
             <div className="rp-buttons">
-              <button className="rp-button">Prihvati</button>
-              <button className="rp-button">Odbij</button>
+              <button className="rp-button"><CheckCircleIcon className="icon-color-blue" /></button>
+              <button className="rp-button"><CancelIcon /></button>
             </div>
           </div>
         </div>

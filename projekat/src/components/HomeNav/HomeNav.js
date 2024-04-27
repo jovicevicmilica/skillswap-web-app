@@ -1,7 +1,6 @@
 import { React, useContext } from 'react'
 import './HomeNav.css'
 import HomeIcon from '@mui/icons-material/Home';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import AppsIcon from '@mui/icons-material/Apps';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';

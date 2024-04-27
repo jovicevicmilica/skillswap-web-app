@@ -1,6 +1,7 @@
 import React from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom'; 
+import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
 function NavBar() {
   return (
@@ -14,6 +15,9 @@ function NavBar() {
             <Link to="/register" className="blue-button"><button className="nav-button">Registruj se</button></Link>
           </div>
         </div>
+      </div>
+      <div className="hamburger">
+        <MenuTwoToneIcon className="icon-color-blue"/>
       </div>
     </div>
   );

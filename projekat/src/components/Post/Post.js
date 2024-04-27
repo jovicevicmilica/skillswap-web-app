@@ -35,15 +35,15 @@ const Post = ({post}) => {
             <div className="post-info">
                 <div className="post-item">
                     {liked ? <FavoriteIcon className="icon-color-blue" /> : <FavoriteBorderIcon />}
-                    27 lajkova
+                    27<span>lajkova</span>
                 </div>
                 <div className="post-item" onClick={()=>setCommentOpen(!commentOpen)}> {/*ako je otvoren, zatvori, inace otvori*/}
                     <AddCommentIcon />
-                    9 komentara
+                    9<span>komentara</span>
                 </div>
                 <div className="post-item">
                     <ShareIcon />
-                    Podijeli
+                    <span>Podijeli</span>
                 </div>
             </div>
             {commentOpen && <Comments />} {/*da li će se prikazati*/}

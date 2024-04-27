@@ -18,11 +18,7 @@
   padding-right: 100px;
   display: flex;
   position: relative;
-}
-
-div {
-  display: block;
-  unicode-bidi: isolate;
+  width: 100%;
 }
 
 .container-text-wrapper {
@@ -213,4 +209,68 @@ div {
     top: 36%;
     left: 55%;
     right: auto;
+}
+
+@media only screen and (max-width: 480px) {
+  .container-inner {
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
+  }
+
+  .container-text-wrapper {
+    margin: 0;
+    font-size: 30px;
+  }
+
+  .black-button {
+    font-size: 14px;
+  }
+
+  .container-img {
+    width: 320px;
+    margin: 0; 
+  }
+
+  .code {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 11%;
+  }
+
+  .guitar {
+    width: 50px;
+    height: 50px;
+    top: 25%;
+  }
+
+  .book {
+    width: 320px;
+  }
+
+  .game {
+    width: 50px;
+    height: 35px;
+    top: 15%;
+    right: 0%;
+  }
+
+  .paint {
+    width: 50px;
+    height: 50px;
+    right: -20%;
+  }
+
+  .cook {
+    height: 60px;
+    width: 60px;
+    top: 25%;
+    right: -20%;
+  }
+
+  .shine {
+    width: 40px;
+    height: 20px;
+  }
 }

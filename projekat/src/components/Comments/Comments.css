@@ -15,11 +15,10 @@
 
 .comments-write input {
     flex: 5;
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
-    background-color: transparent;
+    background-color: rgba(0, 69, 246, .1);
     color: var(--black);
-    border: 1px solid gray;
     border-radius: 0%;
 }
 
@@ -30,6 +29,11 @@
     color: var(--white);
     padding: 10px;  
     cursor: pointer;
+}
+
+.comments-write button:hover {
+    background-color: var(--black);
+    transition: all 300ms ease;
 }
 
 .comment {
@@ -43,7 +47,7 @@
     flex: 5;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 0px;
     align-items: flex-start;
 }
 
@@ -52,7 +56,8 @@
 }
 
 .comment-info p {
-    color: var(--black);
+    color: var(--black);    
+    font-size: 14px;
 }
 
 .comment-date {
@@ -60,4 +65,10 @@
     align-self: center; 
     color: gray;
     font-size: 12px;
+}
+
+@media only screen and (max-width: 420px) {
+    .comments-write input {
+        width: 10px;
+    }
 }

@@ -18,7 +18,7 @@
     box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
     -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
     -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09); /*da bude ljepši prelaz i sijenka ispod boxa*/
-    padding: 20px;
+    padding: 30px;
     margin-bottom: 20px;
     background-color: var(--white);
 }
@@ -37,7 +37,7 @@
 .rp-user-info {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     position: relative; /*ovo je neophodno da bi zeleni kružić bio preko slike*/
 }
 
@@ -51,27 +51,21 @@
 .rp-user-info span {
     font-weight: 500;
     color: var(--black);
+    margin-right: 20px;
 }
 
 .rp-buttons {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .rp-button {
     border: none;
-    color: var(--white);
+    color: var(--black);
     cursor: pointer;
     padding: 5px;
-}
-
-.rp-button:first-child {
-    background-color: var(--skillswap-blue);
-}
-
-.rp-button:last-child {
-    background-color: var(--black);
+    background-color: transparent;
 }
 
 /*pravimo zeleni kružić koji simulira da je neko aktivan*/
@@ -83,4 +77,28 @@
     position: absolute; /*da bi bio preko slike*/
     top: 0; /*da bi bio gore*/
     left: 30px; /*da bi bio desno*/
+}
+
+@media only screen and (max-width: 480px) {
+    .right-part {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .right-part {
+        display: none;
+    }
+}   
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .right-part {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .rp-buttons {
+        display: block;
+    }
 }

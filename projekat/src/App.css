@@ -14,19 +14,18 @@ html, body {
   width: 100%;
   min-height: 100%;
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth; /*da prelaz klikom preko komponenti bude smooth*/
-}
-
-* {
-  box-sizing: border-box;
-}
-
-div {
-  display: block;
-  unicode-bidi: isolate;
-  margin: 0;
 }
 
 .full-homepage {
   background-color: var(--skillswap-aliceblue);
+  display: flex;
+}
+
+@media (max-width: 480px) {
+    .full-homepage {
+      display: block; /*zato što kao flex remeti kada je veličina telefona*/
+    } 
 }

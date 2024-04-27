@@ -1,21 +1,12 @@
 /*čitav nav - bar sa svim što sadrži*/
 .nav-about {
-  z-index: auto;
   color: #000;
   z-index: 10;
   width: 100%;
   justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
   padding-left: 5vw;
   padding-right: 5vw;
   display: flex;
-  top: 0%;
-  bottom: auto;
-  left: 0%;
-  right: 0%;
-  unicode-bidi: isolate;
-  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   line-height: 20px;
@@ -25,7 +16,6 @@
   width: 100%;
   align-items: center;
   display: flex;
-  unicode-bidi: isolate;
 }
 
 .navbar-logo {
@@ -113,4 +103,66 @@ Link {
 
 .blue-button {
   margin-left: auto;
+}
+
+.hamburger {
+  display: none;
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 991px) {
+  /*.nav-inner {
+    z-index: 2;
+  }
+
+  .nav.about {
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }*/
+}
+
+@media screen and (max-width: 767px) {
+  /*.hamburger {
+    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-about {
+    z-index: 5;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }*/
+}
+
+@media only screen and (max-width: 480px) {
+  .hamburger {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+
+  .nav-about {
+    justify-content: space-between;
+    padding-top: 30px;
+    margin: 0;
+  }
+
+  .navbar-logo {
+    width: 40vw;
+    height: 10vw;
+    max-height: 100px;
+    max-width: 200px;
+  }
+
+  .nav-links-wrapper {
+    display: none;
+  }
 }

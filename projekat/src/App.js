@@ -35,7 +35,7 @@ function App() {
           <title>Početna stranica - SkillSwap</title>
         </Helmet>
         <HomeNav />
-        <div className="full-homepage" style={{display: "flex"}}>
+        <div className="full-homepage">
           <LeftPart />
           <div style={{flex: 6}}> {/*on nek zauzima najvise, u odnosu na lijevu i desnu stranu*/}
             <Outlet /> {/*za renderovanje child ruta*/}
@@ -66,13 +66,13 @@ function App() {
           <NavBar />
           <ScrollToTopArrow />
           <Container/>
-          <FeatureSection />
+          {/*<FeatureSection />
           <SkillsDirectory/>
           <ScrollToTopArrow />
           <Testimonials/>
           <FAQSection />
           <Discover/>
-          <Footer />
+          <Footer />*/}
         </>
       )
     },
@@ -193,9 +193,7 @@ function App() {
   ]);
 
   return (
-    <div className="App">
-      <RouterProvider router={router} /> 
-    </div>
+    <RouterProvider router={router} /> 
   );
 }
 

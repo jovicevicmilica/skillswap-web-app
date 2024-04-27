@@ -1,9 +1,9 @@
 /*lakše uređivati ovako direktno pristupanjem, nalik na scss, nego da modelujem zasebno svako polje*/
 .home-navbar {
+    width: 100%;
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 10px 20x;
     height: 90px;
     border-bottom: 1px solid lightgrey;
     position: sticky; /*biće na vrhu čak i kada skrolujemo*/
@@ -37,14 +37,15 @@
     align-items: center;
     display: flex;
     gap: 10px;
-    border: 1px solid lightgrey;
+    background-color: rgba(0, 69, 246, .1);
     border-radius: 0%;
-    padding: 5px;
+    padding: 10px 10px;
 }
 
 .home-search input {
     border: none;
     width: 500px;
+    background-color: transparent; /*da se uklopi sa search bar - om*/
 }
 
 .home-right {
@@ -66,4 +67,90 @@
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/*mobilni telefoni*/
+@media only screen and (max-width: 480px) {
+    .home-navbar {
+        margin-top: 10px;
+        height: 80px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .home-search {
+        background-color: transparent;
+    }
+
+    .home-search input {
+        display: none;
+    }
+
+    .home-right {
+        display: none;
+    }
+
+    .homenav-logo {
+        width: 35vw;
+        height: 35vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+}
+
+/*veći mobilni telefoni*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .home-navbar {
+        margin-top: 10px;
+        height: 80px;
+    }
+
+    .home-search {
+        background-color: transparent;
+    }
+
+    .home-left {
+        gap: 50px;
+    }
+
+    .home-search input {
+        display: none;
+    }
+
+    .home-right {
+        display: none;
+    }
+
+    .homenav-logo {
+        width: 35vw;
+        height: 35vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+}
+
+/*tableti*/
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .home-search input {
+        width: 250px;
+    }
+
+    .homenav-logo {
+        margin-right: none;
+        width: 20vw;
+        height: 20vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+
+    .home-user {
+        display: none;
+    }
+}
+
+/*mali desktop ekrani*/
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .home-search input {
+        width: 300px;
+    }
 }

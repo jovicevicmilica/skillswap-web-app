@@ -5,6 +5,7 @@
     height: calc(100vh - 90px); /*računamo koliko je visok da bi se toliko zadržao*/
     overflow: auto;
     background-color: var(--white);
+    margin-right: 20px;
 }
 
 .left-part::-webkit-scrollbar{
@@ -19,7 +20,7 @@
 }
 
 .lp-container {
-    padding: 20px;
+    padding: 30px;
 }
 
 .lp-menu {
@@ -56,5 +57,17 @@
 }
 
 .lp-user span {
-    font-size: 14px;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 480px) {
+    .left-part {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .left-part {
+        display: none;
+    }
 }

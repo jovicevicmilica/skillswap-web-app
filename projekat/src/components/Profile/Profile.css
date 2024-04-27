@@ -1,0 +1,158 @@
+.profile {
+    background-color: var(--skillswap-aliceblue);
+}
+
+.profile-images {
+    width: 100%;
+    height: 300px;
+    position: relative; /*jer će profilna biti apsolutna*/
+}
+
+.cover-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto; /*da je stavimo po sredini cover slike*/
+    top: 200px; /*da je pomjerimo na sred cover - a*/
+}
+
+.profile-container {
+    padding: 30px 70px;
+}
+
+.profile-user-info {
+    height: 270px;
+    box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+    border-radius: 0%;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-left {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.profile-center {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-center span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.profile-name {
+    margin-top: 20px;
+}
+
+.profile-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+    margin-bottom: 20px;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 10px;
+}
+
+.profile-info span {
+    font-size: 12px;
+}
+
+.profile-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /*da bi bili skroz desno*/
+    gap: 10px;
+}
+
+.profile-button {
+    border: none;
+    background-color: var(--skillswap-blue);
+    padding: 10px 20px;
+    border-radius: 0%;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.profile-button:hover {
+    background-color: var(--black); 
+    transition: all 300ms ease;
+}
+
+/*mobilni telefoni*/
+@media only screen and (max-width: 480px) {
+    .profile-user-info {
+        flex-direction: column;
+        height: 30vh;
+        padding: 20px;
+        margin-top: 70px;
+        height: 290px;
+    }
+
+    .profile-name {
+        margin-top: 0px;
+    }
+
+    .profile-container {
+        padding: 10px;
+    }
+}
+
+/*veći mobilni telefoni*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    .profile-name {
+        margin-top: 30px;
+    }
+
+    .profile-left {
+        flex-wrap: wrap;
+    }
+}
+
+/*tableti*/
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .profile-container {
+        padding: 30px;
+    }
+}
+
+/*mali desktop ekrani*/
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .profile-container {
+        padding: 30px;
+    }
+}
