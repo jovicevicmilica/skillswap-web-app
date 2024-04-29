@@ -98,9 +98,86 @@ div {
 
 .feature-block-img.friendship {
   background-image: url("../../images/friendship.png");
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: auto;
+  right: auto;
   max-height: none;
   max-width: none;
-  background-position: 100% 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
+}
+
+@media only screen and (max-width: 990px) {
+  .feature-container-inner {
+    padding: 70px 50px;
+  }
+
+  .feature-heading {
+    margin-bottom: 30px;
+    font-size: 35px;
+  }
+
+  .feature-subheading {
+    font-size: 20px;
+  }
+
+  .blocks {
+    grid-column-gap: 30px;
+  }
+
+  .feature-block-inner {
+    padding-left: 30px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .feature-container-inner {
+    padding: 50px 30px 50px 35px;
+  }
+
+  .feature-heading {
+    margin-bottom: 20px;
+    font-size: 30px;
+  }
+
+  .blocks {
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .feature-block {
+    width: 100%;
+  }
+
+  .feature-block-inner {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .feature-container-inner {
+    padding: 40px 25px 40px 30px;
+  }
+
+  .feature-heading {
+    font-size: 25px;
+  }
+
+  .feature-subheading {
+    font-size: 18px;
+  }
+
+  .blocks {
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .feature-block {
+    width: 100%;
+  }
+
+  .feature-block-inner {
+    font-size: 18px;
+  }
 }

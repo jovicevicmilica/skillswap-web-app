@@ -211,6 +211,139 @@
     right: auto;
 }
 
+@media only screen and (max-width: 990px) {
+  .container-inner {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .container-text-wrapper {
+    max-width: 650px;
+    font-size: 45px;
+  }
+
+  .container-img {
+    width: 700px;
+  }
+
+  .code {
+    width: 90px;
+    height: 90px;
+    left: 16%;
+  }
+
+  .guitar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .book {
+    width: 600px;
+  }
+
+  .game {
+    width: 50px;
+    height: 75px;
+    right: -5%;
+  }
+
+  .paint {
+    width: 80px;
+    height: 80px;
+    right: 0%;
+    z-index: 15;
+  }
+
+  .cook {
+    height: 80px;
+    width: 80px;
+    top: 15%;
+    right: -25%;
+  }
+
+  .black-button {
+    font-size: 13px;
+    padding: 17px 30px;
+  }
+
+  .shine.three {
+    left: 10%;
+    top: 30%;
+  }
+
+  .shine.four {
+    top: 55%;
+  }
+
+  .shine.two {
+    top: -20%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container-inner {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .container-text-wrapper {
+    width: 90%;
+    grid-row-gap: 30px;
+    font-size: 40px;
+  }
+
+  .black-button {
+    padding: 18px 25px 15px;
+  }
+
+  .container-img {
+    width: 450px;
+    height: 300px;
+  }
+
+  .code {
+    width: 60px;
+    height: 60px;
+    bottom: 25%;
+    left: 15%;
+  }
+
+  .guitar {
+    width: 60px;
+    height: 60px;
+    left: -15%;
+  }
+
+  .book {
+    width: 400px;
+    height: 200px;
+  }
+
+  .game {
+    width: 40px;
+    height: 55px;
+  }
+
+  .paint {
+    width: 50px;
+    height: 50px;
+    right: -5%;
+    z-index: 15;
+  }
+
+  .cook {
+    height: 60px;
+    width: 60px;
+    top: 25%;
+    right: -25%;
+  }
+
+  .black-button {
+    font-size: 13px;
+    padding: 17px 30px;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .container-inner {
     padding-left: 25px;
@@ -220,11 +353,8 @@
 
   .container-text-wrapper {
     margin: 0;
-    font-size: 30px;
-  }
-
-  .black-button {
-    font-size: 14px;
+    font-size: 35px;
+    line-height: 1.3;
   }
 
   .container-img {
@@ -243,10 +373,11 @@
     width: 50px;
     height: 50px;
     top: 25%;
+    left: -20%;
   }
 
   .book {
-    width: 320px;
+    width: 280px;
   }
 
   .game {
@@ -259,18 +390,19 @@
   .paint {
     width: 50px;
     height: 50px;
-    right: -20%;
+    right: -16%;
+    z-index: 15;
   }
 
   .cook {
     height: 60px;
     width: 60px;
     top: 25%;
-    right: -20%;
+    right: -40%;
   }
 
-  .shine {
-    width: 40px;
-    height: 20px;
+  .black-button {
+    font-size: 13px;
+    padding: 17px 30px;
   }
 }

@@ -168,3 +168,100 @@
 .close-dropdown:hover {
   color: #ccc; 
 }
+
+@media only screen and (max-width: 990px) {
+  .skills-section-inner {
+    padding: 70px 50px 50px;
+  }
+
+  .skills-header {
+    margin-bottom: 25px;
+    font-size: 25px;
+  }
+
+  .skill-box {
+    grid-column-gap: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .skill-heading {
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .skills-section-inner {
+    padding: 50px 30px 40px;
+  }
+
+  .skills-header {
+    font-size: 20px;
+  }
+
+  .skill-box {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-heading {
+    max-width: none;
+    font-size: 24px;
+  }
+
+  .skill-dropdown.open {
+    padding: 10px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+/*uvijek najmanja veličina ide na kraj da bi se prvo uzeo style iz nje, a ako nekog nema, onda iz gornjih*/
+@media only screen and (max-width: 480px) {
+  .skills-section-inner {
+    padding: 40px 25px 30px;
+  }
+
+  .skills-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .skills-box {
+    margin-bottom: 15px;
+  }
+
+  .skill-box {
+    padding: 30px 20px;
+  }
+
+  .skill-heading {
+    font-size: 24px;
+  }
+
+  .skill-details {
+    grid-area: span 1 / span 1 / span 1 / span 1;
+  }
+
+  .skill-text {
+    font-size: 14px;
+  }
+
+  .skill-dropdown.open {
+    padding: 10px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+/*ovaj dio ide zato što mi veličina boxa ne odgovara do 353 širine*/
+@media only screen and (max-width: 353px) {
+  .skill-dropdown.open {
+    max-height: 700px;
+  }
+}

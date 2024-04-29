@@ -48,14 +48,13 @@
 }
 
 .faq-question {
-  font-size: 1em;
+  font-size: 20px;
   text-align: left;
   margin: 0;
   position: relative;
   padding-right: 50px; /*dodaje prostor za dugme preklapanja*/
   font-family: "Poppins", sans-serif;
   font-weight: bold;
-  font-size: 20px;
 }
 
 .faq-question-title {
@@ -84,6 +83,7 @@
   align-items: center;
   color: var(--skillswap-blue);
   font-size: 25px;
+  padding: 10px;
 }
 
 .faq-toggle:hover {
@@ -105,4 +105,57 @@
   color: var(--skillswap-blue);
   transition: all .5s;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .faq-section {
+    padding: 50px;
+  }
+
+  .faq-header {
+    font-size: 25px;
+  }
+
+  .faq-description {
+    font-size: 16px;
+  }
+
+  .faq-question {
+    font-size: 18px;
+  }
+
+  .faq-toggle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .faq-section {
+    padding: 50px;
+  }
+
+  .faq-header {
+    font-size: 25px;
+  }
+
+  .faq-description {
+    font-size: 16px;
+  }
+
+  .faq-question {
+    font-size: 18px;
+  }
+
+  .faq-toggle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/*ovaj dio ide zato što mi veličina fonta ne odgovara do ove širine*/
+@media only screen and (max-width: 389px) {
+  .faq-question {
+    font-size: 16px;
+  }
 }

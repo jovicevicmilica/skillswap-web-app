@@ -51,7 +51,7 @@ function Footer() {
         <div className="newsletter-block" id="newsletter">
           <div className="footer-text">
             <div className="footer-header">Pretplatite se na mjesečne novosti</div>
-            <div>Budite među prvima koji će saznati šta je novo na SkillSwap-u. Prijavite se već sada i otkrijte inspirativne priče članova, korisne savete za razvoj veština, najave ekskluzivnih događaja, i još mnogo toga.</div>
+            <div className="footer-p">Budite među prvima koji će saznati šta je novo na SkillSwap-u. Prijavite se već sada i otkrijte inspirativne priče članova, korisne savete za razvoj veština, najave ekskluzivnih događaja, i još mnogo toga.</div>
           </div>
           <div className="footer-form">
             <ToastContainer transition={Slide} closeOnClick />

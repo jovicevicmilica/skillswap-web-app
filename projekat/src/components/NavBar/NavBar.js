@@ -17,7 +17,7 @@ function NavBar() {
         </div>
       </div>
       <div className="hamburger">
-        <MenuTwoToneIcon className="icon-color-blue"/>
+        <MenuTwoToneIcon className="icon-color-blue nav-menu"/>
       </div>
     </div>
   );

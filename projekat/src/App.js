@@ -66,13 +66,12 @@ function App() {
           <NavBar />
           <ScrollToTopArrow />
           <Container/>
-          {/*<FeatureSection />
+          <FeatureSection />
           <SkillsDirectory/>
-          <ScrollToTopArrow />
           <Testimonials/>
           <FAQSection />
           <Discover/>
-          <Footer />*/}
+          <Footer />
         </>
       )
     },

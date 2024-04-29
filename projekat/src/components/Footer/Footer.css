@@ -151,11 +151,17 @@ form {
   line-height: 25px;
 }
 
+.footer-logo-link {
+  margin: 0;
+  padding: 0;
+}
+
 .footer-logo {
   width: 15vw;
   height: 10vw;
   max-height: 50px;
   max-width: 150px;
+  margin: 0;
   background-color: var(--black);
   background-image: url("../../images/logowhite.svg");
   background-position: 50%;
@@ -256,4 +262,162 @@ form {
   max-width: 100%;
   display: inline-block;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 990px) {
+  .footer-container {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    overflow: hidden;
+  }
+
+  .newsletter-block {
+    z-index: 2;
+    position: relative;
+  }
+
+  .footer-bottom {
+    padding-bottom: 10vw;
+  }
+
+  .copyright-block {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .email-link {
+    font-size: 23px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .footer-container {
+    padding-top: 70px;
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+
+  .newsletter-block {
+    padding: 50px 25px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+    line-height: 25px;
+  }
+
+  .footer-header {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .form-input {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    flex-flow: column-reverse wrap;
+    align-items: flex-start;
+    padding-top: 55px;
+    padding-bottom: 60px;
+    padding-right: 20px;
+  }
+
+  .footer-bottom-inner {
+    flex-flow: column-reverse wrap;
+    align-items: flex-start;
+  }
+
+  .logo-block {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 30px;
+    margin-right: 0;
+  }
+
+  .footer-logo {
+    width: 150px;
+    height: 45px;
+    max-height: none;
+    max-width: none;
+  }
+
+  .copyright-block {
+    margin-bottom: 0;
+    display: block;
+  }
+
+  .email-block {
+    margin-bottom: 40px;
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .follow-container {
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .footer-container {
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+
+  .newsletter-block {
+    margin-bottom: 0;
+  }
+
+  .footer-header {
+    font-size: 23px;
+  }
+
+  .footer-p {
+    font-size: 14px;
+  }
+
+  .form-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-input {
+    margin-bottom: 15px;
+  }
+
+  .form-button {
+    width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column-reverse; /*da ide ono s kraja na početak sada, odnosno dio za instagram*/
+    align-items: flex-start;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .footer-logo {
+    width: 150px;
+    height: 50px;
+    margin: 0;
+  }
+
+  .copyright-block {
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .email-block {
+    margin-bottom: 40px;
+  }
+
+  .follow-container {
+    margin-bottom: 40px;
+  }
 }
