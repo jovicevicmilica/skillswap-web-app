@@ -100,7 +100,7 @@
 }
 
 .login-button {
-    width: 30%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
+    width: 45%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
     padding: 15px 30px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
     font-size: 18px; 
     background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
@@ -154,4 +154,119 @@
     width: 15px;
     height: 15px;
     margin-right: 10px; /*da ga malo odaljimo od teksta desno*/
+}
+
+@media only screen and (max-width: 990px) {
+  .login-title-h1,
+  .login-text h1 {
+    font-size: 40px; 
+  }
+
+  .login-button {
+    width: 80%;
+  }
+
+  .login-checkbox-block {
+    margin-bottom: 30px;
+  }
+
+  .log-reg-button {
+    margin-left: 0px;
+  }
+
+  .login-text span {
+    margin-right: 10px;
+  }
+
+  .login-button {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .login-main {
+    padding: 40px;
+  }
+
+  .login-title {
+    padding-top: 50px;
+  }
+
+  .login-title-h1,
+  .login-text h1 {
+    font-size: 29px; 
+  }
+
+  .login-button {
+    width: 90%;
+  }
+
+  .login-checkbox-block {
+    margin-bottom: 30px;
+  }
+
+  .log-reg-button {
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+
+  .login-text span {
+    margin-right: 10px;
+  }
+
+  .login-inner {
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .login-main {
+    padding: 20px;
+  }
+
+  .login-title {
+    padding-top: 30px;
+  }
+
+  .login-inner {
+    margin-bottom: 40px;
+  }
+
+  .login-title-h1,
+  .login-text h1 {
+    font-size: 24px; 
+  }
+
+  .login-form-input,
+  .login-button {
+    padding: 12px 10px; 
+  }
+
+  .login-form {
+    margin: 0 5px; 
+  }
+
+  .login-checkbox-block {
+    margin-bottom: 30px;
+  }
+
+  .log-reg-button {
+    margin-left: 0px;
+  }
+
+  .login-text span {
+    margin-right: 10px;
+  }
+
+  .login-left,
+  .login-right {
+    width: 100%; 
+    padding: 20px; 
+  }
+
+  .login-inner {
+    margin-bottom: 40px;
+    flex-direction: column; /*da budu vertikalni*/
+    align-items: center; 
+  }
 }

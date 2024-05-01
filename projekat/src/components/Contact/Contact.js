@@ -118,12 +118,15 @@ function Contact() {
                     onKeyDown={(e) => handleKeyDown(e, 'message')}
                 ></textarea>
                 <p className="bottom-text">Kontaktiranje je jednostavno, brzo i besplatno. Potrudićemo se da odgovorimo u što bržem roku!</p>
-                <ReCAPTCHA 
-                  ref={recaptchaRef} /*postavimo je na referencu*/
-                  sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" //dobijen sa oficijalnog sajta
-                  onChange={(val) => setCaptchaValue(val)} 
-                  style={{ marginBottom: '20px' }}
-                /> {/*uključivanje recaptche*/}
+                <div className="recaptcha-container">
+                  <ReCAPTCHA 
+                    ref={recaptchaRef} /*postavimo je na referencu*/
+                    sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" //dobijen sa oficijalnog sajta
+                    onChange={(val) => setCaptchaValue(val)} 
+                    style={{ marginBottom: '20px' }}
+                    className="g-recaptcha"
+                  /> {/*uključivanje recaptche*/}
+                </div>
                 <button disabled={isLoading} type="submit">{isLoading ? 'Šaljem...' : 'Pošalji'}</button> {/*dugme pošalji*/}
             </form>
             </div>

@@ -286,7 +286,7 @@ form {
   }
 
   .email-link {
-    font-size: 23px;
+    font-size: 21px;
   }
 }
 
@@ -409,12 +409,16 @@ form {
 
   .copyright-block {
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 16px;
   }
 
   .email-block {
     margin-bottom: 40px;
+  }
+
+  .legal-link { 
+    font-size: 12px;
   }
 
   .follow-container {

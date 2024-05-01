@@ -49,3 +49,39 @@
   background-color: var(--black);
   position: relative;
 }
+
+@media only screen and (max-width: 768px) {
+  .terms-container h1 {
+    font-size: 40px;
+  }
+
+  .terms-container p {
+    font-size: 18px;
+  }
+
+  .terms-container h2 {
+    font-size: 35px;
+  }
+
+  .terms-container ul li {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .terms-container h1 {
+    font-size: 35px;
+  }
+
+  .terms-container p {
+    font-size: 16px;
+  }
+
+  .terms-container h2 {
+    font-size: 30px;
+  }
+
+  .terms-container ul li {
+    font-size: 16px;
+  }
+}

@@ -42,3 +42,39 @@
 .privacy-container p a:hover {
   color: var(--skillswap-blue);
 }
+
+@media only screen and (max-width: 768px) {
+  .privacy-container h1 {
+    font-size: 40px;
+  }
+
+  .privacy-container p {
+    font-size: 18px;
+  }
+
+  .privacy-container h2 {
+    font-size: 35px;
+  }
+
+  .privacy-container ul li {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .privacy-container h1 {
+    font-size: 35px;
+  }
+
+  .privacy-container p {
+    font-size: 16px;
+  }
+
+  .privacy-container h2 {
+    font-size: 30px;
+  }
+
+  .privacy-container ul li {
+    font-size: 16px;
+  }
+}

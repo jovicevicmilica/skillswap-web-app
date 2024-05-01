@@ -125,7 +125,7 @@
     background-color: var(--black); /*tamnija boja za hover efekat*/
 }
 
-.log-reg-button {
+.reg-log-button {
     padding: 10px 20px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
     font-size: 18px; 
     background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
