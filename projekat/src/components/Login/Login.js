@@ -1,13 +1,38 @@
 import React, { useState, useRef, useContext } from 'react';
 import "./Login.css"
-import ReCAPTCHA from 'react-google-recaptcha';
 import { AuthContext } from '../../context/authContext';
+import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify'; /*za alert poruke*/
+import { useNavigate } from 'react-router';
 
-function Login() {
-  const recaptchaRef = useRef(); /*zapamtimo recaptcha referencu da bi je kasnije vratili na to stanje*/
-  const {login} = useContext(AuthContext);
-  const handleLogin = () => {
-    login();
+const Login = () => {
+  const [inputs, setInputs] = useState({
+    email:"",
+    password:"",
+  });
+
+  const [err, setErr] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const { login } = useContext(AuthContext);
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); /*da se stranica ne refreshuje*/
+    try {
+      await login(inputs);
+      navigate("/home-page")
+    } 
+
+    catch(err) {
+      setErr(err.response.data);
+      toast.error(err.response.data);
+      return;
+    }
   };
 
   return (
@@ -31,7 +56,8 @@ function Login() {
                                 type="email"
                                 name="email"
                                 placeholder="Unesite e-mail*"
-                                required               
+                                required  
+                                onChange={handleChange}                  
                                 ></input>
                             </div>
                             <div className="form-inner">
@@ -40,6 +66,7 @@ function Login() {
                                 type="password"
                                 name="password"
                                 placeholder="Unesite lozinku*"
+                                onChange={handleChange}
                                 required                
                                 ></input>
                             </div>
@@ -58,4 +85,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;

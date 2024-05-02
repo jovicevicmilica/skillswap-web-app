@@ -4,6 +4,7 @@ import "./Register.css";
 import Select from 'react-select';
 import { Slide, toast, ToastContainer } from 'react-toastify'; /*za alert poruke*/
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 const skillOptions = {
   'Poslovanje': [
@@ -62,8 +63,24 @@ function Register() {
   const recaptchaRef = useRef();
   const [selectedSkill, setSelectedSkill] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [inputs, setInputs] = useState({
+    name:"",
+    email:"",
+    password:"",
+    primarySkill:""
+  });
+
+  const [err, setErr] = useState(null);
 
   const handleSkillChange = selectedOption => {
+    const event = {
+      target: {
+        name: "primarySkill",
+        value: selectedOption ? selectedOption.value : ""
+      }
+    };
+
+    handleChange(event); /*da pozovemo i dio za inputs*/
     setSelectedSkill(selectedOption);
   };
 
@@ -71,13 +88,27 @@ function Register() {
     setTermsAccepted(!termsAccepted);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleChange = e => {
+    setInputs(prev => ({...prev, [e.target.name]:e.target.value}))
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault(); /*jer ne refreshujemo stranicu*/
     if (!termsAccepted) {
       toast.error("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
       return;
     }
-    console.log('Forma poslana', { selectedSkill });
+    console.log('Forma poslata', { selectedSkill });
+
+    try {
+      await axios.post("http://localhost:8800/api/auth/register", inputs);
+    }
+
+    catch(err) {
+      setErr(err.response.data);
+      toast.error(err.response.data);
+      return;
+    }
   };
 
   return (
@@ -99,15 +130,15 @@ function Register() {
                     <form className="register-form">
                         <div className="form-inner">
                             <label className="register-form-label">Ime i prezime</label>
-                            <input className="register-form-input" type="text" name="fullName" placeholder="Unesite ime i prezime*" required />
+                            <input className="register-form-input" type="text" name="name" placeholder="Unesite ime i prezime*" required onChange={handleChange} />
                         </div>
                         <div className="form-inner">
                             <label className="register-form-label">E-mail</label>
-                            <input className="register-form-input" type="email" name="email" placeholder="Unesite e-mail*" required />
+                            <input className="register-form-input" type="email" name="email" placeholder="Unesite e-mail*" required onChange={handleChange} />
                         </div>
                         <div className="form-inner">
                             <label className="register-form-label">Lozinka</label>
-                            <input className="register-form-input" type="password" name="password" placeholder="Unesite lozinku*" required />
+                            <input className="register-form-input" type="password" name="password" placeholder="Unesite lozinku*" required onChange={handleChange} />
                         </div>
                         <div className="form-inner">
                             <label className="register-form-label">Primarna vještina<span className="required-info"> (*nakon izvršene registracije možete mijenjati odabranu vještinu koju posjedujete i dodati nove, obavezno je odabrati jednu)</span></label>
@@ -128,10 +159,10 @@ function Register() {
                             <input type="checkbox" id="terms" checked={termsAccepted} onChange={handleTermsChange} className="register-checkbox"/>
                             <label htmlFor="terms">Prihvatam uslove korišćenja i politiku privatnosti*</label>
                         </div>
-                        <div className="form-inner">
-                            <ReCAPTCHA ref={recaptchaRef} sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" style={{ marginBottom: '20px' }} />
+                        <div className="recaptcha-reg">
+                            <ReCAPTCHA ref={recaptchaRef} sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" style={{ marginBottom: '20px' }} className="g-recaptcha-reg" />
                         </div>
-                        <button type="submit" className="register-button">Registrujte se</button>
+                        <button type="submit" className="register-button" onClick={handleSubmit}>Registrujte se</button>
                     </form>
                 </div>
             </div>

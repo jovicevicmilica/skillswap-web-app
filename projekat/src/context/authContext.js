@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
- 
+import axios from "axios";
+
 //za pronalaženje trenutnog korisnika našeg sajta
 export const AuthContext = createContext();
 
@@ -8,9 +9,12 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  const login = () => {
-    //privremena funkcija prije backend - a
-    setCurrentUser({id: 1, name:"Milica Jovićević", profilePicture:"https://www.shutterstock.com/image-photo/smiling-businesswoman-looking-camera-webcam-600nw-1302585136.jpg"})
+  const login = async (inputs) => {
+    const res = await axios.post("http://localhost:8800/api/auth/login", inputs, { /*mora await da nam user ne bi postao undefined, čekamo na axios*/
+      withCredentials: true,
+    });
+
+    setCurrentUser(res.data);
   };
 
   useEffect(() => {

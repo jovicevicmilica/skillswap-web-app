@@ -106,7 +106,7 @@
 }
 
 .register-button {
-    width: 40%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
+    width: 60%; /*dugme će zauzeti punu širinu svog roditeljskog kontejnera*/
     padding: 15px 30px; /*dodaje veći padding na vrhu i dnu za veću visinu*/
     font-size: 18px; 
     background-color: var(--skillswap-skyblue); /*boja pozadine dugmeta*/
@@ -209,4 +209,227 @@
 
 .reg-log-button:hover {
     background-color: var(--black);
+}
+
+
+@media only screen and (max-width: 990px) {
+  .register-title-h1,
+  .register-text h1 {
+    font-size: 40px; 
+  }
+
+  .register-checkbox-block {
+    margin-bottom: 30px;
+  }
+
+  .log-reg-button {
+    margin-left: 0px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+
+  .register-button {
+    width: 100%;
+  }
+
+  .recaptcha-reg {
+    display: flex;
+    justify-content: left; /*dodala poseban container da recaptcha ne bi udarala u desnu stranu*/
+  }
+
+  .g-recaptcha-reg {
+    transform:  scale(0.8);
+    transform-origin: left center;
+  }
+
+  .reg-log-button {
+    margin-left: 0px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .register-main {
+    padding: 40px;
+  }
+
+  .register-title {
+    padding-top: 50px;
+  }
+
+  .register-title-h1,
+  .register-text h1 {
+    font-size: 29px; 
+  }
+
+  .register-button {
+    width: 90%;
+  }
+
+  .register-checkbox-block {
+    margin-bottom: 30px;
+  }
+
+  .log-reg-button {
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+
+  .register-inner {
+    margin-bottom: 40px;
+  }
+
+  .reg-log-button {
+    margin-left: 0px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+   
+  .recaptcha-reg {
+    display: flex;
+    justify-content: left; /*dodala poseban container da recaptcha ne bi udarala u desnu stranu*/
+  }
+
+  .g-recaptcha-reg {
+    transform:  scale(0.7);
+    transform-origin: left center;
+  }
+
+  .register-checkbox-block label {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .register-main {
+    padding: 20px;
+  }
+
+  .register-title {
+    padding-top: 30px;
+  }
+
+  .register-inner {
+    margin-bottom: 40px;
+  }
+
+  .register-title-h1,
+  .register-text h1 {
+    font-size: 24px; 
+  }
+
+  .register-form-input,
+  .register-button {
+    padding: 12px 10px; 
+  }
+
+  .register-form {
+    margin: 0 5px; 
+  }
+
+  .register-checkbox-block {
+    padding: 10px 0;
+  }
+
+  .reg-log-button {
+    margin-left: 0px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+
+  .register-left,
+  .register-right {
+    width: 100%; 
+    padding: 20px; 
+  }
+
+  .register-inner {
+    margin-bottom: 40px;
+    flex-direction: column; /*da budu vertikalni*/
+    align-items: center; 
+  }
+
+  .register-checkbox-block label {
+    font-size: 12px;
+  }
+}
+
+
+@media only screen and (max-width: 480px) {
+  .register-main {
+    padding: 20px;
+  }
+
+  .register-title {
+    padding-top: 30px;
+  }
+
+  .register-inner {
+    margin-bottom: 40px;
+  }
+
+  .register-title-h1,
+  .register-text h1 {
+    font-size: 24px; 
+  }
+
+  .register-form-input,
+  .register-button {
+    padding: 12px 10px; 
+  }
+
+  .register-form {
+    margin: 0 5px; 
+  }
+
+  .register-checkbox-block {
+    padding: 10px 0;
+  }
+
+  .reg-log-button {
+    margin-left: 0px;
+  }
+
+  .register-text span {
+    margin-right: 10px;
+  }
+
+  .register-left,
+  .register-right {
+    width: 100%; 
+    padding: 20px; 
+  }
+
+  .register-inner {
+    margin-bottom: 40px;
+    flex-direction: column; /*da budu vertikalni*/
+    align-items: center; 
+  }
+
+  .register-checkbox-block label {
+    font-size: 12px;
+  }
+
+  .recaptcha-reg {
+    display: flex;
+    justify-content: left; /*dodala poseban container da recaptcha ne bi udarala u desnu stranu*/
+  }
+
+  .g-recaptcha-reg {
+    transform:  scale(0.8);
+    transform-origin: left center;
+  }
 }
