@@ -67,7 +67,7 @@ function Footer() {
                   value={email}
                   onChange={handleEmailChange}
                 /> 
-                <input type="submit" class="form-button" value="Prijavi se"/>
+                <input type="submit" className="form-button" value="Prijavi se"/>
               </div>
             </form>
           </div>

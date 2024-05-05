@@ -24,25 +24,30 @@ import LeftPart from './components/LeftPart/LeftPart';
 import RightPart from './components/RightPart/RightPart';
 import Profile from './components/Profile/Profile';
 import { AuthContext } from './context/authContext';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const {currentUser} = useContext(AuthContext);
 
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return(
-      <div>
-        <Helmet>
-          <title>Početna stranica - SkillSwap</title>
-        </Helmet>
-        <HomeNav />
-        <div className="full-homepage">
-          <LeftPart />
-          <div style={{flex: 6}}> {/*on nek zauzima najvise, u odnosu na lijevu i desnu stranu*/}
-            <Outlet /> {/*za renderovanje child ruta*/}
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <Helmet>
+            <title>Početna stranica - SkillSwap</title>
+          </Helmet>
+          <HomeNav />
+          <div className="full-homepage">
+            <LeftPart />
+            <div style={{flex: 6}}> {/*on nek zauzima najvise, u odnosu na lijevu i desnu stranu*/}
+              <Outlet /> {/*za renderovanje child ruta*/}
+            </div>
+            <RightPart />
           </div>
-          <RightPart />
         </div>
-      </div>
+      </QueryClientProvider>
     );
   };
 

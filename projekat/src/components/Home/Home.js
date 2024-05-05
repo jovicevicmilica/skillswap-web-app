@@ -1,10 +1,12 @@
 import React from 'react';
 import './Home.css';
 import Posts from '../Posts/Posts';
+import Share from '../Share/Share';
 
 const Home = () => {
   return (
     <div className="home">
+        <Share />
         <Posts />
     </div>
   )

@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault(); /*da se stranica ne refreshuje*/
     try {
       await login(inputs);
-      navigate("/home-page")
+      navigate("/home-page");
     } 
 
     catch(err) {
@@ -72,7 +72,7 @@ const Login = () => {
                             </div>
                             <div className="login-checkbox-block">
                                 <input type="checkbox" id="remember" name="remember" className="login-checkbox"></input>
-                                <label for="remember" className="login-remember">Zapamti me</label>
+                                <label htmlFor="remember" className="login-remember">Zapamti me</label>
                             </div>
                         </form>
                         <button type="submit" className="login-button" onClick={handleLogin}>Prijavi se</button> {/*dugme prijave*/}
