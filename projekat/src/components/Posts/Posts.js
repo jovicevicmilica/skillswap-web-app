@@ -7,8 +7,8 @@ import { toast } from 'react-toastify'; // for alert messages
 
 const Posts = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ['posts'],
-    queryFn: () => makeRequest.get("/home-page/posts").then(res => res.data)
+    queryKey: ['home-page/posts'],
+    queryFn: () => makeRequest.get("/posts").then(res => res.data)
   });
 
   if (isLoading) {

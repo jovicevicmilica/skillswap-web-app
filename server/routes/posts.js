@@ -3,7 +3,6 @@ import { getPosts, addPost } from "../controllers/post.js";
 const router = express.Router();
 
 /*ovdje sada idu zahtjevi*/
-router.get("/home-page/posts", getPosts); /*da vidimo objave*/
-router.post("/home-page/posts", addPost); /*da objavimo*/
-
+router.get("/", getPosts); /*da vidimo objave*/
+router.post("/", addPost); /*da objavimo*/
 export default router;

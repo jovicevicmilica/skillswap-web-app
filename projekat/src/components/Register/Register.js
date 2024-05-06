@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { Slide, toast, ToastContainer } from 'react-toastify'; /*za alert poruke*/
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { useNavigate } from 'react-router';
 
 const skillOptions = {
   'Poslovanje': [
@@ -70,6 +71,8 @@ function Register() {
     primarySkill:""
   });
 
+  const navigate = useNavigate();
+
   const [err, setErr] = useState(null);
 
   const handleSkillChange = selectedOption => {
@@ -101,7 +104,9 @@ function Register() {
     console.log('Forma poslata', { selectedSkill });
 
     try {
-      await axios.post("http://localhost:8800/api/auth/register", inputs);
+      const response = await axios.post("http://localhost:8800/api/auth/register", inputs);
+      toast.success("Uspješno ste se registrovali!");
+      navigate("/login");
     }
 
     catch(err) {
