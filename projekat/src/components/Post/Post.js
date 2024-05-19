@@ -10,7 +10,7 @@ import Comments from '../Comments/Comments';
 import moment from "moment";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-import { toast } from 'react-toastify'; // for alert messages
+import { toast } from 'react-toastify'; 
 import { AuthContext } from '../../context/authContext';
 
 const Post = ({post}) => {
@@ -19,20 +19,19 @@ const Post = ({post}) => {
 
   const queryClient = useQueryClient();
 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['home-page/likes', post.id],
+    queryFn: () => makeRequest.get("/likes?postId=" + post.id).then(res => res.data)
+  });
+
   const mutation = useMutation({
     mutationFn: (liked) => {
-        if(liked) return makeRequest.delete("/likes?postId=" + post.id);
-
-        return makeRequest.post("/likes", {postId: post.id});
+      if(liked) return makeRequest.delete("/likes?postId=" + post.id);
+      return makeRequest.post("/likes", {postId: post.id});
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['likes']);
     }
-  });
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['home-page/likes', post.id],
-    queryFn: () => makeRequest.get("/likes?postId=" + post.id).then(res => res.data)
   });
 
   if (isLoading) {
@@ -57,7 +56,7 @@ const Post = ({post}) => {
                 <div className="post-user-info">
                     <img src={post.profilePic} alt="" />
                     <div className="post-details">
-                        <Link to={`/profile/${post.userId}`} style={{textDecoration:"none", color:"inherit"}}> 
+                        <Link to={`/home-page/profile/${post.userId}`} style={{textDecoration:"none", color:"inherit"}}> 
                             <span className="post-name">{post.name}</span>
                         </Link>
                         <span className="post-date">{moment(post.createdAt).fromNow()}</span>

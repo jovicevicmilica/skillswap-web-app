@@ -129,15 +129,15 @@
     position: relative;
 }
 
-.bio-icon.red {
+.bio-icon.loš {
     color: red;
 }
 
-.bio-icon.yellow {
+.bio-icon.srednji {
     color: yellow;
 }
 
-.bio-icon.green {
+.bio-icon.odličan {
     color: green;
 }
 

@@ -19,7 +19,7 @@ const LeftPart = () => {
       <div className="lp-container">
         <div className="lp-menu">
           <div className="lp-user">
-            <img src={currentUser.profilePicture} alt="" />
+            <img src={currentUser.profilePic} alt="" />
             <span>{currentUser.name}</span>
           </div>
           <div className="lp-item">

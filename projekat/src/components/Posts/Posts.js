@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Posts.css';
 import Post from '../Post/Post';
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
-import { toast } from 'react-toastify'; // for alert messages
+import { toast } from 'react-toastify';
 
-const Posts = () => {
+const Posts = ({userId}) => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['home-page/posts'],
-    queryFn: () => makeRequest.get("/posts").then(res => res.data)
+    queryFn: () => makeRequest.get("/posts?userId=" + userId).then(res => res.data)
   });
 
   if (isLoading) {
-    toast.info("Objave se učitavaju!");
     return <div>Učitavam...</div>;
   }
 
   if (error) {
-    toast.error(`Desila se greška: ${error.message}`);
     return <div>Greška: {error.message}</div>;
   }
 
@@ -30,6 +28,6 @@ const Posts = () => {
       )}
     </div>
   );
-}
+};
 
 export default Posts;

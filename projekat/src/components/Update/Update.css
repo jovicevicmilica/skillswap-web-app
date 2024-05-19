@@ -1,0 +1,84 @@
+.update-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.update-content {
+  max-height: 90vh; 
+  overflow-y: auto; 
+  width: 40%;
+  background-color: var(--white);
+  padding: 50px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+  position: relative;
+}
+
+.update-content::-webkit-scrollbar{
+    display: none; /*mičemo ugrađeni skrol bar*/
+}
+
+.update-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.update-form-label {
+  font-weight: bold;
+}
+
+.update-form-input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  background-color: rgba(0, 69, 246, .1);
+  border-radius: 0;
+}
+
+.update-form-input[type="file"] {
+  display: none;
+}
+
+.image-container-update {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-button {
+  background-color: #0045f6;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.profile-button:hover {
+  background-color: var(--black);
+}

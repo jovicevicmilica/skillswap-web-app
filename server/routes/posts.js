@@ -5,4 +5,5 @@ const router = express.Router();
 /*ovdje sada idu zahtjevi*/
 router.get("/", getPosts); /*da vidimo objave*/
 router.post("/", addPost); /*da objavimo*/
+
 export default router;

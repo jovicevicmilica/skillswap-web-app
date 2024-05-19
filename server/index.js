@@ -44,7 +44,7 @@ app.use("/api/home-page/users", userRoutes);
 app.use("/api/home-page/posts", postRoutes);
 app.use("/api/home-page/comments", commentRoutes);
 app.use("/api/home-page/likes", likeRoutes);
-app.use("/api/relationships", relationshipRoutes);
+app.use("/api/home-page/relationships", relationshipRoutes);
 
 app.listen(8800, () => {
     console.log("API radi!")

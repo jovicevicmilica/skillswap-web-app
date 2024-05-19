@@ -180,9 +180,11 @@ function App() {
     {
       path: "/home-page",
       element: (
-        <ProtectedRoute><Layout /></ProtectedRoute> //ubacimo layout u protected route, jer mu se pristupa samo ako smo uspješno ulogovani
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
       ),
-      children:[
+      children: [
         {
           path: "/home-page",
           element: <Home />

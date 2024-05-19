@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getPosts = (req, res) => {
+    const userId = req.query.userId;
     const token = req.cookies.accessToken;
     /*ako nema tokena, vraćemo error, jer ako nismo ulogovani, ne smijemo da vidimo objave*/
     if(!token) return res.status(401).json("Niste ulogovani!");
@@ -13,15 +14,21 @@ export const getPosts = (req, res) => {
         /*ukoliko token jeste validan, onda dobijamo userInfo umjesto err, i pristupamo id - ju*/
 
         /*ovo ubacimo sve unutra verify - ja, da bi mogli da koristimo user id*/
-        const q = `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId)
-        LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId = ? OR p.userId = ?
-        ORDER BY p.createdAt DESC`; /*uzimamo sve objave, sortiramo naše i naših pratitelja tako da najranije budu na vrhu, zato je DESC*/
+        const q =
+            userId !== "undefined"
+                ? `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ? ORDER BY p.createdAt DESC`
+                : `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId)
+            LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId= ? OR p.userId =?
+            ORDER BY p.createdAt DESC`; /*uzimamo sve objave, sortiramo naše i naših pratitelja tako da najranije budu na vrhu, zato je DESC*/
         /*sada ćemo promijeniti query tako da se prikazuju samo naše objave i objave naših prijatelja*/
         /*prvo u bazi podesimo relationships*/
         /*user id dobijamo preko cookies u jwt*/
 
+        const values =
+            userId !== "undefined" ? [userId] : [userInfo.id, userInfo.id];       
+
         /*pored objava treba nam takođe i nekoliko detalja korisnika koji je objavio post, kao slika i deskripcija*/
-        db.query(q, [userInfo.id, userInfo.id], (err, data) => { /*trebaju nam dva ova id - ja, naš i onih koje vidimo*/
+        db.query(q, values, (err, data) => { /*trebaju nam dva ova id - ja, naš i onih koje vidimo*/
             if(err) return res.status(500).json(err);
 
             return res.status(200).json(data);
