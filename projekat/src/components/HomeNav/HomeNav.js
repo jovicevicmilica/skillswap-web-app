@@ -30,7 +30,7 @@ const HomeNav = () => {
             <MessageIcon />
             <NotificationsIcon />
             <div className="home-user">
-                <img src={currentUser.profilePic} alt="" />
+                <img src={"/upload/" + currentUser.profilePic} alt="" />
                 <span>{currentUser.name}</span>
             </div>
         </div>

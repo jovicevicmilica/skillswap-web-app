@@ -82,8 +82,8 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="profile-images">
-        <img src={data.coverPic} alt="" className="cover-photo" />
-        <img src={data.profilePic} alt="" className="profile-photo" />
+        <img src={"/upload/" + data.coverPic} alt="" className="cover-photo" />
+        <img src={"/upload/" + data.profilePic} alt="" className="profile-photo" />
       </div>
       <div className="profile-container">
         {showSkills ? (

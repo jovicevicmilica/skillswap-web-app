@@ -55,13 +55,13 @@ const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa korist
   return (
     <div className="comments">
         <div className="comments-write">
-            <img src={currentUser.profilePic} alt="" />
+            <img src={"/upload/" + currentUser.profilePic} alt="" />
             <input type="text" placeholder="Napišite komentar..." value={desc} onChange={e => setDesc(e.target.value)}/>
             <button onClick={handleClick}>Objavi</button>
         </div>
         {data && data.length > 0 ? (data.map(comment=>(
             <div className="comment">
-                <img src={comment.profilePic} alt="" />
+                <img src={"/upload/" + comment.profilePic} alt="" />
                 <div className="comment-info">
                     <span>{comment.name}</span>
                     <p>{comment.desc}</p>

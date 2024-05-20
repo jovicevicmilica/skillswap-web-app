@@ -19,7 +19,6 @@ const Share = () => {
         formData.append("file", file); 
 
         const res = await makeRequest.post("/upload", formData);
-        console.log("Upload response:", res.data);
         return res.data; /*vraće taj url*/
     } catch(err) {
         console.log(err);
@@ -63,7 +62,7 @@ const Share = () => {
         <div className="share-top">
           <div className="share-left">
             <img
-                src={currentUser.profilePic}
+                src={"/upload/" + currentUser.profilePic}
                 alt=""
             />
             <input type="share-text" placeholder={`Šta želite podijeliti, ${currentUser.name}?`} 

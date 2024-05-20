@@ -30,44 +30,6 @@ const RightPart = () => {
             </div>
           </div>
         </div>
-        <div className="rp-item">
-          <span>Aktivni</span>
-          <div className="rp-user">
-            <div className="rp-user-info">
-              <img src="https://static2yumama.mondo.rs/Picture/70355/jpeg/Dete-ridja-kosa-crvena-kosa_700288018.jpg?ts=2022-12-28T13:12:32" alt="" />
-              <div className="rp-online" />
-              <span>Nikolina Todorović</span>
-            </div>
-          </div>
-          <div className="rp-user">
-            <div className="rp-user-info">
-              <img src="https://imgix.ranker.com/user_node_img/50088/1001750393/original/nice-new-coat-photo-u1?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="" />
-              <div className="rp-online" />
-              <span>Miloš Šćekić</span>
-            </div>
-          </div>
-          <div className="rp-user">
-            <div className="rp-user-info">
-              <img src="https://static2yumama.mondo.rs/Picture/70355/jpeg/Dete-ridja-kosa-crvena-kosa_700288018.jpg?ts=2022-12-28T13:12:32" alt="" />
-              <div className="rp-online" />
-              <span>Nikolina Todorović</span>
-            </div>
-          </div>
-          <div className="rp-user">
-            <div className="rp-user-info">
-              <img src="https://static2yumama.mondo.rs/Picture/70355/jpeg/Dete-ridja-kosa-crvena-kosa_700288018.jpg?ts=2022-12-28T13:12:32" alt="" />
-              <div className="rp-online" />
-              <span>Nikolina Todorović</span>
-            </div>
-          </div>
-          <div className="rp-user">
-            <div className="rp-user-info">
-              <img src="https://static2yumama.mondo.rs/Picture/70355/jpeg/Dete-ridja-kosa-crvena-kosa_700288018.jpg?ts=2022-12-28T13:12:32" alt="" />
-              <div className="rp-online" />
-              <span>Nikolina Todorović</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

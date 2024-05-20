@@ -22,7 +22,7 @@ const Posts = ({userId}) => {
   return (
     <div className="posts">
       {data && data.length > 0 ? (
-        data.map(post => <Post key={post.id} post={post} />)
+        data.map((post) => <Post key={post.id} post={post} />)
       ) : (
         <p>Nema dostupnih objava. Povežite se sa nekim već sada!</p>
       )}

@@ -52,6 +52,10 @@
   border-radius: 0;
 }
 
+.update-form-select {
+  margin: 10px 0;
+}
+
 .update-form-input[type="file"] {
   display: none;
 }

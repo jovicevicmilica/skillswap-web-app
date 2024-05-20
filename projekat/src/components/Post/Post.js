@@ -54,7 +54,7 @@ const Post = ({post}) => {
         <div className="post-container">
             <div className="post-user">
                 <div className="post-user-info">
-                    <img src={post.profilePic} alt="" />
+                    <img src={"/upload/" + post.profilePic} alt="" />
                     <div className="post-details">
                         <Link to={`/home-page/profile/${post.userId}`} style={{textDecoration:"none", color:"inherit"}}> 
                             <span className="post-name">{post.name}</span>
@@ -66,7 +66,7 @@ const Post = ({post}) => {
             </div>  
             <div className="post-content">
                 <p>{post.desc}</p>      
-                <img src={"./upload/" + post.img} alt="" /> {/*da bi prikazali slike iz foldera upload*/}
+                <img src={"/upload/" + post.img} alt="" /> {/*da bi prikazali slike iz foldera upload*/}
             </div>
             <div className="post-info">
                 <div className="post-item">

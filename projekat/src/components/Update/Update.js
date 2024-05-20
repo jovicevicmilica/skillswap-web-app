@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Update.css'; 
 import CloseIcon from '@mui/icons-material/Close';
 import Select from 'react-select';
 import { makeRequest } from '../../axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { AuthContext } from '../../context/authContext';
 
 const townOptions = [
   { label: "Podgorica", value: "Podgorica" },
@@ -61,9 +62,9 @@ const transformedOptions = Object.keys(skillOptions).map(category => ({
 }));
 
 const skillLevelOptions = [
-  { label: "Loš", value: "Loš" },
-  { label: "Srednji", value: "Srednji" },
-  { label: "Odličan", value: "Odličan" },
+  { label: "loš", value: "loš" },
+  { label: "srednji", value: "srednji" },
+  { label: "odličan", value: "odličan" },
 ];
 
 const customStyles = {
@@ -87,51 +88,31 @@ const customStyles = {
 const Update = ({ setOpenUpdate, user }) => {
   const [cover, setCover] = useState(null);
   const [profile, setProfile] = useState(null);
+  const { updateUser } = useContext(AuthContext);
+
   const [texts, setTexts] = useState({
     email: user.email,
-    password: user.password,
     name: user.name,
-    town: user.town,
+    town: { label: user.town, value: user.town },
     primarySkill: user.primarySkill,
     primarySkillLevel: user.primarySkillLevel,
-    learningPref: user.learningPref
+    learningPref: { label: user.learningPref, value: user.learningPref }
   });
-  const [userSkills, setUserSkills] = useState(user.userSkills || []);
-  const [interestedSkills, setInterestedSkills] = useState(user.interestedSkills || []);
 
   const upload = async (file) => {
+    console.log(file)
     try {
-        const formData = new FormData();
-        formData.append("file", file); 
-        const res = await makeRequest.post("/upload", formData);
-        return res.data;
-    } catch(err) {
-        console.log(err);
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await makeRequest.post("/upload", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const handleChange = (e) => {
-    setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value }))
-  };
-
-  const handleSkillChange = (selectedOptions) => {
-    setUserSkills(selectedOptions.map(skill => ({ ...skill, level: '' })));
-  };
-
-  const handleInterestedSkillChange = (selectedOptions) => {
-    setInterestedSkills(selectedOptions.map(skill => ({ ...skill, level: '' })));
-  };
-
-  const handleSkillLevelChange = (index, level, type) => {
-    if (type === 'user') {
-      const updatedSkills = [...userSkills];
-      updatedSkills[index].level = level.value;
-      setUserSkills(updatedSkills);
-    } else if (type === 'interested') {
-      const updatedSkills = [...interestedSkills];
-      updatedSkills[index].level = level.value;
-      setInterestedSkills(updatedSkills);
-    }
+    setTexts((prev) => ({ ...prev, [e.target.name] : [e.target.value] }));
   };
 
   const queryClient = useQueryClient();
@@ -151,17 +132,13 @@ const Update = ({ setOpenUpdate, user }) => {
     let profileUrl;
     coverUrl = cover ? await upload(cover) : user.coverPic;
     profileUrl = profile ? await upload(profile) : user.profilePic;
-
-    mutation.mutate({ 
-      ...texts, 
-      coverPic: coverUrl, 
-      profilePic: profileUrl, 
-      userSkills: userSkills.map(skill => ({ skill: skill.value, level: skill.level })), 
-      interestedSkills: interestedSkills.map(skill => ({ skill: skill.value, level: skill.level })) 
-    });
+    
+    const updatedUser = { ...texts, town: texts.town.value, coverPic: coverUrl, profilePic: profileUrl, learningPref: texts.learningPref.value }; 
+    mutation.mutate({ ...texts, town: texts.town.value, coverPic: coverUrl, profilePic: profileUrl, learningPref: texts.learningPref.value });
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
+    updateUser(updatedUser);
   };
 
   return (
@@ -184,24 +161,17 @@ const Update = ({ setOpenUpdate, user }) => {
             <label className="update-form-label" htmlFor='profile'>
                 <span>Profilna slika</span>
                 <div className="image-container-update">
-                    <img src={profile ? URL.createObjectURL(profile) : "./upload/" + user.coverPic} alt="" />
+                    <img src={profile ? URL.createObjectURL(profile) : "./upload/" + user.profilePic} alt="" />
                     <CloudUploadIcon />
                 </div>
             </label>
             <input className="update-form-input" type="file" id="profile" style={{ display: "none" }} onChange={(e) => setProfile(e.target.files[0])} />
+
             <label className="update-form-label">Email</label>
             <input
                 type="text"
                 value={texts.email}
                 name="email"
-                onChange={handleChange}
-                className="update-form-input"
-            />
-            <label className="update-form-label">Lozinka</label>
-            <input
-                type="text"
-                value={texts.password}
-                name="password"
                 onChange={handleChange}
                 className="update-form-input"
             />
@@ -214,72 +184,21 @@ const Update = ({ setOpenUpdate, user }) => {
                 className="update-form-input"
             />
             <label className="update-form-label">Grad</label>
-            <input
-                type="text"
-                name="town"
+            <Select
                 value={texts.town}
-                onChange={handleChange}
-                className="update-form-input"
+                onChange={value => setTexts(prev => ({ ...prev, town: value }))}
+                options={townOptions}
+                styles={customStyles}
+                className='update-form-select'
             />
             <label className="update-form-label">Preference učenja</label>
             <Select
+                value={texts.learningPref}
+                onChange={value => setTexts(prev => ({ ...prev, learningPref: value }))}
                 options={learningPrefOptions}
-                value={learningPrefOptions.find(option => option.value === texts.learningPref)}
-                onChange={(selectedOption) => setTexts((prev) => ({ ...prev, learningPref: selectedOption.value }))}
-                styles={customStyles}
+                styles={customStyles}   
+                className='update-form-select'
             />
-            <label className="update-form-label">Primarna vještina</label>
-            <Select
-                options={transformedOptions}
-                value={transformedOptions.flatMap(option => option.options).find(option => option.value === texts.primarySkill)}
-                onChange={(selectedOption) => setTexts((prev) => ({ ...prev, primarySkill: selectedOption.value }))}
-                styles={customStyles}
-            />
-            <label className="update-form-label">Nivo primarne vještine</label>
-            <Select
-                options={skillLevelOptions}
-                value={skillLevelOptions.find(option => option.value === texts.primarySkillLevel)}
-                onChange={(selectedOption) => setTexts((prev) => ({ ...prev, primarySkillLevel: selectedOption.value }))}
-                styles={customStyles}
-            />
-            <label className="update-form-label">Vještine koje posjedujem</label>
-            <Select
-                isMulti
-                options={transformedOptions}
-                value={userSkills}
-                onChange={handleSkillChange}
-                styles={customStyles}
-            />
-            {userSkills.map((skill, index) => (
-              <div key={index}>
-                <label className="update-form-label">Nivo za {skill.label}</label>
-                <Select
-                  options={skillLevelOptions}
-                  value={skillLevelOptions.find(option => option.value === skill.level)}
-                  onChange={(selectedOption) => handleSkillLevelChange(index, selectedOption, 'user')}
-                  styles={customStyles}
-                />
-              </div>
-            ))}
-            <label className="update-form-label">Vještine koje me interesuju</label>
-            <Select
-                isMulti
-                options={transformedOptions}
-                value={interestedSkills}
-                onChange={handleInterestedSkillChange}
-                styles={customStyles}
-            />
-            {interestedSkills.map((skill, index) => (
-              <div key={index}>
-                <label className="update-form-label">Nivo za {skill.label}</label>
-                <Select
-                  options={skillLevelOptions}
-                  value={skillLevelOptions.find(option => option.value === skill.level)}
-                  onChange={(selectedOption) => handleSkillLevelChange(index, selectedOption, 'interested')}
-                  styles={customStyles}
-                />
-              </div>
-            ))}
           </div>
         </form>
         <button className="profile-button" onClick={handleClick}>Ažuriraj</button>

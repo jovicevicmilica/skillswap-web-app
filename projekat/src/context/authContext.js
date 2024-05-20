@@ -13,7 +13,16 @@ export const AuthContextProvider = ({ children }) => {
       withCredentials: true,
     });
 
-    setCurrentUser(res.data)
+    setCurrentUser(res.data);
+  };
+
+  //DA BI SE AŽURIRALI PODACI SVUDA KADA AŽURIRAMO PROFIL, a ne da se čuva currentUser samo kad se ulogujemo
+  const updateUser = async (inputs) => {
+    const res = await axios.put("http://localhost:8800/api/home-page/users", inputs, {
+      withCredentials: true,
+    });
+
+    setCurrentUser(res.data);
   };
 
   useEffect(() => {
@@ -21,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login }}>
+    <AuthContext.Provider value={{ currentUser, login, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
