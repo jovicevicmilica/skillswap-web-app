@@ -41,6 +41,7 @@
 
 .update-form-label {
   font-weight: bold;
+  margin-top: 15px;
 }
 
 .update-form-input {
@@ -61,11 +62,23 @@
 }
 
 .image-container-update {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  max-height: 300px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
   margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.image-container-update img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
 }
 
 .forms {
@@ -74,7 +87,7 @@
 }
 
 .profile-button {
-  background-color: #0045f6;
+  background-color: var(--skillswap-blue);
   color: white;
   padding: 10px;
   border: none;
@@ -84,5 +97,41 @@
 }
 
 .profile-button:hover {
+  background-color: var(--black);
+}
+
+.profile-button-smaller {
+  background-color: var(--skillswap-skyblue);
+  width: 100%;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-button-smaller:hover {
+  background-color: var(--black);
+}
+
+.update-items {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.profile-button-update {
+  background-color: var(--skillswap-blue);
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.profile-button-update:hover {
   background-color: var(--black);
 }

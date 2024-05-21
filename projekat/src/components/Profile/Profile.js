@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import './Profile.css';
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
@@ -48,6 +48,20 @@ const Profile = () => {
     }
   });
 
+  const ownedSkills = useMemo(() => {
+    if (!data) return [];
+    const primarySkill = {
+      skill: data.primarySkill,
+      skillLevel: data.primarySkillLevel,
+      type: 'imam'  
+    };
+  
+    const additionalSkills = data.skills.filter(skill => skill.type === 'imam');
+    return [primarySkill, ...additionalSkills];
+  }, [data]);
+
+  const desiredSkills = useMemo(() => data?.skills.filter(skill => skill.type === 'želim') || [], [data]);
+
   if (isLoading) {
     toast.info("Podaci se učitavaju...");
     return <div>Učitavam...</div>;
@@ -71,13 +85,6 @@ const Profile = () => {
   const handleFollow = () => {
     mutation.mutate(relationshipData.includes(currentUser.id));
   };
-
-  const ownedSkills = data.skills.filter(skill => skill.type === 'imam').map(skill => ({
-    ...skill
-  }));
-  const desiredSkills = data.skills.filter(skill => skill.type === 'želim').map(skill => ({
-    ...skill
-  }));
 
   return (
     <div className="profile">

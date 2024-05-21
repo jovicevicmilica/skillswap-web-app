@@ -43,10 +43,11 @@ export const login = (req, res) => {
 
         if(data.length === 0) return res.status(404).json("Korisnik nije pronađen!"); /*nema nalog*/
 
+        console.log(req.body.password)
+        console.log(data[0].password)
         const checkPass = bcrypt.compareSync(req.body.password, data[0].password); /*data[0] znači da uzimamo tog prvog korisnika, i upoređujemo unijetu sa njegovom lozinkom u bazi*/
-
+        console.log(checkPass);
         if(!checkPass) return res.status(400).json("Pogrešna lozinka ili email!");
-
         const token = jwt.sign({ id:data[0].id }, "secretkey"); /*ovo radimo da bi samo korisnik čija je objava mogao da je briše itd.*/
 
         const { password, ...others } = data[0];

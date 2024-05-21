@@ -24,6 +24,12 @@ const Post = ({post}) => {
     queryFn: () => makeRequest.get("/likes?postId=" + post.id).then(res => res.data)
   });
 
+  const { data: commentCountData } = useQuery({
+    queryKey: ['home-page/comment-count', post.id],
+    queryFn: () => makeRequest.get("/comments/count?postId=" + post.id).then(res => res.data),
+    initialData: 0 //postavljanje početne vrijednosti
+  });
+
   const mutation = useMutation({
     mutationFn: (liked) => {
       if(liked) return makeRequest.delete("/likes?postId=" + post.id);
@@ -73,9 +79,9 @@ const Post = ({post}) => {
                     {data.includes(currentUser.id) ? (<FavoriteIcon className="icon-color-blue" onClick={handleLike}/>) : (<FavoriteBorderIcon onClick={handleLike}/>)}
                     {data.length} lajkova
                 </div>
-                <div className="post-item" onClick={()=>setCommentOpen(!commentOpen)}> {/*ako je otvoren, zatvori, inace otvori*/}
-                    <AddCommentIcon />
-                    9<span>komentara</span>
+                <div className="post-item" onClick={()=>setCommentOpen(!commentOpen)}>
+                  <AddCommentIcon />
+                  {commentCountData !== undefined ? `${commentCountData} komentara` : '0 komentara'}
                 </div>
                 <div className="post-item">
                     <ShareIcon />

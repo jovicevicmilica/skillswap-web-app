@@ -60,6 +60,20 @@
     font-size: 16px;
 }
 
+.logout-button {
+  background-color: var(--skillswap-blue);
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  background-color: var(--black);
+}
+
 @media only screen and (max-width: 480px) {
     .left-part {
         display: none;

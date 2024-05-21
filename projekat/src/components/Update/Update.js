@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Update.css'; 
 import CloseIcon from '@mui/icons-material/Close';
 import Select from 'react-select';
@@ -6,6 +6,11 @@ import { makeRequest } from '../../axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { AuthContext } from '../../context/authContext';
+
+const skillTypeOptions = [
+  { label: "imam", value: "imam" },
+  { label: "želim", value: "želim" }
+];
 
 const townOptions = [
   { label: "Podgorica", value: "Podgorica" },
@@ -88,19 +93,34 @@ const customStyles = {
 const Update = ({ setOpenUpdate, user }) => {
   const [cover, setCover] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [userSkills, setUserSkills] = useState([]);
   const { updateUser } = useContext(AuthContext);
-
+  const [originalPass] = useState(user.password); //čuvamo originalnu lozinku
   const [texts, setTexts] = useState({
     email: user.email,
+    password: '', //radi sigurnosti!
     name: user.name,
     town: { label: user.town, value: user.town },
-    primarySkill: user.primarySkill,
-    primarySkillLevel: user.primarySkillLevel,
+    primarySkill: { label: user.primarySkill, value: user.primarySkill},
+    primarySkillLevel: { label: user.primarySkillLevel, value: user.primarySkillLevel},
     learningPref: { label: user.learningPref, value: user.learningPref }
   });
+  const [newSkill, setNewSkill] = useState({ type: '', skill: '', skillLevel: '' });
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const res = await makeRequest.get(`/skills/${user.id}`);
+        setUserSkills(res.data);
+      } catch (err) {
+        console.error('Failed to fetch skills:', err);
+      }
+    };
+
+    fetchSkills();
+  }, [user.id]);
 
   const upload = async (file) => {
-    console.log(file)
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -112,7 +132,29 @@ const Update = ({ setOpenUpdate, user }) => {
   };
 
   const handleChange = (e) => {
-    setTexts((prev) => ({ ...prev, [e.target.name] : [e.target.value] }));
+    setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value }));
+  };
+
+  const handleDeleteSkill = async (skillId) => {
+    try {
+      await makeRequest.delete(`/skills/${skillId}`);
+      setUserSkills(currentSkills => currentSkills.filter(skill => skill.id !== skillId));
+    } catch (error) {
+      console.error('Error deleting skill:', error);
+    }
+  };
+
+  const handleAddSkill = async () => {
+    try {
+      const res = await makeRequest.post('/skills', {
+        userId: user.id,
+        ...newSkill
+      });
+      setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]);
+      setNewSkill({ type: '', skill: '', skillLevel: '' }); // Reset form after adding
+    } catch (error) {
+      console.error('Error adding skill:', error);
+    }
   };
 
   const queryClient = useQueryClient();
@@ -133,12 +175,23 @@ const Update = ({ setOpenUpdate, user }) => {
     coverUrl = cover ? await upload(cover) : user.coverPic;
     profileUrl = profile ? await upload(profile) : user.profilePic;
     
-    const updatedUser = { ...texts, town: texts.town.value, coverPic: coverUrl, profilePic: profileUrl, learningPref: texts.learningPref.value }; 
-    mutation.mutate({ ...texts, town: texts.town.value, coverPic: coverUrl, profilePic: profileUrl, learningPref: texts.learningPref.value });
+    const updatedUser = {
+        ...texts,
+        town: texts.town.value,
+        coverPic: coverUrl,
+        profilePic: profileUrl,
+        learningPref: texts.learningPref.value,
+        primarySkill: texts.primarySkill.value,
+        primarySkillLevel: texts.primarySkillLevel.value,
+        password: texts.password || originalPass //nova lozinka ako postoji, inače originalna
+    };
+
+    mutation.mutate(updatedUser);
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
     updateUser(updatedUser);
+    setTexts(prev => ({ ...prev, password: '' })); //resetovanje
   };
 
   return (
@@ -166,7 +219,6 @@ const Update = ({ setOpenUpdate, user }) => {
                 </div>
             </label>
             <input className="update-form-input" type="file" id="profile" style={{ display: "none" }} onChange={(e) => setProfile(e.target.files[0])} />
-
             <label className="update-form-label">Email</label>
             <input
                 type="text"
@@ -174,6 +226,15 @@ const Update = ({ setOpenUpdate, user }) => {
                 name="email"
                 onChange={handleChange}
                 className="update-form-input"
+            />
+            <label className="update-form-label">Nova lozinka</label>
+            <input
+                type="password"
+                value={texts.password || ''}
+                name="password"
+                onChange={handleChange}
+                className="update-form-input"
+                placeholder="Unesite novu lozinku"
             />
             <label className="update-form-label">Ime i prezime</label>
             <input
@@ -199,9 +260,60 @@ const Update = ({ setOpenUpdate, user }) => {
                 styles={customStyles}   
                 className='update-form-select'
             />
+            <label className="update-form-label">Primarna vještina</label>
+            <Select
+                value={ texts.primarySkill }
+                onChange={value => setTexts(prev => ({ ...prev, primarySkill: value }))}
+                options={transformedOptions}
+                styles={customStyles}   
+                className='update-form-select'
+            />
+            <label className="update-form-label">Nivo primarne vještine</label>
+            <Select
+                value={ texts.primarySkillLevel }
+                onChange={value => setTexts(prev => ({ ...prev, primarySkillLevel: value }))}
+                options={skillLevelOptions}
+                styles={customStyles}   
+                className='update-form-select'
+            />
+            <button className="profile-button-update" onClick={handleClick}>Ažuriraj</button>
+            <h1>Ažuriraj vještine</h1>
+            <label className="update-form-label">Tip nove vještine</label>
+            <Select
+              value={skillTypeOptions.find(option => option.value === newSkill.type)}
+              onChange={option => setNewSkill(prev => ({ ...prev, type: option.value }))}
+              options={skillTypeOptions}
+              styles={customStyles}
+              className='update-form-select'
+            />
+            <label className="update-form-label">Nova vještina</label>
+            <Select
+              value={transformedOptions.flatMap(group => group.options).find(option => option.value === newSkill.skill)}
+              onChange={option => setNewSkill(prev => ({ ...prev, skill: option.value }))}
+              options={transformedOptions}
+              styles={customStyles}
+              className='update-form-select'
+            />
+            <label className="update-form-label">Nivo znanja nove vještine</label>
+            <Select
+              value={skillLevelOptions.find(option => option.value === newSkill.skillLevel)}
+              onChange={option => setNewSkill(prev => ({ ...prev, skillLevel: option.value }))}
+              options={skillLevelOptions}
+              styles={customStyles}
+              className='update-form-select'
+            />
+            <button onClick={handleAddSkill} className="profile-button-smaller">Dodaj vještinu</button>
+            <div>
+              <label className="update-form-label">Vještine koje posjedujete (osim primarne)</label>
+              {userSkills.map((skill, index) => (
+                <div key={index} className="update-items">
+                  {skill.skill} ({skill.skillLevel}) - {skill.type}
+                  <button onClick={() => handleDeleteSkill(skill.id)} className="profile-button-smaller">Obriši</button>
+                </div>
+              ))}
+            </div>
           </div>
         </form>
-        <button className="profile-button" onClick={handleClick}>Ažuriraj</button>
       </div>
     </div>
   );

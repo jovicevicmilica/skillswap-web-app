@@ -31,7 +31,9 @@ const HomeNav = () => {
             <NotificationsIcon />
             <div className="home-user">
                 <img src={"/upload/" + currentUser.profilePic} alt="" />
-                <span>{currentUser.name}</span>
+                <Link to={`/home-page/profile/${currentUser.id}`} style={{textDecoration:"none", color:"inherit"}}> 
+                    <span>{currentUser.name}</span>
+                </Link>
             </div>
         </div>
     </div>

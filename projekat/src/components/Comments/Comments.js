@@ -7,6 +7,7 @@ import moment from "moment";
 import "moment/locale/bs"; /*naš jezik*/
 import { toast } from 'react-toastify'; // for alert messages
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa koristimo postId*/
   const [desc, setDesc] = useState("");
@@ -63,7 +64,9 @@ const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa korist
             <div className="comment">
                 <img src={"/upload/" + comment.profilePic} alt="" />
                 <div className="comment-info">
-                    <span>{comment.name}</span>
+                    <Link to={`/home-page/profile/${comment.userId}`} style={{textDecoration:"none", color:"inherit"}}> 
+                      <span>{comment.name}</span>
+                    </Link>
                     <p>{comment.desc}</p>
                 </div>
                 <span className="comment-date">{moment(comment.createdAt).fromNow()}</span>

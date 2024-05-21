@@ -10,9 +10,25 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { AuthContext } from '../../context/authContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const LeftPart = () => {
-  const { currentUser } = useContext(AuthContext); 
+  const { currentUser, logout } = useContext(AuthContext); 
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    e.preventDefault(); /*da se stranica ne refreshuje*/
+    try {
+      await logout();
+      navigate("/login");
+    } 
+
+    catch(err) {
+      toast.error(err.response.data);
+      return;
+    }
+  };
 
   return (
     <div className="left-part">
@@ -20,7 +36,9 @@ const LeftPart = () => {
         <div className="lp-menu">
           <div className="lp-user">
             <img src={"/upload/" + currentUser.profilePic} alt="" />
-            <span>{currentUser.name}</span>
+            <Link to={`/home-page/profile/${currentUser.id}`} style={{textDecoration:"none", color:"inherit"}}> 
+              <span>{currentUser.name}</span>
+            </Link>
           </div>
           <div className="lp-item">
             <PeopleIcon className="icon-color-blue" />
@@ -38,14 +56,6 @@ const LeftPart = () => {
         <hr/> {/*druga sekcija!*/}
         <div className="lp-menu">
           <span>Vaše prečice</span>
-          <div className="lp-item">
-            <CalendarMonthIcon className="icon-color-blue" />
-            <span>Događaji</span>
-          </div>
-          <div className="lp-item">
-            <EmailIcon className="icon-color-blue" />
-            <span>Poruke</span>
-          </div>
           <div className="lp-item">
             <CollectionsIcon className="icon-color-blue" />
             <span>Galerija</span>
@@ -66,6 +76,7 @@ const LeftPart = () => {
             <LightbulbIcon className="icon-color-blue" />
             <span>Tutorijali</span>
           </div>
+          <button onClick={handleLogout} className="logout-button">Odjavi se</button>
         </div>
       </div>
     </div>

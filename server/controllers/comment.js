@@ -30,3 +30,12 @@ export const addComment = (req, res) => {
         });
     });
 };
+
+export const getCommentCount = (req, res) => {
+    const q = `SELECT COUNT(*) as count FROM comments WHERE postId = ?`;
+
+    db.query(q, [req.query.postId], (err, data) => {
+        if(err) return res.status(500).json(err);
+        return res.status(200).json(data[0].count); //pretpostavlja se da je data array objekata
+    });
+};
