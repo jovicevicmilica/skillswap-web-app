@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .post-user-info {
@@ -71,6 +72,22 @@
     cursor: pointer;
     font-size: 14px;
     gap: 5px;
+}
+
+.post-delete {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    border: none;
+    background-color: var(--skillswap-blue);
+    padding: 5px;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.post-delete::hover {
+    background-color: var(--black);
+    transform: all 5ms ease;
 }
 
 @media only screen and (max-width: 450px) {

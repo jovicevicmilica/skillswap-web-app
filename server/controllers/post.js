@@ -46,3 +46,21 @@ export const addPost = (req, res) => {
         });
     });
 };
+
+export const deletePost = (req, res) => {
+    const token = req.cookies.accessToken;
+    if(!token) return res.status(401).json("Niste ulogovani!");
+    /*moramo biti ulogovani da bi kačili objave pa je ovaj dio nepromijenjen od gore*/
+
+    jwt.verify(token, "secretkey", (err, userInfo) => {
+        if(err) return res.status(403).json("Token nije validan.");
+
+        const q = "DELETE FROM posts WHERE `id`=? AND `userId`=?";
+
+        db.query(q, [ req.params.id, userInfo.id ], (err, data) => {
+            if(err) return res.status(500).json(err);
+            if(data.affectedRows > 0) return res.status(200).json("Objava je obrisana!");
+            return res.status(403).json("Možeš brisati samo svoju objavu!");
+        });
+    });
+};

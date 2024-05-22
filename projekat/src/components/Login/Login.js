@@ -70,10 +70,6 @@ const Login = () => {
                                 required                
                                 ></input>
                             </div>
-                            <div className="login-checkbox-block">
-                                <input type="checkbox" id="remember" name="remember" className="login-checkbox"></input>
-                                <label htmlFor="remember" className="login-remember">Zapamti me</label>
-                            </div>
                         </form>
                         <button type="submit" className="login-button" onClick={handleLogin}>Prijavi se</button> {/*dugme prijave*/}
                     </div>

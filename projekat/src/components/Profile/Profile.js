@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useMemo, useEffect } from 'react';
 import './Profile.css';
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { useLocation } from 'react-router';
 import { AuthContext } from '../../context/authContext';
 import Update from '../Update/Update';
+import { useNavigate } from 'react-router';
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -21,9 +22,32 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext); 
 
   const [showSkills, setShowSkills] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
+
+  const toggleMoreOptions = () => {
+      setShowMoreOptions(!showMoreOptions);
+  };
 
   const toggleSkills = () => {
     setShowSkills(!showSkills);
+  };
+
+  const navigate = useNavigate();
+
+  const reportUser = () => { //šaljemo mejl adminu
+    const mailto = `mailto:skillswap24@gmail.com?subject=Prijava korisnika ${data.name}&body=Poštovani,%0D%0A%0D%0AObraćam vam se kako bih skrenuo pažnju na ponašanje korisnika ${data.name}.%0D%0A%0D%0A[Ovdje napišite detalje prijave.]%0D%0A%0D%0AS poštovanjem,%0D%0A${currentUser.name}`;
+    window.location.href = mailto;
+  };
+
+  const deleteUser = () => { //ukoliko je naš profil, umjesto prijave možemo da obrišemo profil
+    makeRequest.delete(`/users/delete/${currentUser.id}`)
+      .then(response => {
+        toast.success('Profil je uspješno obrisan.');
+        navigate("/");
+      })
+      .catch(error => {
+        toast.error(`Došlo je do greške: ${error.response.data}`);
+      });
   };
 
   const { isLoading, error, data } = useQuery({
@@ -33,7 +57,7 @@ const Profile = () => {
 
   const { isLoading: isRelationshipLoading, error: relationshipError, data: relationshipData } = useQuery({
     queryKey: ['home-page/relationship', userId],
-    queryFn: () => makeRequest.get(`/relationships?followedUserId=${userId}`).then(res => res.data) // Updated URL
+    queryFn: () => makeRequest.get(`/relationships?followedUserId=${userId}`).then(res => res.data)
   });
 
   const queryClient = useQueryClient();
@@ -62,6 +86,22 @@ const Profile = () => {
 
   const desiredSkills = useMemo(() => data?.skills.filter(skill => skill.type === 'želim') || [], [data]);
 
+  useEffect(() => { //da lakše zatvorimo opciju obriši/prijavi klikom bilo gdje pored
+    const closeMenu = (e) => {
+        if (!e.target.closest('.profile-right')) {
+            setShowMoreOptions(false);
+        }
+    };
+
+    if (showMoreOptions) {
+        document.addEventListener('click', closeMenu);
+    }
+
+    return () => {
+        document.removeEventListener('click', closeMenu);
+    };
+  }, [showMoreOptions]);
+
   if (isLoading) {
     toast.info("Podaci se učitavaju...");
     return <div>Učitavam...</div>;
@@ -83,7 +123,21 @@ const Profile = () => {
   }
 
   const handleFollow = () => {
-    mutation.mutate(relationshipData.includes(currentUser.id));
+    const isFollowing = relationshipData.isFollowing;
+    mutation.mutate(isFollowing);
+  };
+
+  const getRelationshipStatus = (relationshipData, currentUser, userId) => {
+    const isFollowing = relationshipData.isFollowing;
+    const isFollowedBy = relationshipData.followers.some(rel => rel.followerUserId === currentUser.id && rel.isMutual);
+
+    if (isFollowing && isFollowedBy) {
+      return 'Povezani';
+    } else if (isFollowing) {
+      return 'Razmjena zatražena';
+    } else {
+      return 'Zatraži razmjenu';
+    }
   };
 
   return (
@@ -143,16 +197,23 @@ const Profile = () => {
               {userId === currentUser.id ? (
                 <button className="profile-button" onClick={() => setOpenUpdate(true)}>Ažuriraj profil</button>
               ) : (
-                relationshipData && relationshipData.includes(currentUser.id) ? (
-                  <button className="profile-button" onClick={handleFollow}>Razmjena zatražena</button>
-                ) : (
-                  <button className="profile-button" onClick={handleFollow}>Zatraži razmjenu</button>
-                )
+                <button className="profile-button" onClick={handleFollow}>
+                  {getRelationshipStatus(relationshipData, currentUser, userId)}
+                </button>
               )}
             </div>
             <div className="profile-right">
               <InfoIcon onClick={toggleSkills} />
-              <MoreVertIcon />
+              <MoreVertIcon onClick={toggleMoreOptions} />
+              {showMoreOptions && (
+                  <div className="more-options-menu">
+                      {userId === currentUser.id ? (
+                          <button onClick={deleteUser}>Obriši profil</button>
+                      ) : (
+                          <button onClick={reportUser}>Prijavi profil</button>
+                      )}
+                  </div>
+              )}
             </div>
           </div>
         )}

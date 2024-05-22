@@ -15,6 +15,7 @@ import { AuthContext } from '../../context/authContext';
 
 const Post = ({post}) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const {currentUser} = useContext(AuthContext);
 
   const queryClient = useQueryClient();
@@ -40,6 +41,15 @@ const Post = ({post}) => {
     }
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (postId) => {
+      return makeRequest.delete("/posts/" + post.id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+    }
+  });
+
   if (isLoading) {
     toast.info("Lajk se učitava!");
     return <div>Učitavam...</div>;
@@ -50,9 +60,13 @@ const Post = ({post}) => {
     return <div>Greška: {error.message}</div>;
   }
 
-  const handleLike = async (e) => {
+  const handleLike = () => {
     /*provjeravamo da li je već lajkovano, jer inače ide dislajk*/
     mutation.mutate(data.includes(currentUser.id)); /*ovo je ili true ili false, dakle biće ili lajk ili dislajk*/
+  };
+
+  const handleDelete = () => {
+    deleteMutation.mutate(post.id);
   };
 
   return (
@@ -68,7 +82,8 @@ const Post = ({post}) => {
                         <span className="post-date">{moment(post.createdAt).fromNow()}</span>
                     </div>
                 </div>
-                <MoreHorizIcon />
+                <MoreHorizIcon onClick={()=>setMenuOpen(!menuOpen)} />
+                {menuOpen && post.userId === currentUser.id && (<button onClick={handleDelete} className="post-delete">Obriši objavu</button>)}
             </div>  
             <div className="post-content">
                 <p>{post.desc}</p>      

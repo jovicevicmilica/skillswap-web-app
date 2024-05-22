@@ -95,7 +95,6 @@ const Update = ({ setOpenUpdate, user }) => {
   const [profile, setProfile] = useState(null);
   const [userSkills, setUserSkills] = useState([]);
   const { updateUser } = useContext(AuthContext);
-  const [originalPass] = useState(user.password); //čuvamo originalnu lozinku
   const [texts, setTexts] = useState({
     email: user.email,
     password: '', //radi sigurnosti!
@@ -153,7 +152,7 @@ const Update = ({ setOpenUpdate, user }) => {
       setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]);
       setNewSkill({ type: '', skill: '', skillLevel: '' }); // Reset form after adding
     } catch (error) {
-      console.error('Error adding skill:', error);
+      console.error('Greška u dodavanju vještine:', error);
     }
   };
 
@@ -183,7 +182,10 @@ const Update = ({ setOpenUpdate, user }) => {
         learningPref: texts.learningPref.value,
         primarySkill: texts.primarySkill.value,
         primarySkillLevel: texts.primarySkillLevel.value,
-        password: texts.password || originalPass //nova lozinka ako postoji, inače originalna
+    };
+
+    if(texts.password) {
+        updatedUser.password = texts.password;
     };
 
     mutation.mutate(updatedUser);
@@ -278,6 +280,7 @@ const Update = ({ setOpenUpdate, user }) => {
             />
             <button className="profile-button-update" onClick={handleClick}>Ažuriraj</button>
             <h1>Ažuriraj vještine</h1>
+            <p>Uzmite u obzir da smijete imati ukupno 3 vještine koje posjedujete (uključujući primarnu) i ukupno 3 koje vas interesuju! Preko nećete moći dodati!</p>
             <label className="update-form-label">Tip nove vještine</label>
             <Select
               value={skillTypeOptions.find(option => option.value === newSkill.type)}
@@ -302,7 +305,7 @@ const Update = ({ setOpenUpdate, user }) => {
               styles={customStyles}
               className='update-form-select'
             />
-            <button onClick={handleAddSkill} className="profile-button-smaller">Dodaj vještinu</button>
+            <button onClick={handleAddSkill} className="profile-button-smaller" disabled={(newSkill.type === 'imam' && userSkills.filter(skill => skill.type === 'imam').length >= 2) || (newSkill.type === 'želim' && userSkills.filter(skill => skill.type === 'želim').length >= 3)}>Dodaj vještinu</button>
             <div>
               <label className="update-form-label">Vještine koje posjedujete (osim primarne)</label>
               {userSkills.map((skill, index) => (

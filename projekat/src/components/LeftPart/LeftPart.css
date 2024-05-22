@@ -12,13 +12,6 @@
     display: none; /*mičemo ugrađeni skrol bar*/
 }
 
-.left-part hr { /*linija prelaza između sekcija*/
-    margin: 20px 0px;
-    border: none;
-    height: 0.5px;
-    background-color: lightgrey;
-}
-
 .lp-container {
     padding: 30px;
 }
@@ -43,6 +36,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
 }
 
 .lp-item span {
@@ -72,6 +67,10 @@
 
 .logout-button:hover {
   background-color: var(--black);
+}
+
+.lp-item span {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 480px) {

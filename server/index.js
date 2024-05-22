@@ -7,6 +7,9 @@ import commentRoutes from "./routes/comments.js";
 import likeRoutes from "./routes/likes.js";
 import relationshipRoutes from "./routes/relationships.js";
 import skillRoutes from "./routes/skills.js";
+import followRoutes from "./routes/follows.js";
+import messageRoutes from "./routes/messages.js";
+import friendRoutes from "./routes/friends.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
@@ -47,6 +50,9 @@ app.use("/api/home-page/comments", commentRoutes);
 app.use("/api/home-page/likes", likeRoutes);
 app.use("/api/home-page/relationships", relationshipRoutes);
 app.use("/api/home-page/skills", skillRoutes);
+app.use("/api/home-page/follows", followRoutes);
+app.use("/api/home-page/messages", messageRoutes);
+app.use("/api/home-page/friends", friendRoutes);
 
 app.listen(8800, () => {
     console.log("API radi!")

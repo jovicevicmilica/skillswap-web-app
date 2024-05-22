@@ -30,6 +30,10 @@ const LeftPart = () => {
     }
   };
 
+  const goToFriends = () => {
+    navigate("/home-page/friends");
+  };
+
   return (
     <div className="left-part">
       <div className="lp-container">
@@ -40,7 +44,8 @@ const LeftPart = () => {
               <span>{currentUser.name}</span>
             </Link>
           </div>
-          <div className="lp-item">
+          <span>Vaše prečice</span>
+          <div className="lp-item" onClick={goToFriends}>
             <PeopleIcon className="icon-color-blue" />
             <span>Povezani</span>
           </div>
@@ -52,18 +57,10 @@ const LeftPart = () => {
             <GroupsIcon className="icon-color-blue" />
             <span>Grupno učenje</span>
           </div>
-        </div>
-        <hr/> {/*druga sekcija!*/}
-        <div className="lp-menu">
-          <span>Vaše prečice</span>
           <div className="lp-item">
             <CollectionsIcon className="icon-color-blue" />
             <span>Galerija</span>
           </div>
-        </div>
-        <hr/> 
-        <div className="lp-menu">
-          <span>Ostalo</span>
           <div className="lp-item">
             <AutoStoriesIcon className="icon-color-blue" />
             <span>Priče o vještinama</span>

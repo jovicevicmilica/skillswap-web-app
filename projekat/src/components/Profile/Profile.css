@@ -185,6 +185,31 @@
     font-size: 13px;
 }
 
+.more-options-menu {
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.more-options-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0;
+    background-color: var(--skillswap-lightblue);
+}
+
+.more-options-menu button:hover {
+    background-color: var(--black);
+    transition: all 5ms ease;
+}
+
 /*mobilni telefoni*/
 @media only screen and (max-width: 480px) {
     .profile-user-info {

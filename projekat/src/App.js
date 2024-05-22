@@ -23,6 +23,7 @@ import Home from './components/Home/Home';
 import LeftPart from './components/LeftPart/LeftPart';
 import RightPart from './components/RightPart/RightPart';
 import Profile from './components/Profile/Profile';
+import FriendsList from './components/FriendsList/FriendsList';
 import { AuthContext } from './context/authContext';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -193,6 +194,10 @@ function App() {
           path: "/home-page/profile/:id",
           element: <Profile />
         },
+        {
+          path: "/home-page/friends",
+          element: <FriendsList />
+        }
       ]
     }
 
