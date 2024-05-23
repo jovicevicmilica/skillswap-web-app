@@ -1,8 +1,7 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Login.css"
 import { AuthContext } from '../../context/authContext';
-import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify'; /*za alert poruke*/
+import { toast } from 'react-toastify'; /*za alert poruke*/
 import { useNavigate } from 'react-router';
 
 const Login = () => {
@@ -24,10 +23,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault(); /*da se stranica ne refreshuje*/
     try {
-      await login(inputs);
-      navigate("/home-page");
+      const user = await login(inputs);
+      if(user.email === "skillswap24@gmail.com") {
+        navigate("/admin-page");
+      } else {
+        navigate("/home-page");
+      }
     } 
-
     catch(err) {
       setErr(err.response.data);
       toast.error(err.response.data);

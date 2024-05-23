@@ -26,6 +26,11 @@ import Profile from './components/Profile/Profile';
 import FriendsList from './components/FriendsList/FriendsList';
 import { AuthContext } from './context/authContext';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AdminPage from './components/AdminPage/AdminPage';
+import AdminNav from "./components/AdminNav/AdminNav";
+import AdminUsers from './components/AdminUsers/AdminUsers';
+import AdminPosts from './components/AdminPosts/AdminPosts';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const {currentUser} = useContext(AuthContext);
@@ -52,9 +57,33 @@ function App() {
     );
   };
 
-  const ProtectedRoute = ({children}) =>{
-    if(!currentUser){ //ako nismo ulogovani, vracemo se na pocetnu, ne vidimo sakrivene stvari u layout - u
+  const AdminLayout = () => {
+    return(
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <Helmet>
+            <title>Admin stranica - SkillSwap</title>
+          </Helmet>
+          <AdminNav />
+          <div className="full-adminpage">
+            <Outlet />
+          </div>
+        </div>
+      </QueryClientProvider>
+    );
+  };
+
+  const ProtectedRoute = ({children}) => {
+    if(!currentUser || currentUser.email === "skillswap24@gmail.com"){ //ako nismo ulogovani, vracemo se na početnu, ne vidimo sakrivene stvari u layout - u, ili ako smo admin! jer adminu to ne treba, ali može se maći
       return <Navigate to="/login" />;
+    }
+
+    return children;
+  }
+
+  const AdminRoute = ({children}) => {
+    if (!currentUser || currentUser.email !== "skillswap24@gmail.com") {
+      return <Navigate to="/home-page" />;
     }
 
     return children;
@@ -176,6 +205,29 @@ function App() {
           <Footer />
         </>
       )
+    },
+
+    {
+      path: "/admin-page",
+      element: (
+        <AdminRoute>
+          <AdminLayout />
+        </AdminRoute>
+      ),
+      children: [
+        {
+          path: "/admin-page",
+          element: <AdminPage />
+        },
+        {
+          path: "users",
+          element: <AdminUsers />
+        },
+        {
+          path: "posts",  
+          element: <AdminPosts />
+        }
+      ]
     },
 
     {

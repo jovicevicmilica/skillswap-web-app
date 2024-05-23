@@ -1,4 +1,4 @@
-import { React, useContext, useState } from 'react';
+import { React, useContext, useState, useEffect } from 'react';
 import './Post.css';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -50,6 +50,22 @@ const Post = ({post}) => {
     }
   });
 
+  useEffect(() => { //da lakše zatvorimo opciju obriši/prijavi klikom bilo gdje pored
+    const closeMenu = (e) => {
+        if (!e.target.closest('.post')) {
+            setMenuOpen(false);
+        }
+    };
+
+    if (menuOpen) {
+        document.addEventListener('click', closeMenu);
+    }
+
+    return () => {
+        document.removeEventListener('click', closeMenu);
+    };
+  }, [menuOpen]);
+
   if (isLoading) {
     toast.info("Lajk se učitava!");
     return <div>Učitavam...</div>;
@@ -69,6 +85,11 @@ const Post = ({post}) => {
     deleteMutation.mutate(post.id);
   };
 
+  const reportPost = () => {
+    const mailto = `mailto:skillswap24@gmail.com?subject=Prijava objave ID: ${post.id}&body=Poštovani,%0D%0A%0D%0AŽelim da prijavim objavu sa sljedećim detaljima:%0D%0A%0D%0AID objave: ${post.id}%0D%0AOpis objave: ${encodeURIComponent(post.desc)}%0D%0A%0D%0AMolim vas da preduzmete potrebne mjere.%0D%0A%0D%0AHvala vam,%0D%0A${currentUser.name}`;
+    window.location.href = mailto;
+  };
+
   return (
     <div className="post">
         <div className="post-container">
@@ -83,7 +104,11 @@ const Post = ({post}) => {
                     </div>
                 </div>
                 <MoreHorizIcon onClick={()=>setMenuOpen(!menuOpen)} />
-                {menuOpen && post.userId === currentUser.id && (<button onClick={handleDelete} className="post-delete">Obriši objavu</button>)}
+                {menuOpen && (
+                  post.userId === currentUser.id ?
+                    (<button onClick={handleDelete} className="post-delete">Obriši objavu</button>) :
+                    (<button onClick={reportPost} className="post-delete">Prijavi objavu</button>) //ukoliko je tuđa objava, ide report umjesto brisanja
+                )}
             </div>  
             <div className="post-content">
                 <p>{post.desc}</p>      

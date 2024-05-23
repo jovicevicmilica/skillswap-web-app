@@ -1,0 +1,52 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    width: 600px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.popup-form-label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.popup-form-input,
+.popup-form-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+}
+
+.popup-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--skillswap-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}

@@ -1,0 +1,178 @@
+/*lakše uređivati ovako direktno pristupanjem, nalik na scss, nego da modelujem zasebno svako polje*/
+.admin-navbar {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
+    border-bottom: 1px solid lightgrey;
+    position: sticky; /*biće na vrhu čak i kada skrolujemo*/
+    top: 0;
+    background-color: var(--white);
+    z-index: 999; /*iznad svega*/
+    overflow-y: hidden;
+}
+
+.admin-left {
+    margin-left: 20px;
+    align-items: center;
+    display: flex;
+    gap: 30px;
+}
+
+.admin-logo {
+    background-image: url(../../images/logoblue.svg);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    width: 12vw;
+    height: 12vw;
+    max-height: 100px;
+    max-width: 200px;
+    flex: none;
+    margin-right: 10px;
+}
+
+.admin-search {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    border-radius: 0%;
+    padding: 10px 10px;
+}
+
+.admin-search input {
+    border: none;
+    width: 500px;
+    background-color: transparent; /*da se uklopi sa search bar - om*/
+}
+
+.admin-search button {
+    background-color: var(--skillswap-blue);
+    color: var(--white);
+    border-radius: 0;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-search button:hover {
+    background-color: var(--black);
+}
+
+.admin-right {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-right: 50px;
+}
+
+.admin-user {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.admin-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-user span {
+    margin-right: 30px;
+}
+
+.home-icon {
+    color: var(--black);
+    margin-top: 5px;
+}
+
+/*mobilni telefoni*/
+@media only screen and (max-width: 480px) {
+    .admin-navbar {
+        margin-top: 10px;
+        height: 80px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .admin-search {
+        background-color: transparent;
+    }
+
+    .admin-search input {
+        display: none;
+    }
+
+    .admin-right {
+        display: none;
+    }
+
+    .admin-logo {
+        width: 35vw;
+        height: 35vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+}
+
+/*veći mobilni telefoni*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .admin-navbar {
+        margin-top: 10px;
+        height: 80px;
+    }
+
+    .admin-search {
+        background-color: transparent;
+    }
+
+    .admin-left {
+        gap: 50px;
+    }
+
+    .admin-search input {
+        display: none;
+    }
+
+    .admin-right {
+        display: none;
+    }
+
+    .admin-logo {
+        width: 35vw;
+        height: 35vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+}
+
+/*tableti*/
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .admin-search input {
+        width: 250px;
+    }
+
+    .admin-logo {
+        margin-right: none;
+        width: 20vw;
+        height: 20vw;
+        max-height: 100px;
+        max-width: 200px;
+    }
+
+    .admin-user {
+        display: none;
+    }
+}
+
+/*mali desktop ekrani*/
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+    .admin-search input {
+        width: 300px;
+    }
+}

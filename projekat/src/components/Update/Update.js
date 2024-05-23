@@ -6,6 +6,8 @@ import { makeRequest } from '../../axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { AuthContext } from '../../context/authContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const skillTypeOptions = [
   { label: "imam", value: "imam" },
@@ -112,7 +114,7 @@ const Update = ({ setOpenUpdate, user }) => {
         const res = await makeRequest.get(`/skills/${user.id}`);
         setUserSkills(res.data);
       } catch (err) {
-        console.error('Failed to fetch skills:', err);
+        console.error('Neuspješno dohvaćene vještine:', err);
       }
     };
 
@@ -138,8 +140,10 @@ const Update = ({ setOpenUpdate, user }) => {
     try {
       await makeRequest.delete(`/skills/${skillId}`);
       setUserSkills(currentSkills => currentSkills.filter(skill => skill.id !== skillId));
+      toast.success("Vještina je uspješno obrisana.");
     } catch (error) {
-      console.error('Error deleting skill:', error);
+      console.error('Greška prilikom brisanja vještine:', error);
+      toast.error('Greška prilikom brisanja vještine.');
     }
   };
 
@@ -150,9 +154,11 @@ const Update = ({ setOpenUpdate, user }) => {
         ...newSkill
       });
       setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]);
-      setNewSkill({ type: '', skill: '', skillLevel: '' }); // Reset form after adding
+      setNewSkill({ type: '', skill: '', skillLevel: '' }); //resetovanje forme nakon dodavanja
+      toast.success('Vještina je uspješno dodana.');
     } catch (error) {
       console.error('Greška u dodavanju vještine:', error);
+      toast.error('Greška u dodavanju vještine.');
     }
   };
 
@@ -164,6 +170,10 @@ const Update = ({ setOpenUpdate, user }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['user']);
+      toast.success('Profil je uspješno ažuriran.');
+    },
+    onError: () => {
+      toast.error('Greška prilikom ažuriranja profila.');
     }
   });
 
@@ -318,6 +328,7 @@ const Update = ({ setOpenUpdate, user }) => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

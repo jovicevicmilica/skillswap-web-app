@@ -21,7 +21,7 @@ const HomeNav = () => {
 
     const fetchMessages = async () => {
         try {
-            const response = await makeRequest.get('/messages/showMessages'); // Pretpostavljam da je vaš endpoint '/messages'
+            const response = await makeRequest.get('/messages/showMessages'); 
             setMessages(response.data.reverse()); //da bi išla najnovija na vrh!
         } catch (error) {
             console.error('Neuspješno dohvaćene poruke:', error);
@@ -30,7 +30,7 @@ const HomeNav = () => {
 
     useEffect(() => {
         fetchMessages();
-    }, []); // Ovaj prazan array osigurava da se useEffect pokrene samo jednom nakon učitavanja komponente.
+    }, []); //ovaj prazan array osigurava da se useEffect pokrene samo jednom nakon učitavanja komponente.
 
     return (
         <div className="home-navbar">
