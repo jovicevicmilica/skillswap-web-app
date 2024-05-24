@@ -45,7 +45,6 @@
     margin: 20px 0px;
     border: none;
     height: 0.5px;
-    background-color: themed("border");
 }
 
 .share-bottom {
@@ -88,6 +87,16 @@
     padding: 5px;
     color: white;
     cursor: pointer;
-    background-color: var(--skillswap-lightblue);
+    background-color: var(--skillswap-blue);
     border-radius: 0px;          
+}
+
+.share-place {
+  font-size: 14px;
+  color: gray;
+  margin-top: 10px;
+}
+
+.no-underline { 
+  text-decoration: none;
 }

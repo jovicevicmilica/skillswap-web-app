@@ -30,20 +30,20 @@
   font-size: 20px;
 }
 
-.user-info {
+.user-info-post {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.user-profile-pic {
+.user-profile-pic-post {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.user-name {
+.user-name-post {
     font-weight: 500;
     font-size: 16px;
     margin-left: 10px;

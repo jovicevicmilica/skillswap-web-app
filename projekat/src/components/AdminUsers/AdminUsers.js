@@ -9,12 +9,15 @@ import { makeAdminRequest } from '../../axiosAdm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import SearchIcon from '@mui/icons-material/Search';
 
 const AdminUsers = () => {
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
     const [isAddUserPopupOpen, setIsAddUserPopupOpen] = useState(false); 
     const [isUpdateUserPopupOpen, setIsUpdateUserPopupOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         fetchUsers();
@@ -23,8 +26,8 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
         try {
             const response = await makeAdminRequest.get('/users'); 
-            
             setUsers(response.data); 
+            setFilteredUsers(response.data);
         } catch (error) {
             console.error('Neuspješno dohvaćeni korisnici:', error);
         }
@@ -40,6 +43,7 @@ const AdminUsers = () => {
         try {
             await makeAdminRequest.delete(`/users/${userId}`);
             setUsers(users.filter(user => user.id !== userId));
+            setFilteredUsers(filteredUsers.filter(user => user.id !== userId));
             toast.success("Korisnik je uspješno obrisan.");
         } catch (error) {
             console.error('Neuspješno obrisan korisnik:', error);
@@ -49,10 +53,30 @@ const AdminUsers = () => {
 
     const handleAddUser = (newUser) => {
         setUsers(prevUsers => [...prevUsers, newUser]);
+        setFilteredUsers(prevUsers => [...prevUsers, newUser]); //ažuriramo i filtriranu listu
     };
 
     const handleUpdateUser = (updatedUser) => {
         setUsers(prevUsers => prevUsers.map(user => user.id === updatedUser.id ? updatedUser : user));
+        setFilteredUsers(prevUsers => prevUsers.map(user => user.id === updatedUser.id ? updatedUser : user));
+    };
+
+    const handleSearch = async (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        if (query.trim() === '') {
+            setFilteredUsers(users);
+            return;
+        }
+
+        try {
+            const response = await makeAdminRequest.get(`/search-users?query=${query}`);
+            setFilteredUsers(response.data);
+        } catch (error) {
+            console.error('Greška u pretrazi korisnika:', error);
+            setFilteredUsers([]);
+        }
     };
 
     const getSkillLevelColor = (level) => {
@@ -73,6 +97,16 @@ const AdminUsers = () => {
             <div className="admin-header">Upravljanje korisnicima</div>
             <div className="admin-content">
                 <button className="add-user-btn" onClick={() => setIsAddUserPopupOpen(true)}>Dodaj korisnika</button>
+                <div className="admin-search-users">
+                    <SearchIcon />
+                    <input
+                        type="text"
+                        placeholder="Pretraži korisnike..."
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        className="admin-search-input"
+                    />
+                </div>
                 <div className="admin-users-table">
                     <div className="table-header">
                         <div className="table-cell">Ime i prezime</div>
@@ -82,7 +116,7 @@ const AdminUsers = () => {
                         <div className="table-cell">Preference učenja</div>
                         <div className="table-cell">Akcije</div>
                     </div>
-                    {users.map((user) => (
+                    {filteredUsers.map((user) => (
                         <div className="table-row" key={user.id}>
                             <div className="table-cell user-info">
                                 <img src={"/upload/" + user.profilePic} alt="Profile" className="profile-pic" />

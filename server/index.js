@@ -1,5 +1,8 @@
 import express from "express";
 const app = express();
+import 'dotenv/config';
+import mailRoutes from "./routes/mails.js";
+import newsletterRoutes from "./routes/newsletter.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
@@ -11,6 +14,7 @@ import followRoutes from "./routes/follows.js";
 import messageRoutes from "./routes/messages.js";
 import friendRoutes from "./routes/friends.js";
 import adminRoutes from "./routes/admin.js";
+import searchRoutes from "./routes/search.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
@@ -50,6 +54,8 @@ app.post("/api/admin/upload", upload.single("file"), (req, res) => {
     res.status(200).json(file.filename); /*da bismo smjestili filename u bazu*/
 });
 
+app.use("/api/mails", mailRoutes);
+app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/auth", authRoutes); /*ostaje ovakav jer ne ide na home-page*/
 app.use("/api/home-page/users", userRoutes);
 app.use("/api/home-page/posts", postRoutes);
@@ -61,6 +67,7 @@ app.use("/api/home-page/follows", followRoutes);
 app.use("/api/home-page/messages", messageRoutes);
 app.use("/api/home-page/friends", friendRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/home-page/search", searchRoutes);
 
 app.listen(8800, () => {
     console.log("API radi!")

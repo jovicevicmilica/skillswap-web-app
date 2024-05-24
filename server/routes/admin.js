@@ -1,5 +1,5 @@
 import express from "express";
-import { getTotalPosts, getTotalUsers, getMostUsersTown, getUsersAdmin, addUserAdmin, updateUserAdmin, deleteUserAdmin, getPostsAdmin, addPostAdmin, updatePostAdmin, deletePostAdmin } from "../controllers/admin.js";
+import { getTotalPosts, getTotalUsers, getMostUsersTown, getUsersAdmin, addUserAdmin, updateUserAdmin, deleteUserAdmin, getPostsAdmin, addPostAdmin, updatePostAdmin, deletePostAdmin, searchUsersAdmin, searchPostsAdmin } from "../controllers/admin.js";
 
 const router = express.Router();
 
@@ -15,5 +15,7 @@ router.get("/posts", getPostsAdmin);
 router.put("/posts/:postId", updatePostAdmin);
 router.post("/posts", addPostAdmin);
 router.delete("/posts/:postId", deletePostAdmin);
+router.get("/search-users", searchUsersAdmin);
+router.get("/search-posts", searchPostsAdmin);
 
 export default router

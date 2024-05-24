@@ -40,6 +40,7 @@
     background-color: rgba(0, 69, 246, .1);
     border-radius: 0%;
     padding: 10px 10px;
+    position: relative;
 }
 
 .home-search input {
@@ -139,6 +140,75 @@
 .message-email:hover {
     color: var(--skillswap-blue);
     transition: all 5ms ease;
+}
+
+.search-dropdown {
+    position: absolute;
+    width: 100%;  /*da bi bio širok koliko i search*/
+    top: 100%;  /*da bi bio odmah ispod searcha*/
+    left: 0;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 1000;  /*da je na vrhu svega*/
+    max-height: 300px; /*visina dropdowna*/
+    overflow-y: auto; 
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.search-dropdown::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    gap: 10px;
+}
+
+.search-item-text {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.search-item:last-child {
+    border-bottom: none; /*posljednji nema divider*/
+}
+
+.search-item:hover {
+    background-color: #f1f1f1;
+}
+
+.search-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.detailed-search-btn {
+    background-color: var(--skillswap-blue);
+    border: none;
+    color: var(--white);
+    transition: all 3ms ease;
+}
+
+.detailed-search-btn:hover {
+    background-color: var(--black);
 }
 
 /*mobilni telefoni*/

@@ -67,7 +67,6 @@ const Post = ({post}) => {
   }, [menuOpen]);
 
   if (isLoading) {
-    toast.info("Lajk se učitava!");
     return <div>Učitavam...</div>;
   }
 
@@ -111,8 +110,9 @@ const Post = ({post}) => {
                 )}
             </div>  
             <div className="post-content">
-                <p>{post.desc}</p>      
+                <p dangerouslySetInnerHTML={{ __html: post.desc }}></p> {/*koristimo dangerouslySetInnerHTML za prikaz HTML-a*/}
                 <img src={"/upload/" + post.img} alt="" /> {/*da bi prikazali slike iz foldera upload*/}
+                {post.place && <div className="post-place" style={{ color: "grey" }}>Mjesto: {post.place}</div>}
             </div>
             <div className="post-info">
                 <div className="post-item">

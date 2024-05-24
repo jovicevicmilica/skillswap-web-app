@@ -43,7 +43,7 @@ function Contact() {
 
     setIsLoading(true); //da bi realizovali ponovno korišćenje forme
     //ako je odgovor na reCAPTCHA validan, šalje se POST zahtjev na server sa unesenim podacima
-    axios.post("http://localhost:3001/api/mail/send-email", { /*jer se poruke šalju meni, ide post*/
+    axios.post("http://localhost:8800/api/mails/send-email", { /*jer se poruke šalju meni, ide post*/
       //promijenjeno u api/mail jer sam odvojila server.js i mail.js, pa da mi server bude glavni, a mail samo za kontakt
       email,
       subject,
@@ -96,7 +96,7 @@ function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, 'email')} //realizacija key up and down
-                    autocomplete="email"
+                    autoComplete="email"
                   />
                 </div>
                 <input
@@ -139,9 +139,9 @@ function Contact() {
                     width="550" 
                     height="650" 
                     style={{ border: "0" }}
-                    allowfullscreen="" 
+                    allowFullScreen="" 
                     loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
+                    referrerPolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </div>

@@ -102,3 +102,20 @@
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.admin-search-users {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 69, 246, .1);
+    border-radius: 0%;
+    padding: 10px 10px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.admin-search-input {
+    border: none;
+    width: 500px;
+    background-color: transparent; /*da se uklopi sa search bar - om*/
+}

@@ -34,7 +34,6 @@ const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa korist
   });
 
   if (isLoading) {
-    toast.info("Komentari se učitavaju!");
     return <div>Učitavam...</div>;
   }
 

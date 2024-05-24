@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs";
 import moment from 'moment';
 
 export const getTotalUsers = (req, res) => {
-    const q = `SELECT COUNT(*) AS totalUsers FROM users`;
+    const q = `SELECT COUNT(*) AS totalUsers FROM users WHERE email != "skillswap24@gmail.com"`;
+    //ne brojimo admina u korisnike
 
     db.query(q, (err, data) => {
         if (err) return res.status(500).json(err);
@@ -11,6 +12,7 @@ export const getTotalUsers = (req, res) => {
         return res.status(200).json(data[0]);
     });
 };
+
 
 export const getTotalPosts = (req, res) => {
     const q = `SELECT COUNT(*) AS totalPosts FROM posts`;
@@ -40,7 +42,7 @@ export const getMostUsersTown = (req, res) => {
 
 export const getUsersAdmin = (req, res) => {
     const q = `
-        SELECT id, name, email, town, primarySkill, primarySkillLevel, learningPref, profilePic 
+        SELECT id, name, email, town, primarySkill, primarySkillLevel, learningPref, profilePic, coverPic 
         FROM users
         WHERE email != 'skillswap24@gmail.com'
     `; //ne treba nam da se prikazuje admin!
@@ -74,7 +76,7 @@ export const addUserAdmin = (req, res) => {
       if (err) return res.status(500).json(err);
 
       //vraćemo korisnika!
-      const q3 = "SELECT id, name, email, town, primarySkill, primarySkillLevel learningPref, profilePic FROM users WHERE email = ?";
+      const q3 = "SELECT id, name, email, town, primarySkill, primarySkillLevel, learningPref, profilePic, coverPic FROM users WHERE email = ?";
       db.query(q3, [email], (err, newUserData) => {
         if (err) return res.status(500).json(err);
         return res.status(201).json(newUserData[0]);
@@ -98,6 +100,7 @@ export const deleteUserAdmin = (req, res) => {
 };
 
 export const updateUserAdmin = (req, res) => {
+  console.log(req.body);
   const { id, email, password, name, town, profilePic, coverPic, primarySkill, primarySkillLevel, learningPref } = req.body;
 
   let q = "UPDATE users SET `email`=?, `name`=?, `town`=?, `profilePic`=?, `coverPic`=?, `primarySkill`=?, `primarySkillLevel`=?, `learningPref`=? WHERE id=?";
@@ -119,6 +122,7 @@ export const updateUserAdmin = (req, res) => {
       db.query(q2, [id], (err, updatedUserData) => {
         if (err) return res.status(500).json(err);
         const updatedUserInfo = updatedUserData[0];
+        console.log(updatedUserInfo);
         return res.json(updatedUserInfo);
       });
     } else {
@@ -148,7 +152,7 @@ export const addPostAdmin = (req, res) => {
     db.query(q, values, (err, result) => {
         if (err) return res.status(500).json(err);
         const postId = result.insertId;
-        const q2 = "SELECT p.id, p.desc, p.img, p.userId, p.createdAt, u.name as userName FROM posts p LEFT JOIN users u ON p.userId = u.id WHERE p.id = ?";
+        const q2 = "SELECT p.id, p.desc, p.img, p.userId, p.createdAt, u.name as userName, u.profilePic as userProfile FROM posts p LEFT JOIN users u ON p.userId = u.id WHERE p.id = ?";
         db.query(q2, [postId], (err, newPostData) => {
             if (err) return res.status(500).json(err);
             return res.status(201).json(newPostData[0]);
@@ -190,5 +194,38 @@ export const deletePostAdmin = (req, res) => {
         if (err) return res.status(500).json(err);
         if (data.affectedRows > 0) return res.status(200).json("Objava uspješno obrisana.");
         return res.status(404).json("Objava nije pronađena.");
+    });
+};
+
+export const searchUsersAdmin = (req, res) => {
+    const { query } = req.query;
+    const q = `
+        SELECT id, name, email, town, primarySkill, primarySkillLevel, learningPref, profilePic, coverPic 
+        FROM users
+        WHERE email != 'skillswap24@gmail.com' AND LOWER(name) LIKE LOWER(?)
+    `;
+
+    const values = [`%${query}%`];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data);
+    });
+};
+
+export const searchPostsAdmin = (req, res) => {
+    const { query } = req.query;
+    const q = `
+        SELECT posts.id, posts.desc, posts.img, posts.createdAt, users.name AS userName, users.profilePic AS userProfile
+        FROM posts
+        JOIN users ON posts.userId = users.id
+        WHERE LOWER(users.name) LIKE LOWER(?)
+    `;
+
+    const values = [`%${query}%`];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data);
     });
 };

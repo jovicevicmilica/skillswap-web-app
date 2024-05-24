@@ -54,20 +54,8 @@ const LeftPart = () => {
             <span>Razmjena</span>
           </div>
           <div className="lp-item">
-            <GroupsIcon className="icon-color-blue" />
-            <span>Grupno učenje</span>
-          </div>
-          <div className="lp-item">
             <CollectionsIcon className="icon-color-blue" />
             <span>Galerija</span>
-          </div>
-          <div className="lp-item">
-            <AutoStoriesIcon className="icon-color-blue" />
-            <span>Priče o vještinama</span>
-          </div>
-          <div className="lp-item">
-            <WorkIcon className="icon-color-blue"/>
-            <span>Kursevi</span>
           </div>
           <div className="lp-item">
             <LightbulbIcon className="icon-color-blue" />

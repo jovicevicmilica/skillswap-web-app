@@ -103,7 +103,6 @@ const Profile = () => {
   }, [showMoreOptions]);
 
   if (isLoading) {
-    toast.info("Podaci se učitavaju...");
     return <div>Učitavam...</div>;
   }
 
@@ -113,7 +112,6 @@ const Profile = () => {
   }
 
   if (isRelationshipLoading) {
-    toast.info("Podaci o odnosima se učitavaju...");
     return <div>Učitavam odnose...</div>;
   }
 

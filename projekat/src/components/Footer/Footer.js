@@ -17,31 +17,15 @@ function Footer() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/api/newsletter/subscribe", { email });
-      if (response.status === 200) {
-        toast.success('Uspješno ste se pretplatili na newsletter.');
-      } else {
-        throw new Error('Greška prilikom pretplate na newsletter.');
+      const response = await axios.post("http://localhost:8800/api/newsletter/subscribe", { email });
+      if (response.data.status === 'already_subscribed') {
+        toast.info('Već ste prijavljeni na newsletter.');
+      } else if (response.data.status === 'subscribed') {
+        toast.success('Uspješno ste se prijavili na newsletter.');
       }
     } catch (error) {
-      toast.error('Došlo je do greške prilikom pretplate na newsletter.');
-      console.error('Greška prilikom pretplate na newsletter:', error);
-    }
-  };
-
-  //odjava sa mjesečnih novosti
-  const handleUnsubscribe = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3001/api/newsletter/unsubscribe", { email });
-      if (response.status === 200) {
-        toast.success('Uspješno ste se odjavili.');
-      } else {
-        throw new Error('Greška prilikom odjave.');
-      }
-    } catch (error) {
-      toast.error('Greška prilikom odjave.');
-      console.error('Greška odjave:', error);
+      toast.error('Greška prilikom prijave na newsletter.');
+      console.error('Greška prilikom prijave na newsletter:', error);
     }
   };
 

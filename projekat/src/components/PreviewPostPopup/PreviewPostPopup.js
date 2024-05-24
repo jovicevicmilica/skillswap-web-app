@@ -5,7 +5,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import 'moment/locale/bs';
-
 moment.locale('bs');
 
 const PreviewPostPopup = ({ setIsPreviewPostPopupOpen, post }) => {
@@ -20,10 +19,10 @@ const PreviewPostPopup = ({ setIsPreviewPostPopupOpen, post }) => {
           <CloseIcon />
         </button>
         <div className="post-details">
-          <div className="user-info">
-            <img src={"/upload/" + post.userProfile} alt="User Profile" className="user-profile-pic" />
+          <div className="user-info-post">
+            <img src={"/upload/" + post.userProfile} alt="User Profile" className="user-profile-pic-post" />
             <div>
-              <p className="user-name">{post.userName}</p>
+              <p className="user-name-post">{post.userName}</p>
               <p className="post-time">{timeAgo(post.createdAt)}</p>
             </div>
           </div>

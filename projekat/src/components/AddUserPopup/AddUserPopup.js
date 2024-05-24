@@ -107,6 +107,7 @@ const AddUserPopup = ({ setIsAddUserPopupOpen, onAddUser }) => {
         e.preventDefault();
         try {
             const response = await makeAdminRequest.post('/users', newUser);
+            console.log(response.data);
             onAddUser(response.data); 
             setIsAddUserPopupOpen(false);
             toast.success("Korisnik uspješno dodat.");

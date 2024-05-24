@@ -84,3 +84,14 @@
     height: 50px;
     object-fit: cover;
 }
+
+.admin-search-posts {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 69, 246, .1);
+    border-radius: 0%;
+    padding: 10px 10px;
+    position: relative;
+    margin-bottom: 20px;
+}

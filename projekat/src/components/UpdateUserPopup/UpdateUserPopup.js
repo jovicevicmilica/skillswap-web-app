@@ -123,6 +123,7 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(['users']);
       toast.success('Profil je uspješno ažuriran.');
+      console.log(data.data);
       onUserUpdated(data.data); //da bi nam se automatski uočile promjene nakon apdejta!
     },
     onError: () => {
@@ -141,8 +142,8 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
         ...texts,
         id: user.id,
         town: texts.town.value,
-        coverPic: coverUrl,
-        profilePic: profileUrl,
+        coverPic: coverUrl || user.coverPic,
+        profilePic: profileUrl || user.profilePic,
         learningPref: texts.learningPref.value,
         primarySkill: texts.primarySkill.value,
         primarySkillLevel: texts.primarySkillLevel.value,

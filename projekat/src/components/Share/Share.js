@@ -6,11 +6,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-import axios from "axios";
+import SelectPopup from "../SelectPopup/SelectPopup";
 
 const Share = () => {
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
+  const [popupType, setPopupType] = useState(null); //za kontrolu pop-up prozora
+  const [tags, setTags] = useState([]); //za čuvanje tagova
+  const [place, setPlace] = useState(""); //za čuvanje mjesta
 
   const upload = async () => {
     try {
@@ -48,12 +51,31 @@ const Share = () => {
     if(file) 
         imgUrl = await upload(); /*slika nam je url koji vratimo iz upload funkcije*/
 
+    const formattedDesc = tags.reduce((acc, tag) => {
+      return acc.replace(`@${tag.label}`, `<a href="${tag.link}" class="no-underline" style="color: blue;">@${tag.label}</a>`);
+    }, desc); //formatiramo tag da se ističe
+
     /*sada počinjemo koristiti react query mutacije*/
-    mutation.mutate({ desc, img: imgUrl }); /*pozivamo funkciju od gore sa našom objavom, koja je zapravo slika i opis*/
+    mutation.mutate({ desc : formattedDesc, img: imgUrl, place }); /*pozivamo funkciju od gore sa našom objavom, koja je zapravo slika i opis*/
 
     /*refresh*/
     setDesc("");
     setFile(null);
+    setTags([]);
+    setPlace("");
+  };
+
+  const handleAddTag = (option) => {
+    if (popupType === 'friend') {
+      const newTag = {
+        label: option.label,
+        link: option.link || ''
+      };
+      setTags([...tags, newTag]);
+      setDesc(desc + ` @${option.label}`);
+    } else if (popupType === 'place') {
+      setPlace(option.label);
+    }
   };
 
   return (
@@ -90,11 +112,11 @@ const Share = () => {
                 <span>Dodaj sliku</span>
               </div>
             </label>
-            <div className="share-item">
+            <div className="share-item" onClick={() => setPopupType('place')}>
               <MapIcon />
               <span>Označi mjesto</span>
             </div>
-            <div className="share-item">
+            <div className="share-item" onClick={() => setPopupType('friend')}>
               <AlternateEmailIcon />
               <span>Označi kolegu</span>
             </div>
@@ -103,7 +125,9 @@ const Share = () => {
             <button onClick={handleClick}>Podijeli</button>
           </div>
         </div>
+        {place && <div className="share-place">Mjesto: {place}</div>}
       </div>
+      {popupType && <SelectPopup type={popupType} closePopup={() => setPopupType(null)} addTag={handleAddTag} />}
     </div>
   );
 };
