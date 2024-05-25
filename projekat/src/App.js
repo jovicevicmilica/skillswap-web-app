@@ -31,6 +31,10 @@ import AdminNav from "./components/AdminNav/AdminNav";
 import AdminUsers from './components/AdminUsers/AdminUsers';
 import AdminPosts from './components/AdminPosts/AdminPosts';
 import 'react-toastify/dist/ReactToastify.css';
+import ExchangeList from './components/ExchangeList/ExchangeList';
+import Gallery from './components/Gallery/Gallery';
+import Requests from './components/Requests/Requests';
+import Messages from './components/Messages/Messages';
 
 function App() {
   const {currentUser} = useContext(AuthContext);
@@ -249,7 +253,23 @@ function App() {
         {
           path: "/home-page/friends",
           element: <FriendsList />
-        }
+        },
+        {
+          path: "/home-page/exchange",
+          element: <ExchangeList />
+        },
+        {
+          path: "/home-page/gallery",
+          element: <Gallery />
+        },
+        {
+          path: "/home-page/requests",
+          element: <Requests />
+        },
+        {
+          path: "/home-page/messages",
+          element: <Messages />
+        },
       ]
     }
 

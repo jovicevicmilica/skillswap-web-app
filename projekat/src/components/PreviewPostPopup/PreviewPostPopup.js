@@ -12,6 +12,21 @@ const PreviewPostPopup = ({ setIsPreviewPostPopupOpen, post }) => {
     return moment(date).fromNow();
   };
 
+  //ovo radimo da admin ne bi mogao da klikne na profil, to može samo onaj ko je ulogovan kao korisnik
+  //a ovako je lakše nego da mijenjam sve u share komponenti vezano za tag
+  const sanitizeDescription = (desc) => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = desc;
+
+        tempDiv.querySelectorAll('a').forEach(anchor => {
+            anchor.removeAttribute('href');
+            anchor.style.color = 'blue';
+            anchor.style.textDecoration = 'none';
+        });
+
+        return tempDiv.innerHTML;
+    };
+
   return (
     <div className="preview-overlay">
       <div className="preview-content">
@@ -26,7 +41,7 @@ const PreviewPostPopup = ({ setIsPreviewPostPopupOpen, post }) => {
               <p className="post-time">{timeAgo(post.createdAt)}</p>
             </div>
           </div>
-          <p className="post-description">{post.desc}</p>
+          <p className="post-description" dangerouslySetInnerHTML={{ __html: sanitizeDescription(post.desc) }}></p>
           {post.img ? (
             <img src={"/upload/" + post.img} alt="Post" className="post-image" />
           ) : (

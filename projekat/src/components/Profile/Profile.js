@@ -178,7 +178,7 @@ const Profile = () => {
         ) : (
           <div className="profile-user-info">
             <div className="profile-left">
-              <HelpIcon className="icon-color-blue" fontSize='large' />
+              <span></span> {/*ovdje ipak neće biti ništa*/}
             </div>
             <div className="profile-center">
               <span className="profile-name">{data.name}</span>

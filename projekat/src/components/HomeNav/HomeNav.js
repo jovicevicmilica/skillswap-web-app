@@ -11,6 +11,7 @@ import { AuthContext } from '../../context/authContext';
 import { makeRequest } from '../../axios';
 import { debounce } from 'lodash';
 import DetailedSearchModal from '../DetailedSearchModal/DetailedSearchModal';
+import HomeDropdown from '../HomeDropdown/HomeDropdown';
 
 const HomeNav = () => {
     const { currentUser } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const HomeNav = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const [showDetailedSearch, setShowDetailedSearch] = useState(false);
+    const [showHomenavDropdown, setShowHomenavDropdown] = useState(false);
     const navigate = useNavigate();
 
     //koristimo debouncedSearch da ne bi previše opteretili server tako što mu šaljemo zahtjev svako malo
@@ -50,7 +52,7 @@ const HomeNav = () => {
         }
     }, [searchQuery]);
 
-    useEffect(() => { //da lakše zatvorimo opciju obriši/prijavi klikom bilo gdje pored
+    useEffect(() => { //da lakše zatvorimo share klikom pored
         const closeDropdown = (e) => {
             if (!e.target.closest('.home-right')) {
                 setShowDropdown(false);
@@ -101,6 +103,13 @@ const HomeNav = () => {
         setShowDetailedSearch(true);
     };
 
+    const toggleHomenavDropdown = () => {
+        setShowHomenavDropdown(!showHomenavDropdown);
+    };
+
+    const closeHomenavDropdown = () => {
+        setShowHomenavDropdown(false);
+    };
 
     return (
         <div className="home-navbar">
@@ -111,7 +120,10 @@ const HomeNav = () => {
                 <Link to="/home-page" style={{ textDecoration: "none" }} className="home-link">
                     <HomeIcon className="home-icon"/>
                 </Link>
-                <AppsIcon />
+                <AppsIcon onClick={toggleHomenavDropdown} className="apps-icon-container"/>
+                {showHomenavDropdown && (
+                    <HomeDropdown onClose={closeHomenavDropdown} />
+                )}
                 <div className="home-search">
                     <SearchIcon />
                     <input

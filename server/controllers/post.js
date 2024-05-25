@@ -64,3 +64,24 @@ export const deletePost = (req, res) => {
         });
     });
 };
+
+export const getPostsWithImages = (req, res) => {
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Niste ulogovani!");
+
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token nije validan.");
+
+    const query = `
+      SELECT p.id, p.desc, p.img, p.createdAt
+      FROM posts p
+      WHERE p.userId = ? AND p.img IS NOT NULL AND p.img != ''
+      ORDER BY p.createdAt DESC
+    `;
+
+    db.query(query, [userInfo.id], (err, results) => {
+      if (err) return res.status(500).json(err);
+      res.json(results);
+    });
+  });
+};

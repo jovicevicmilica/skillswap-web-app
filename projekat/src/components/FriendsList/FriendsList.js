@@ -28,14 +28,18 @@ const FriendsList = () => {
         <span>E-mail</span>
         <span>Primarna vještina</span>
       </div>
-      {friends.map(friend => (
-        <div key={friend.id} className="friend-item" onClick={() => navigate(`/home-page/profile/${friend.id}`)}>
-          <img src={"/upload/" + friend.profilePic} alt={friend.name} />
-          <span>{friend.name}</span>
-          <span>{friend.email}</span>
-          <span>{friend.primarySkill}</span>
-        </div>
-      ))}
+      {friends.length === 0 ? (
+        <div className="no-friends">Nemate prijatelja. Povežite se sa nekim već sada!</div>
+      ) : (
+        friends.map(friend => (
+          <div key={friend.id} className="friend-item" onClick={() => navigate(`/home-page/profile/${friend.id}`)}>
+            <img src={"/upload/" + friend.profilePic} alt={friend.name} />
+            <span>{friend.name}</span>
+            <span>{friend.email}</span>
+            <span>{friend.primarySkill}</span>
+          </div>
+        ))
+      )}
     </div>
   );
 };

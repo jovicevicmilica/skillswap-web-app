@@ -88,6 +88,19 @@ const AdminPosts = () => {
         }
     };
 
+    const sanitizeDescription = (desc) => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = desc;
+
+        tempDiv.querySelectorAll('a').forEach(anchor => {
+            anchor.removeAttribute('href');
+            anchor.style.color = 'blue';
+            anchor.style.textDecoration = 'none';
+        });
+
+        return tempDiv.innerHTML;
+    };
+
     return (
         <div className="admin-page-posts">
             <div className="admin-header-posts">Upravljanje objavama</div>
@@ -115,7 +128,7 @@ const AdminPosts = () => {
                     {filteredPosts.map((post) => (
                         <div className="table-row-posts" key={post.id}>
                             <div className="table-cell-posts">{post.id}</div>
-                            <div className="table-cell-posts">{post.desc}</div>
+                            <div className="table-cell-posts" dangerouslySetInnerHTML={{ __html: sanitizeDescription(post.desc) }}></div>
                             <div className="table-cell-posts">
                                 {post.img ? (
                                     <img src={"/upload/" + post.img} alt="Post" className="post-pic-posts" />
@@ -142,7 +155,7 @@ const AdminPosts = () => {
                 autoClose={5000}
                 hideProgressBar={false}
                 newestOnTop={false}
-                closeOnClick
+                closeOnClick={true}
                 rtl={false}
                 pauseOnFocusLoss
                 draggable

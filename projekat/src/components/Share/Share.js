@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/authContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import SelectPopup from "../SelectPopup/SelectPopup";
+import { toast, ToastContainer } from "react-toastify";
 
 const Share = () => {
   const [file, setFile] = useState(null);
@@ -46,6 +47,12 @@ const Share = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    //validacija: ako nema ni slike ni opisa, ne dozvoljavamo objavu
+    if (!file && desc.trim() === "") {
+      toast.error("Objava mora sadržati sliku ili opis.");
+      return;
+    }
 
     let imgUrl = ""; /*na početku nemamo url, ako uploadujemo sliku dodaće se preko upload funkcije*/
     if(file) 
@@ -128,6 +135,17 @@ const Share = () => {
         {place && <div className="share-place">Mjesto: {place}</div>}
       </div>
       {popupType && <SelectPopup type={popupType} closePopup={() => setPopupType(null)} addTag={handleAddTag} />}
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

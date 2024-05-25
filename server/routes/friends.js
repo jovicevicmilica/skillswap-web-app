@@ -1,8 +1,9 @@
-import express from "express"; /*ovo radi preko importa sada jer sam dodala u package.json taj module*/
-import { getFriends } from "../controllers/friend.js"; 
-const router = express.Router()
+import express from "express";
+import { getFriends, getExchangeUsers } from "../controllers/friend.js";
 
-/*ovdje sada idu zahtjevi*/
+const router = express.Router();
+
 router.get("/showFriends", getFriends);
+router.get("/showExchangeUsers", getExchangeUsers);
 
-export default router
+export default router;

@@ -211,6 +211,23 @@
     background-color: var(--black);
 }
 
+.password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container .password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.password-icon {
+  margin-right: 20px;
+  margin-top: 5px;
+}
 
 @media only screen and (max-width: 990px) {
   .register-title-h1,

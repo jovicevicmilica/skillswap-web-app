@@ -6,6 +6,8 @@ import { Slide, toast, ToastContainer } from 'react-toastify'; /*za alert poruke
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useNavigate } from 'react-router';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const skillOptions = {
   'Poslovanje': [
@@ -71,6 +73,8 @@ function Register() {
     primarySkill:""
   });
 
+  const [showPassword, setShowPassword] = useState(false); //dodato stanje za prikaz lozinke, da li je otkrivena ili sakrivena
+
   const navigate = useNavigate();
 
   const [err, setErr] = useState(null);
@@ -101,6 +105,13 @@ function Register() {
       toast.error("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
       return;
     }
+
+    //validacija dužine lozinke
+    if (inputs.password.length < 8) {
+      toast.error("Lozinka mora biti duža od 8 karaktera.");
+      return;
+    }
+
     console.log('Forma poslata', { selectedSkill });
 
     try {
@@ -143,7 +154,12 @@ function Register() {
                         </div>
                         <div className="form-inner">
                             <label className="register-form-label">Lozinka</label>
-                            <input className="register-form-input" type="password" name="password" placeholder="Unesite lozinku*" required onChange={handleChange} />
+                            <div className="password-input-container">
+                              <input className="register-form-input" type={showPassword ? "text" : "password"} name="password" placeholder="Unesite lozinku*" required onChange={handleChange} />
+                              <div className="password-icon" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                              </div>
+                            </div>
                         </div>
                         <div className="form-inner">
                             <label className="register-form-label">Primarna vještina<span className="required-info"> (*nakon izvršene registracije možete mijenjati odabranu vještinu koju posjedujete i dodati nove, obavezno je odabrati jednu)</span></label>

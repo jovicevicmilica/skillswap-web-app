@@ -123,10 +123,6 @@ const Post = ({post}) => {
                   <AddCommentIcon />
                   {commentCountData !== undefined ? `${commentCountData} komentara` : '0 komentara'}
                 </div>
-                <div className="post-item">
-                    <ShareIcon />
-                    <span>Podijeli</span>
-                </div>
             </div>
             {commentOpen && <Comments postId={post.id} />} {/*da li će se prikazati*/}
         </div>

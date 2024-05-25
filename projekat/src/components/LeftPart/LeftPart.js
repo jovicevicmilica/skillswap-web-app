@@ -34,6 +34,14 @@ const LeftPart = () => {
     navigate("/home-page/friends");
   };
 
+  const goToExchange = () => {
+    navigate("/home-page/exchange");
+  };
+
+  const goToGallery = () => {
+    navigate("/home-page/gallery");
+  };
+
   return (
     <div className="left-part">
       <div className="lp-container">
@@ -49,17 +57,17 @@ const LeftPart = () => {
             <PeopleIcon className="icon-color-blue" />
             <span>Povezani</span>
           </div>
-          <div className="lp-item">
+          <div className="lp-item" onClick={goToExchange}>
             <SwapVertIcon className="icon-color-blue" />
             <span>Razmjena</span>
           </div>
-          <div className="lp-item">
+          <div className="lp-item" onClick={goToGallery}>
             <CollectionsIcon className="icon-color-blue" />
             <span>Galerija</span>
           </div>
           <div className="lp-item">
             <LightbulbIcon className="icon-color-blue" />
-            <span>Tutorijali</span>
+            <span>Tutorijal</span>
           </div>
           <button onClick={handleLogout} className="logout-button">Odjavi se</button>
         </div>

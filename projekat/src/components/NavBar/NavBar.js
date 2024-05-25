@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom'; 
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
 function NavBar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => { //otvaranje i zatvaranje hamburgera za mobilne uređaje
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => { //da lakše zatvorimo hamburger klikom pored
+    const closeDropdown = (e) => {
+      if (!e.target.closest('.nav-about')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('click', closeDropdown);
+    }
+
+    return () => {
+      document.removeEventListener('click', closeDropdown);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="nav-about">
       <div className="nav-inner">
@@ -16,9 +38,16 @@ function NavBar() {
           </div>
         </div>
       </div>
-      <div className="hamburger">
+      <div className="hamburger" onClick={toggleMenu}>
         <MenuTwoToneIcon className="icon-color-blue nav-menu"/>
       </div>
+      {isMenuOpen && (
+        <div className="navbar-dropdown-menu">
+          <Link to="/contact" className="navbar-dropdown-link" onClick={toggleMenu}>Kontakt</Link>
+          <Link to="/login" className="navbar-dropdown-link" onClick={toggleMenu}>Prijavi se</Link>
+          <Link to="/register" className="navbar-dropdown-link" onClick={toggleMenu}>Registruj se</Link>
+        </div>
+      )}
     </div>
   );
 }

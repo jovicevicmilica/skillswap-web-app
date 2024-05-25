@@ -1,4 +1,4 @@
-.friends-list {
+.requests-list {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -8,18 +8,18 @@
   min-height: 80vh;
 }
 
-.friends-list h1 {
+.requests-list h1 {
   margin-bottom: 50px;
 }
 
-.friend-header {
+.request-header {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 20px;
 }
 
-.friend-item {
+.request-item {
   display: grid;
-  grid-template-columns: 50px 2fr 3fr 2.5fr;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   gap: 10px;
   padding: 10px;
@@ -28,29 +28,27 @@
   cursor: pointer;
 }
 
-.friend-item img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.friend-item span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.friend-header {
-  font-weight: bold;
-  margin-bottom: 10px;
-  display: grid;
-  grid-template-columns: auto 1fr 1.1fr 0.98fr;
+.request-actions {
+  display: flex;
   gap: 10px;
 }
 
-.no-friends {
-  margin-top: 10px;
-  color: var(--skillswap-blue);
+.accept-button, .reject-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.request-header {
+  font-weight: bold;
+  display: grid;
+  margin-bottom: 10px;
+  grid-template-columns: auto 1fr 1.1fr;
+  gap: 10px;
+}
+
+.no-requests.main {
   font-size: 15px;
   margin-left: 10px;
 }

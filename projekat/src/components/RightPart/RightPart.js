@@ -45,7 +45,7 @@ const RightPart = () => {
         <div className="rp-item">
           <span>Zahtjevi za razmjenu</span>
           {data.length === 0 ? (
-            <div className="no-requests">Nema novih zahtjeva</div>
+            <div className="no-requests">Nema novih zahtjeva.</div>
           ) : (
             data.map(user => (
               <div className="rp-user" key={user.id}>

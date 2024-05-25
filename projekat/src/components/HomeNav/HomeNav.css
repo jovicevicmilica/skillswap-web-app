@@ -1,4 +1,3 @@
-/*lakše uređivati ovako direktno pristupanjem, nalik na scss, nego da modelujem zasebno svako polje*/
 .home-navbar {
     width: 100%;
     align-items: center;
@@ -10,6 +9,12 @@
     top: 0;
     background-color: var(--white);
     z-index: 999; /*iznad svega*/
+}
+
+.apps-icon-container {
+  position: relative; 
+  padding: 0;
+  margin: 0;
 }
 
 .home-left {
@@ -123,6 +128,20 @@
     background-color: var(--black);
 }
 
+.messages-dropdown::-webkit-scrollbar {
+    width: 10px;
+}
+
+.messages-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.messages-dropdown::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
 .message-name {
     color: var(--skillswap-blue); 
     font-weight: bold;
@@ -152,12 +171,10 @@
     z-index: 1000;  /*da je na vrhu svega*/
     max-height: 300px; /*visina dropdowna*/
     overflow-y: auto; 
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
 }
 
 .search-dropdown::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 .search-dropdown::-webkit-scrollbar-track {
@@ -288,11 +305,30 @@
     .home-user {
         display: none;
     }
+
+    .search-icon {
+        display: none;
+    }
 }
 
 /*mali desktop ekrani*/
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
     .home-search input {
         width: 300px;
+    }
+
+    .detailed-search-btn {
+        display: block;
+    }
+
+    .search-icon {
+        display: none;
+    }
+}
+
+/*sakrivena detaljna pretraga za ekrane manje od 769px*/
+@media only screen and (max-width: 768px) {
+    .detailed-search-btn {
+        display: none;
     }
 }

@@ -29,7 +29,6 @@ function Discover() {
                   <div className="discover-box-inner">
                     <div className="title">SAZNAJ</div>
                     <div className="discover-links">
-                      <a href="/about-us" className="discover-link">O nama</a>
                       <a href="/tutorial" className="discover-link">Vodič</a>
                       <a href="#newsletter" className="discover-link">Novosti</a>
                       <a href="#skills-directory" className="discover-link">Vještine</a>

@@ -3,12 +3,16 @@ import "./Login.css"
 import { AuthContext } from '../../context/authContext';
 import { toast } from 'react-toastify'; /*za alert poruke*/
 import { useNavigate } from 'react-router';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const [inputs, setInputs] = useState({
     email:"",
     password:"",
   });
+
+  const [showPassword, setShowPassword] = useState(false); //dodato stanje za prikaz lozinke
 
   const [err, setErr] = useState(null);
 
@@ -64,13 +68,12 @@ const Login = () => {
                             </div>
                             <div className="form-inner">
                                 <label className="login-form-label">Lozinka</label>
-                                <input className="login-form-input"
-                                type="password"
-                                name="password"
-                                placeholder="Unesite lozinku*"
-                                onChange={handleChange}
-                                required                
-                                ></input>
+                                <div className="password-input-container">
+                                  <input className="login-form-input" type={showPassword ? "text" : "password"} name="password" placeholder="Unesite lozinku*" required onChange={handleChange} />
+                                  <div className="password-icon" onClick={() => setShowPassword(!showPassword)}>
+                                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                  </div>
+                                </div>
                             </div>
                         </form>
                         <button type="submit" className="login-button" onClick={handleLogin}>Prijavi se</button> {/*dugme prijave*/}
