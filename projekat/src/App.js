@@ -68,8 +68,8 @@ function App() {
           <Helmet>
             <title>Admin stranica - SkillSwap</title>
           </Helmet>
-          <AdminNav />
           <div className="full-adminpage">
+            <AdminNav />
             <Outlet />
           </div>
         </div>

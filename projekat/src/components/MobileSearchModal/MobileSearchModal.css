@@ -1,0 +1,143 @@
+.mobile-search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.mobile-search-content {
+    background-color: #fff;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; 
+    max-height: 90vh; 
+    position: relative; 
+}
+
+.mobile-search-content h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.mobile-close-button {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.mobile-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    font-size: 15px;
+}
+
+.mobile-forms input {
+    padding: 10px;
+    border: none;
+    background-color: rgba(0, 69, 246, .1);
+}
+
+.profile-button-mobile {
+    padding: 10px;
+    background-color: var(--skillswap-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.profile-button-mobile:hover {
+    background-color: var(--black);
+}
+
+.mobile-form-label {
+    font-weight: bold;
+}
+
+.mobile-form-select {
+    font-size: 14px;
+    padding: 20px 0px;
+}
+
+.mobile-search-dropdown {
+    position: relative;
+    width: 100%; 
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 1000;  
+    max-height: 300px; 
+    overflow-y: auto; 
+    margin-top: 10px;
+}
+
+.mobile-search-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    gap: 10px;
+}
+
+.mobile-search-item-text {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.mobile-search-item:last-child {
+    border-bottom: none; 
+}
+
+.mobile-search-item:hover {
+    background-color: #f1f1f1;
+}
+
+.mobile-search-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.mobile-no-results {
+    padding: 15px;
+    text-align: center;
+    color: grey;
+}
+
+@media only screen and (max-width: 480px) {
+    .mobile-search-content {
+        padding: 20px; 
+    }
+
+    .mobile-forms {
+        gap: 5px; 
+    }
+
+    .profile-button-mobile {
+        padding: 8px;
+    }
+
+    .mobile-forms input, .mobile-form-select {
+        font-size: 13px;
+    }
+
+    .mobile-form-label {
+        font-size: 14px;
+    }
+}

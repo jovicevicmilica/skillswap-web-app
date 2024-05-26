@@ -6,6 +6,14 @@
     flex-direction: column;
     align-items: center;
     min-height: 90vh;
+    z-index: 10;
+}
+
+.admin-header {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
 .admin-content-main {
@@ -16,13 +24,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.admin-header {
-    color: white;
-    font-size: 30px;
-    margin-bottom: 30px;
-    font-weight: bold;
 }
 
 .statistic {
@@ -59,4 +60,59 @@
 
 .view-requests-btn:hover {
     background-color: var(--black); 
+}
+
+@media only screen and (max-width: 768px) {
+    .admin-page {
+        padding: 20px;
+    }
+
+    .admin-header {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .admin-content-main {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .statistic {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .statistic label {
+        font-size: 16px;
+    }
+
+    .statistic div {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .view-requests-btn {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .admin-header {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .statistic label {
+        font-size: 14px;
+    }
+
+    .statistic div {
+        font-size: 12px;
+    }
+
+    .view-requests-btn {
+        padding: 10px;
+    }
 }

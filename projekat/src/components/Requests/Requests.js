@@ -46,7 +46,6 @@ const Requests = () => {
     <div className="requests-list">
       <h1>Zahtjevi za razmjenu</h1>
       <div className="request-header">
-        <span></span>
         <span>Ime i prezime</span>
       </div>
       {requests.length === 0 ? (
@@ -54,6 +53,7 @@ const Requests = () => {
       ) : (
         requests.map((user) => (
           <div key={user.id} className="request-item">
+            <img src={"/upload/" + user.profilePic} alt={user.name} className="profile-pic" />
             <span>{user.name}</span>
             <div className="request-actions">
               <button onClick={() => handleAccept(user.id)} className="accept-button">

@@ -1,6 +1,5 @@
 .admin-page {
     background-color: var(--skillswap-lightblue); 
-    font-family: Arial, sans-serif;
     padding: 60px;
     display: flex;
     flex-direction: column;
@@ -43,7 +42,7 @@
 
 .table-header, .table-row {
     display: grid;
-    grid-template-columns: 1.5fr 2.5fr 1.5fr 2fr 2fr 1fr; /*sve ima svoju širinu, svako polje*/
+    grid-template-columns: 1.5fr 2.5fr 1.5fr 2fr 2fr 1fr;
     padding: 10px;
     align-items: center;
 }
@@ -117,5 +116,105 @@
 .admin-search-input {
     border: none;
     width: 500px;
-    background-color: transparent; /*da se uklopi sa search bar - om*/
+    background-color: transparent;
+}
+
+@media only screen and (max-width: 480px) {
+    .admin-page {
+        padding: 10px;
+    }
+
+    .admin-header {
+        font-size: 18px;
+        margin-bottom: 10px;
+        margin-top: 50px;
+    }
+
+    .admin-content, .admin-users-table {
+        width: 100%;
+    }
+
+    .table-header, .table-row {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header {
+        gap: 50px;
+    }
+
+    .table-cell, .add-user-btn, .admin-search-input {
+        padding: 5px;
+    }
+
+    .admin-search-users {
+        width: 100%; 
+    }
+
+    .admin-users-table {
+        overflow-x: auto;
+    }
+
+    .action-icon {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .admin-page {
+        padding: 20px;
+    }
+
+    .admin-header {
+        margin-top: 50px;
+        font-size: 20px;
+    }
+
+    .table-header, .table-row {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header {
+        gap: 50px;
+    }
+
+    .table-cell, .add-user-btn, .admin-search-input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .admin-search-users {
+        width: 100%; 
+    }
+
+    .admin-users-table {
+        overflow-x: auto;
+    }
+
+    .action-icon {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .admin-header {
+        margin-top: 50px;
+    }
+
+    .table-header, .table-row {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header {
+        gap: 60px;
+    }
+
+    .action-icon {
+        margin-left: 0;
+        margin-right: 8px;
+    }
 }

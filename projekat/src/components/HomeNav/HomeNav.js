@@ -12,6 +12,7 @@ import { makeRequest } from '../../axios';
 import { debounce } from 'lodash';
 import DetailedSearchModal from '../DetailedSearchModal/DetailedSearchModal';
 import HomeDropdown from '../HomeDropdown/HomeDropdown';
+import MobileSearchModal from '../MobileSearchModal/MobileSearchModal';
 
 const HomeNav = () => {
     const { currentUser } = useContext(AuthContext);
@@ -22,23 +23,22 @@ const HomeNav = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [showDetailedSearch, setShowDetailedSearch] = useState(false);
     const [showHomenavDropdown, setShowHomenavDropdown] = useState(false);
+    const [showMobileSearch, setShowMobileSearch] = useState(false);
     const navigate = useNavigate();
 
-    //koristimo debouncedSearch da ne bi previše opteretili server tako što mu šaljemo zahtjev svako malo
-    //pa šaljemo na 300ms dok se kuca
     const debouncedSearch = debounce(async (query) => {
         if (query.trim().length > 0) {
             try {
                 const response = await makeRequest.get(`/search/users?query=${query}`);
-                setSearchResults(response.data); //smjestimo u search rezultate to što dobijemo
+                setSearchResults(response.data);
                 setShowDropdown(true);
             } catch (error) {
                 console.error('Greška u pretrazi:', error);
                 setSearchResults([]);
-                setShowDropdown(false);
+                setShowDropdown(true); 
             }
         } else {
-            setShowDropdown(false); //inače ugasimo search, ako se ne kuca ništa
+            setShowDropdown(false);
             setSearchResults([]);
         }
     }, 300);
@@ -48,11 +48,11 @@ const HomeNav = () => {
             debouncedSearch(searchQuery);
         } else {
             setShowDropdown(false);
-            setSearchResults([]); //kad nema ništa, čistimo
+            setSearchResults([]);
         }
     }, [searchQuery]);
 
-    useEffect(() => { //da lakše zatvorimo share klikom pored
+    useEffect(() => {
         const closeDropdown = (e) => {
             if (!e.target.closest('.home-right')) {
                 setShowDropdown(false);
@@ -68,6 +68,22 @@ const HomeNav = () => {
         };
     }, [showDropdown]);
 
+    useEffect(() => {
+        const closeDropdown = (e) => {
+            if (!e.target.closest('.home-left')) {
+                setShowHomenavDropdown(false);
+            }
+        };
+
+        if (showHomenavDropdown) {
+            document.addEventListener('click', closeDropdown);
+        }
+
+        return () => {
+            document.removeEventListener('click', closeDropdown);
+        };
+    }, [showHomenavDropdown]);
+
     const executeDetailedSearch = async (criteria) => {
         try {
             const response = await makeRequest.get('/search/users', { params: criteria });
@@ -76,7 +92,7 @@ const HomeNav = () => {
         } catch (error) {
             console.error('Greška u pretrazi:', error);
             setSearchResults([]);
-            setShowDropdown(false);
+            setShowDropdown(true); 
         }
     };
 
@@ -87,7 +103,7 @@ const HomeNav = () => {
     const fetchMessages = async () => {
         try {
             const response = await makeRequest.get('/messages/showMessages'); 
-            setMessages(response.data.reverse()); //da bi išla najnovija na vrh!
+            setMessages(response.data);
         } catch (error) {
             console.error('Neuspješno dohvaćene poruke:', error);
         }
@@ -95,11 +111,11 @@ const HomeNav = () => {
 
     useEffect(() => {
         fetchMessages();
-    }, []); //ovaj prazan array osigurava da se useEffect pokrene samo jednom nakon učitavanja komponente.
+    }, []);
 
     const openDetailedSearch = () => {
         setShowDropdown(false);
-        setSearchQuery(''); //čistimo search query kad otvorimo detailed search
+        setSearchQuery('');
         setShowDetailedSearch(true);
     };
 
@@ -111,21 +127,28 @@ const HomeNav = () => {
         setShowHomenavDropdown(false);
     };
 
+    const openMobileSearch = () => {
+        setShowMobileSearch(true);
+    };
+
+    const handleSearchIconClick = () => {
+        if (window.innerWidth < 769) {
+            openMobileSearch();
+        }
+    };
+
     return (
         <div className="home-navbar">
             <div className="home-left">
-                <Link to="/home-page" style={{ textDecoration: "none" }}>
+                <Link to="/home-page" style={{ textDecoration: "none" }} className="home-link-icon">
                     <div className="homenav-logo"/>
                 </Link>
                 <Link to="/home-page" style={{ textDecoration: "none" }} className="home-link">
                     <HomeIcon className="home-icon"/>
                 </Link>
-                <AppsIcon onClick={toggleHomenavDropdown} className="apps-icon-container"/>
-                {showHomenavDropdown && (
-                    <HomeDropdown onClose={closeHomenavDropdown} />
-                )}
+                <AppsIcon onClick={toggleHomenavDropdown} />
                 <div className="home-search">
-                    <SearchIcon />
+                    <SearchIcon className="search-icon" onClick={handleSearchIconClick} />
                     <input
                         type="text"
                         placeholder="Pretražite vještine ili osobe..."
@@ -133,22 +156,26 @@ const HomeNav = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                     <button className="detailed-search-btn" onClick={openDetailedSearch}>Detaljna pretraga</button>
-                    {showDropdown && searchResults.length > 0 && ( 
+                    {showDropdown && (
                         <div className="search-dropdown">
-                            {searchResults.map((result) => (
-                                <div key={result.id} className="search-item" onClick={() => {
-                                    navigate(`/home-page/profile/${result.id}`);
-                                    setShowDropdown(false);
-                                    setSearchQuery(''); //očistimo search query nakon klika na profil
-                                }}>
-                                    <img src={"/upload/" + result.profilePic} alt={result.name} />
-                                    <div className="search-item-text">
-                                        <strong className="search-item-name">{result.name}</strong>
-                                        <span>-</span>
-                                        <span>{result.primarySkill}</span>
+                            {searchResults.length > 0 ? (
+                                searchResults.map((result) => (
+                                    <div key={result.id} className="search-item" onClick={() => {
+                                        navigate(`/home-page/profile/${result.id}`);
+                                        setShowDropdown(false);
+                                        setSearchQuery('');
+                                    }}>
+                                        <img src={"/upload/" + result.profilePic} alt={result.name} />
+                                        <div className="search-item-text">
+                                            <strong className="search-item-name">{result.name}</strong>
+                                            <span>-</span>
+                                            <span>{result.primarySkill}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p className="no-results">Nema rezultata pretrage.</p>
+                            )}
                         </div>
                     )}
                 </div>
@@ -180,9 +207,20 @@ const HomeNav = () => {
                     </Link>
                 </div>
             </div>
+            {showHomenavDropdown && (
+                <HomeDropdown
+                    onClose={closeHomenavDropdown}
+                />
+            )}
             {showDetailedSearch && (
                 <DetailedSearchModal
                     setShowDetailedSearch={setShowDetailedSearch}
+                    executeDetailedSearch={executeDetailedSearch}
+                />
+            )}
+            {showMobileSearch && (
+                <MobileSearchModal
+                    setShowMobileSearch={setShowMobileSearch}
                     executeDetailedSearch={executeDetailedSearch}
                 />
             )}

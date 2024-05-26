@@ -1,6 +1,5 @@
 .admin-page-posts {
     background-color: var(--skillswap-lightblue); 
-    font-family: Arial, sans-serif;
     padding: 60px;
     display: flex;
     flex-direction: column;
@@ -94,4 +93,104 @@
     padding: 10px 10px;
     position: relative;
     margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 480px) {
+    .admin-page-posts {
+        padding: 10px;
+    }
+
+    .admin-header-posts {
+        font-size: 18px;
+        margin-bottom: 10px;
+        margin-top: 50px;
+    }
+
+    .admin-content-posts, .admin-posts-table-posts {
+        width: 100%;
+    }
+
+    .table-header-posts, .table-row-posts {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header-posts {
+        gap: 50px;
+    }
+
+    .table-cell-posts, .add-post-btn, .admin-search-input {
+        padding: 5px;
+    }
+
+    .admin-search-posts {
+        width: 100%; 
+    }
+
+    .admin-posts-table-posts {
+        overflow-x: auto;
+    }
+
+    .action-icon-posts {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .admin-page-posts {
+        padding: 20px;
+    }
+
+    .admin-header-posts {
+        margin-top: 50px;
+        font-size: 20px;
+    }
+
+    .table-header-posts, .table-row-posts {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header-posts {
+        gap: 50px;
+    }
+
+    .table-cell-posts, .add-post-btn, .admin-search-input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .admin-search-posts {
+        width: 100%; 
+    }
+
+    .admin-posts-table-posts {
+        overflow-x: auto;
+    }
+
+    .action-icon-posts {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .admin-header-posts {
+        margin-top: 50px;
+    }
+
+    .table-header-posts, .table-row-posts {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table-header-posts {
+        gap: 60px;
+    }
+
+    .action-icon-posts {
+        margin-left: 0;
+        margin-right: 8px;
+    }
 }

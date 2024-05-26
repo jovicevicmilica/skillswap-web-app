@@ -54,3 +54,17 @@
   font-size: 15px;
   margin-left: 10px;
 }
+
+/*mobilni telefoni*/
+@media only screen and (max-width: 480px) {
+  .friend-header {
+    grid-template-columns: auto 0.7fr 0.5fr 0.5fr;
+  }
+}
+
+/*veći mobilni telefoni*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .friend-header {
+    grid-template-columns: auto 1.1fr 1fr 1fr;
+  }
+}

@@ -5,7 +5,7 @@ import { makeRequest } from '../../axios';
 import { AuthContext } from '../../context/authContext'; 
 
 const fetchMessages = () => {
-  return makeRequest.get('/messages/showMessages').then(res => res.data.reverse()); //najnovije poruke na vrh
+  return makeRequest.get('/messages/showMessages').then(res => res.data); //najnovije poruke na vrh
 };
 
 const Messages = () => {

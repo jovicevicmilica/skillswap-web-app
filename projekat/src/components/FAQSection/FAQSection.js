@@ -9,18 +9,29 @@ const FAQSection = () => {
     { question: "Šta je SkillSwap?", 
       answer: (
       <span>
-        Saznajte više <a href="/about-section">o nama</a>. {/*span je da se ne bi pravio razmak kao kod paragrafa*/}
+        SkillSwap je online platforma koja omogućava korisnicima da razmjenjuju vještine i znanja. Na primjer, neko ko zna svirati gitaru može ponuditi časove u zamjenu za časove programiranja. Korisnici se registruju, postavljaju svoje vještine i pretražuju druge korisnike sa vještinama koje ih zanimaju. {/*span je da se ne bi pravio razmak kao kod paragrafa*/}
       </span> )},
     { question: "Kako se mogu registrovati na SkillSwap?", 
       answer: (
       <span>
-        Registracija je jednostavna - potrebno je samo da popunite osnovne informacije o sebi, uključujući vještine koje posjedujete i one koje želite naučiti, kao i nekoliko personalnih informacija. Nakon toga, možete pretraživati zajednicu i tražiti savršenog partnera za razmjenu vještina. Registrujte se <a href="/sign-up">ovdje</a> već sada.
+        Registracija je jednostavna - potrebno je samo da popunite osnovne informacije o sebi, uključujući vještine koje posjedujete i one koje želite naučiti, kao i nekoliko personalnih informacija. Nakon toga, možete pretraživati zajednicu i tražiti savršenog partnera za razmjenu vještina. Registrujte se <a href="/register">ovdje</a> već sada.
       </span>
             ) },
-    { question: "Kako funkcioniše razmjena vještina?", answer: "Kada pronađete nekog sa vještinama koje vas interesuju, možete započeti razmjenu tako što ćete kliknuti na opciju 'swap'. Ako druga strana prihvati, možete razmijeniti kontakte i nastaviti komunikaciju za dogovor o detaljima razmjene, bilo putem video poziva ili ličnog susreta."},
+    { question: "Kako funkcioniše razmjena vještina?", answer: "Kada pronađete nekog sa vještinama koje vas interesuju, možete započeti razmjenu tako što ćete kliknuti na opciju 'Zatraži razmjenu'. Ako druga strana prihvati, automatski dobijate njihovu e-mail adresu u porukama, kako bi mogli nastaviti komunikaciju o detaljima razmjene, bilo putem video poziva ili ličnog susreta."},
     { question: "Da li je SkillSwap plaćena usluga?", answer: "Ne, SkillSwap je potpuno besplatna platforma za razmjenu vještina. Naš cilj je omogućiti ljudima da uče jedni od drugih bez ikakvih troškova, a da istovremeno omogućimo zanimljiva upoznavanja."},
-    { question: "Kako mogu ostaviti recenziju?", answer: "Nakon što se razmjena vještina završi, možete ostaviti recenziju o iskustvu s osobom s kojom ste sarađivali. To pomaže drugim korisnicima da donesu odluku o razmjeni i doprinosi pouzdanosti zajednice. Da ostavite recenziju, dovoljno je ući na profil osobe i kliknuti na 'Ostavi utiske'."},
-    { question: "Šta ako naiđem na lažnu recenziju?", answer: "Ukoliko smatrate da je neka recenzija neistinita ili obmanjujuća, možete nas kontaktirati. Naš tim će pregledati slučaj i preduzeti odgovarajuće mjere kako bi očuvali integritet naše zajednice."}
+    { question: "Šta ako sam izabrao pogrešnu vještinu?", answer: "Ne brinite, promjena vještine je izuzetno laka. Na početku birate samo primarnu vještinu, a nakon registracije možete mijenjati i nju, kao i njen nivo, i dodati do dvije druge vještine koje posjedujete, i do tri vještine koje imate, zajedno sa nivoom. Možete ih promijeniti u bilo kom trenutku."},
+    { question: "Šta ako naiđem na lažan profil?", 
+      answer: (
+      <span>
+        Ukoliko smatrate da je neki profil lažan ili obmanjujući, možete nas <a href="/contact">kontaktirati</a>. Naš tim će pregledati slučaj i preduzeti odgovarajuće mjere kako bi očuvali integritet naše zajednice. Moguće je prijaviti profil direktno, kao i objave.
+      </span>
+            ) },
+    { question: "I dalje ne znam kako da upravljam profilom...", 
+      answer: (
+      <span>
+        Nema problema! Možete pogledati detaljan tutorijal (vodič) <a href="/tutorial">ovdje</a>. Ukoliko i dalje imate pitanja, javite se!
+      </span>
+            ) },
   ];
 
   const toggleFAQ = index => {

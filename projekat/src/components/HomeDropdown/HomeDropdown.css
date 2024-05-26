@@ -1,6 +1,6 @@
 .homenav-dropdown {
   position: absolute;
-  top: 55px;
+  top: 60px;
   left: 150px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,4 +24,22 @@
 
 .homenav-dropdown-item span {
   margin-left: 10px;
+}
+
+/*mobilni telefoni*/
+@media only screen and (max-width: 410px) {
+  .homenav-dropdown {
+    top: 55px;
+    left: 150px;
+    width: 160px;
+  }
+}
+
+/*veći mobilni telefoni*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .homenav-dropdown {
+    top: 55px;
+    left: 230px;
+    width: 200px;
+  }
 }

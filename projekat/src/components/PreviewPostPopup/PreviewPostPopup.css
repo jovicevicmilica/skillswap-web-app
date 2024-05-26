@@ -73,3 +73,75 @@
   text-align: center;
   margin-top: 20px;
 }
+
+@media only screen and (max-width: 480px) {
+  .preview-content {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .preview-close-button {
+    font-size: 18px;
+  }
+
+  .user-profile-pic-post {
+    width: 30px;
+    height: 30px;
+  }
+
+  .user-name-post {
+    font-size: 14px;
+  }
+
+  .post-time {
+    font-size: 10px;
+  }
+
+  .post-description {
+    margin-bottom: 15px;
+  }
+
+  .post-image {
+    width: 100%;
+  }
+
+  .no-image {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .preview-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .preview-close-button {
+    font-size: 19px;
+  }
+
+  .user-profile-pic-post {
+    width: 35px;
+    height: 35px;
+  }
+
+  .user-name-post {
+    font-size: 15px;
+  }
+
+  .post-time {
+    font-size: 11px;
+  }
+
+  .post-description {
+    margin-bottom: 18px;
+  }
+
+  .post-image {
+    width: 100%;
+  }
+
+  .no-image {
+    font-size: 13px;
+  }
+}

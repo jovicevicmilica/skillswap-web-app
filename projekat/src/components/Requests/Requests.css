@@ -15,17 +15,27 @@
 .request-header {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: 60px 1fr 1.1fr;
+  align-items: center;
 }
 
 .request-item {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 60px 1fr 1fr;
   align-items: center;
   gap: 10px;
   padding: 10px;
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 20px;
   cursor: pointer;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .request-actions {
@@ -46,6 +56,7 @@
   margin-bottom: 10px;
   grid-template-columns: auto 1fr 1.1fr;
   gap: 10px;
+  padding-left: 10px;
 }
 
 .no-requests.main {
