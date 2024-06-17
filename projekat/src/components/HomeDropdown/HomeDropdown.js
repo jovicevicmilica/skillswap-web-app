@@ -6,6 +6,7 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import EmailIcon from '@mui/icons-material/Email';
 import MessageIcon from '@mui/icons-material/Message';
+import PersonIcon from '@mui/icons-material/Person';
 import { AuthContext } from '../../context/authContext';
 import './HomeDropdown.css';
 import { useContext } from 'react';
@@ -49,8 +50,17 @@ const HomeDropdown = ({ onClose }) => {
     onClose();
   };
 
+  const goToProfile = () => {
+    navigate(`/home-page/profile/${currentUser.id}`);
+    onClose();
+  };
+
   return (
     <div className="homenav-dropdown">
+      <div className="homenav-dropdown-item" onClick={goToProfile}>
+        <PersonIcon />
+        <span>Profil</span>
+      </div>
       <div className="homenav-dropdown-item" onClick={goToFriends}>
         <PeopleIcon />
         <span>Povezani</span>
@@ -62,10 +72,6 @@ const HomeDropdown = ({ onClose }) => {
       <div className="homenav-dropdown-item" onClick={goToGallery}>
         <CollectionsIcon />
         <span>Galerija</span>
-      </div>
-      <div className="homenav-dropdown-item">
-        <LightbulbIcon />
-        <span>Tutorijal</span>
       </div>
       <div className="homenav-dropdown-item" onClick={goToMessages}>
         <MessageIcon />

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './AdminNav.css';
 import HomeIcon from '@mui/icons-material/Home';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -33,6 +33,22 @@ const AdminNav = () => {
     const closeDropdown = () => {
         setDropdownVisible(false);
     };
+
+    useEffect(() => {
+        const closeDropdown = (e) => {
+            if (!e.target.closest('.admin-left')) {
+                setDropdownVisible(false);
+            }
+        };
+
+        if (dropdownVisible) {
+            document.addEventListener('click', closeDropdown);
+        }
+
+        return () => {
+            document.removeEventListener('click', closeDropdown);
+        };
+    }, [dropdownVisible]);
 
     return (
         <div className="admin-navbar">

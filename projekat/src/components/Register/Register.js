@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import "./Register.css";
 import Select from 'react-select';
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { AuthContext } from '../../context/authContext';
 
 const skillOptions = {
   'Poslovanje': [
@@ -62,6 +63,12 @@ const customStyles = {
   }),
 };
 
+//provjera e - maila
+const isValidEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
 function Register() {
   const recaptchaRef = useRef();
   const [selectedSkill, setSelectedSkill] = useState('');
@@ -76,8 +83,8 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false); //dodato stanje za prikaz lozinke, da li je otkrivena ili sakrivena
 
   const navigate = useNavigate();
-
   const [err, setErr] = useState(null);
+  const { login } = useContext(AuthContext);
 
   const handleSkillChange = selectedOption => {
     const event = {
@@ -106,6 +113,12 @@ function Register() {
       return;
     }
 
+    //validacija mejla
+    if (!isValidEmail(inputs.email)) {
+      toast.error("Unesite validan e-mail.");
+      return;
+    }
+
     //validacija dužine lozinke
     if (inputs.password.length < 8) {
       toast.error("Lozinka mora biti duža od 8 karaktera.");
@@ -117,7 +130,9 @@ function Register() {
     try {
       const response = await axios.post("http://localhost:8800/api/auth/register", inputs);
       toast.success("Uspješno ste se registrovali!");
-      navigate("/login");
+      await login({ email: inputs.email, password: inputs.password });
+      //da se automatski ulogujemo poslije registracije, a ne da idemo na login
+      navigate("/home-page");
     }
 
     catch(err) {

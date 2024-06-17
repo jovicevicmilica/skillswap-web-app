@@ -38,6 +38,7 @@
     align-items: flex-end;
     padding-bottom: 4vw;
     padding-left: 4vw;
+    padding-right: 4vw;
     display: flex;
     position: relative;
 }

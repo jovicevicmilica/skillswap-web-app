@@ -65,10 +65,6 @@ const LeftPart = () => {
             <CollectionsIcon className="icon-color-blue" />
             <span>Galerija</span>
           </div>
-          <div className="lp-item">
-            <LightbulbIcon className="icon-color-blue" />
-            <span>Tutorijal</span>
-          </div>
           <button onClick={handleLogout} className="logout-button">Odjavi se</button>
         </div>
       </div>

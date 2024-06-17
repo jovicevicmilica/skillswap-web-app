@@ -136,6 +136,31 @@ const Update = ({ setOpenUpdate, user }) => {
     setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value }));
   };
 
+  const getFilteredOptionsForPrimary = () => {
+    //opcije za primarnu vještinu, sve one koje već nisu označene kao 'imam'
+    const existingImamSkills = userSkills.filter(skill => skill.type === 'imam').map(skill => skill.skill);
+    return transformedOptions.map(category => ({
+      ...category,
+      options: category.options.filter(option => !existingImamSkills.includes(option.value))
+    }));
+  };
+
+  const getFilteredOptionsForSkillType = () => {
+    //prvo dobijemo sve vještine tog tipa
+    let existingSkills = userSkills.filter(skill => skill.type === newSkill.type).map(skill => skill.skill);
+
+    //onda, ako je tip 'imam', dodamo takođe i primarne u skup
+    if (newSkill.type === 'imam') {
+      existingSkills.push(texts.primarySkill.value);
+    }
+
+    //filterišemo da maknemo te opcije iz selecta
+    return transformedOptions.map(category => ({
+      ...category,
+      options: category.options.filter(option => !existingSkills.includes(option.value))
+    }));
+  };
+
   const handleDeleteSkill = async (skillId) => {
     try {
       await makeRequest.delete(`/skills/${skillId}`);
@@ -148,13 +173,22 @@ const Update = ({ setOpenUpdate, user }) => {
   };
 
   const handleAddSkill = async () => {
+    const existingSkill = userSkills.some(skill => skill.skill === newSkill.skill);
+    const isPrimarySkill = texts.primarySkill.value === newSkill.skill;
+    const isDesiredSkillDuplicate = newSkill.type === 'želim' && userSkills.some(skill => skill.type === 'želim' && skill.skill === newSkill.skill);
+
+    if (existingSkill || isPrimarySkill || isDesiredSkillDuplicate) {
+      toast.error('Nije moguće dodati već postojeću vještinu ili vještinu koju već želite.');
+      return; //spriječimo dodavanje vještine koja već postoji
+    }
+
     try {
       const res = await makeRequest.post('/skills', {
         userId: user.id,
         ...newSkill
       });
       setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]);
-      setNewSkill({ type: '', skill: '', skillLevel: '' }); //resetovanje forme nakon dodavanja
+      setNewSkill({ type: '', skill: '', skillLevel: '' }); // Reset form after adding
       toast.success('Vještina je uspješno dodana.');
     } catch (error) {
       console.error('Greška u dodavanju vještine:', error);
@@ -274,19 +308,11 @@ const Update = ({ setOpenUpdate, user }) => {
             />
             <label className="update-form-label">Primarna vještina</label>
             <Select
-                value={ texts.primarySkill }
-                onChange={value => setTexts(prev => ({ ...prev, primarySkill: value }))}
-                options={transformedOptions}
-                styles={customStyles}   
-                className='update-form-select'
-            />
-            <label className="update-form-label">Nivo primarne vještine</label>
-            <Select
-                value={ texts.primarySkillLevel }
-                onChange={value => setTexts(prev => ({ ...prev, primarySkillLevel: value }))}
-                options={skillLevelOptions}
-                styles={customStyles}   
-                className='update-form-select'
+              value={texts.primarySkill}
+              onChange={(selectedOption) => setTexts(prev => ({ ...prev, primarySkill: selectedOption }))}
+              options={getFilteredOptionsForPrimary()}
+              styles={customStyles}
+              className='update-form-select'
             />
             <button className="profile-button-update" onClick={handleClick}>Ažuriraj</button>
             <h1>Ažuriraj vještine</h1>
@@ -294,7 +320,9 @@ const Update = ({ setOpenUpdate, user }) => {
             <label className="update-form-label">Tip nove vještine</label>
             <Select
               value={skillTypeOptions.find(option => option.value === newSkill.type)}
-              onChange={option => setNewSkill(prev => ({ ...prev, type: option.value }))}
+              onChange={option => {
+                setNewSkill(prev => ({ ...prev, type: option.value, skill: '', skillLevel: '' })); // Reset skill and level on type change
+              }}
               options={skillTypeOptions}
               styles={customStyles}
               className='update-form-select'
@@ -303,7 +331,7 @@ const Update = ({ setOpenUpdate, user }) => {
             <Select
               value={transformedOptions.flatMap(group => group.options).find(option => option.value === newSkill.skill)}
               onChange={option => setNewSkill(prev => ({ ...prev, skill: option.value }))}
-              options={transformedOptions}
+              options={getFilteredOptionsForSkillType()}
               styles={customStyles}
               className='update-form-select'
             />
@@ -315,9 +343,17 @@ const Update = ({ setOpenUpdate, user }) => {
               styles={customStyles}
               className='update-form-select'
             />
-            <button onClick={handleAddSkill} className="profile-button-smaller" disabled={(newSkill.type === 'imam' && userSkills.filter(skill => skill.type === 'imam').length >= 2) || (newSkill.type === 'želim' && userSkills.filter(skill => skill.type === 'želim').length >= 3)}>Dodaj vještinu</button>
+            <button onClick={handleAddSkill} className="profile-button-smaller" disabled={
+              (newSkill.type === 'imam' && userSkills.filter(skill => skill.type === 'imam').length >= 2) ||
+              (newSkill.type === 'želim' && userSkills.filter(skill => skill.type === 'želim').length >= 3) ||
+              userSkills.some(skill => skill.skill === newSkill.skill) ||
+              texts.primarySkill.value === newSkill.skill ||
+              (newSkill.type === 'želim' && userSkills.some(skill => skill.type === 'želim' && skill.skill === newSkill.skill))
+            }>
+              Dodaj vještinu
+            </button>
             <div>
-              <label className="update-form-label">Vještine koje posjedujete (osim primarne)</label>
+              <label className="update-form-label">OSTALE VJEŠTINE</label>
               {userSkills.map((skill, index) => (
                 <div key={index} className="update-items">
                   {skill.skill} ({skill.skillLevel}) - {skill.type}
