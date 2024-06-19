@@ -10,17 +10,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
 const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa koristimo postId*/
+  //KOMENTARI
   const [desc, setDesc] = useState("");
 
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext); //da bi mogli dobiti profilnu sliku za komentar
 
   const queryClient = useQueryClient();
-  moment.locale("bs");
+  moment.locale("bs"); //da se proteklo vrijeme prikazuje na ijekavici
 
   /*sada pravimo mutaciju*/
   const mutation = useMutation({
     mutationFn: (newComment) => {
-        return makeRequest.post("/comments", newComment);
+        return makeRequest.post("/comments", newComment); //objavimo komentar
     },
     onSuccess: () => {
       /*refreshujemo da bi mogli objaviti opet*/
@@ -30,7 +31,7 @@ const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa korist
   
   const { isLoading, error, data } = useQuery({
     queryKey: ['home-page/comments'],
-    queryFn: () => makeRequest.get("/comments?postId=" + postId).then(res => res.data)
+    queryFn: () => makeRequest.get("/comments?postId=" + postId).then(res => res.data) //dobijemo sve komentare za određenu objavu
   });
 
   if (isLoading) {
@@ -46,7 +47,7 @@ const Comments = ({postId}) => { /*komentare gledamo u odnosu na post, pa korist
     e.preventDefault();
 
     /*sada počinjemo koristiti react query mutacije*/
-    mutation.mutate({ desc, postId }); 
+    mutation.mutate({ desc, postId });  //objavimo komentar
 
     /*refresh*/
     setDesc("");

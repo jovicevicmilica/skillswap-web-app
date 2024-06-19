@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
+//da pridobijemo one koje pratimo i oni nas, tj. 'POVEZANI' smo
 export const getFriends = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Niste ulogovani!");
@@ -17,6 +18,7 @@ export const getFriends = (req, res) => {
       WHERE u.id != ?
     `;
     //popravljena funkcija za getFriends, treba da bude OBOSTRANO!!!
+    //ne vraćemo sebe, pa ide u.id != ?
 
     db.query(query, [userId, userId, userId], (err, friends) => {
       if (err) return res.status(500).json(err);
@@ -25,6 +27,7 @@ export const getFriends = (req, res) => {
   });
 };
 
+//da pridobijemo korisnike koji imaju vještine koje mi želimo, tj. naše tipa ŽELIM i njihove PRIMARNE ili IMAJU
 export const getExchangeUsers = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Niste ulogovani!");
@@ -71,20 +74,20 @@ export const getExchangeUsers = (req, res) => {
         if (err) return res.status(500).json(err);
 
         //kombinovanje rezultata iz oba upita
-        const combinedResults = [...results1, ...results2];
+        const combinedResults = [...results1, ...results2]; //ide ... da bi raspakovali elemente iz nizova i spojili ih
 
         //grupisanje rezultata po korisnicima i filtriranje null vrijednosti
         const users = {};
-        combinedResults.forEach(row => {
+        combinedResults.forEach(row => { //prolazimo kroz skup korisnika
           if (row.skill) { //filtriramo null vrijednosti
-            if (!users[row.id]) {
-              users[row.id] = { ...row, skills: [] };
+            if (!users[row.id]) { //ako već nije u nizu
+              users[row.id] = { ...row, skills: [] }; //pravimo element sa praznim vještinama
             }
-            users[row.id].skills.push(row.skill);
+            users[row.id].skills.push(row.skill); //dodamo vještinu
           }
         });
 
-        res.json(Object.values(users));
+        res.json(Object.values(users)); //pretvaramo users u niz i uklanjaju se ključevi korisnika, ostaju samo vrijednosti
       });
     });
   });

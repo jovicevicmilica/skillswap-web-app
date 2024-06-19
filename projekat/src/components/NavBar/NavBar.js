@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
 function NavBar() {
+  //NAVBAR NA POČETNOJ STRANICI, PRIJE LOGOVANJA
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => { //otvaranje i zatvaranje hamburgera za mobilne uređaje
+  const toggleMenu = () => { //otvaranje i zatvaranje hamburgera za mobilne uređaje, na klik ga otvorimo/zatvorimo
     setIsMenuOpen(!isMenuOpen);
   };
 
-  useEffect(() => { //da lakše zatvorimo hamburger klikom pored
+  useEffect(() => { //da lakše zatvorimo hamburger klikom pored njega
     const closeDropdown = (e) => {
       if (!e.target.closest('.nav-about')) {
         setIsMenuOpen(false);
@@ -18,11 +19,11 @@ function NavBar() {
     };
 
     if (isMenuOpen) {
-      document.addEventListener('click', closeDropdown);
+      document.addEventListener('click', closeDropdown); //ako je menu otvoren, dodamo da se na klik zatvara
     }
 
     return () => {
-      document.removeEventListener('click', closeDropdown);
+      document.removeEventListener('click', closeDropdown); //inače mičemo taj event listener
     };
   }, [isMenuOpen]);
 
@@ -42,7 +43,7 @@ function NavBar() {
         <MenuTwoToneIcon className="icon-color-blue nav-menu"/>
       </div>
       {isMenuOpen && (
-        <div className="navbar-dropdown-menu">
+        <div className="navbar-dropdown-menu"> {/*ako je otvoren dropdown hamburger - a, prikažemo ga*/}
           <Link to="/contact" className="navbar-dropdown-link" onClick={toggleMenu}>Kontakt</Link>
           <Link to="/login" className="navbar-dropdown-link" onClick={toggleMenu}>Prijavi se</Link>
           <Link to="/register" className="navbar-dropdown-link" onClick={toggleMenu}>Registruj se</Link>

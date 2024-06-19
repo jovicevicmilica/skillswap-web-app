@@ -17,6 +17,7 @@ const testimonials = [ /*ovako možemo lakše da ih dodajemo ili maknemo*/
 ];
 
 function Testimonials() {
+  //TESTIMONIJALI KORISNIKA
   return (
     <div className="testimonials-section" id="testimonials">
       <h1 className="testimonials-header">Zašto korisnici vole našu platformu</h1>

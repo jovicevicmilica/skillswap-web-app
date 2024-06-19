@@ -9,10 +9,11 @@ const fetchFriends = () => {
 };
 
 const FriendsList = () => {
+  //DIO U LEFT PART - U KOJI PRIKAZUJE PRIJATELJE
   const navigate = useNavigate();
 
   const { data: friends, isLoading, isError } = useQuery({
-    queryKey: ['fetchFriends'],
+    queryKey: ['fetchFriends'], //pridobijemo prijatelje korisnika
     queryFn: fetchFriends
   });
 
@@ -29,7 +30,7 @@ const FriendsList = () => {
         <span>Primarna vještina</span>
       </div>
       {friends.length === 0 ? (
-        <div className="no-friends">Nemate prijatelja. Povežite se sa nekim već sada!</div>
+        <div className="no-friends">Trenutno nemate prijatelja. Povežite se sa nekim već sada!</div>
       ) : (
         friends.map(friend => (
           <div key={friend.id} className="friend-item" onClick={() => navigate(`/home-page/profile/${friend.id}`)}>

@@ -6,10 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Footer.css';
 
 function Footer() {
-  const currentYear = new Date().getFullYear();
+  //FOOTER
+  const currentYear = new Date().getFullYear(); //dio u footer - u koji prikazuje godinu, dobijemo trenutnu
   const [email, setEmail] = useState('');
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e) => { //ako se u dijelu za newsletter promijeni e - mail, ažuriramo vrijednost
     setEmail(e.target.value);
   }
 
@@ -18,6 +19,7 @@ function Footer() {
 
     try {
       const response = await axios.post("http://localhost:8800/api/newsletter/subscribe", { email });
+      //prijavimo se preko mail - a i provjeravamo status koji na bekendu šaljemo
       if (response.data.status === 'already_subscribed') {
         toast.info('Već ste prijavljeni na newsletter.');
       } else if (response.data.status === 'subscribed') {

@@ -33,26 +33,25 @@ import AdminPosts from './components/AdminPosts/AdminPosts';
 import 'react-toastify/dist/ReactToastify.css';
 import ExchangeList from './components/ExchangeList/ExchangeList';
 import Gallery from './components/Gallery/Gallery';
-import Requests from './components/Requests/Requests';
 import Messages from './components/Messages/Messages';
 
 function App() {
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext); //da dobijemo trenutnog korisnika
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient(); //koristimo ga da upravljamo kešom
 
   const Layout = () => {
     return(
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}> {/*ovaj provajder nam omogućava da "obavijemo" aplikaciju react-query funkcionalnostima*/}
         <div>
-          <Helmet>
+          <Helmet> {/*helmet omogućava manipulaciju head elementa HTML - a*/}
             <title>Početna stranica - SkillSwap</title>
           </Helmet>
           <HomeNav />
           <div className="full-homepage">
             <LeftPart />
-            <div style={{flex: 6}}> {/*on nek zauzima najvise, u odnosu na lijevu i desnu stranu*/}
-              <Outlet /> {/*za renderovanje child ruta*/}
+            <div style={{flex: 6}}> {/*on nek zauzima najviše, u odnosu na lijevu i desnu stranu*/}
+              <Outlet /> {/*za renderovanje child ruta na mjestu gdje je outlet, unutar roditelja*/}
             </div>
             <RightPart />
           </div>
@@ -61,7 +60,7 @@ function App() {
     );
   };
 
-  const AdminLayout = () => {
+  const AdminLayout = () => { {/*kako izgleda prikaz admin stranice*/}
     return(
       <QueryClientProvider client={queryClient}>
         <div>
@@ -77,15 +76,15 @@ function App() {
     );
   };
 
-  const ProtectedRoute = ({children}) => {
-    if(!currentUser || currentUser.email === "skillswap24@gmail.com"){ //ako nismo ulogovani, vracemo se na početnu, ne vidimo sakrivene stvari u layout - u, ili ako smo admin! jer adminu to ne treba, ali može se maći
-      return <Navigate to="/login" />;
+  const ProtectedRoute = ({children}) => { {/*ovim obavijamo dio gdje je korisnik, da ukoliko nismo ulogovani, ne vidimo stvari u layout - u koje su nam sakrivene*/}
+    if(!currentUser || currentUser.email === "skillswap24@gmail.com"){ //ako nismo ulogovani, vraćemo se na početnu, ne vidimo sakrivene stvari u layout - u, ili ako smo admin! jer adminu to ne treba, ali može se maći
+      return <Navigate to="/login" />; {/*vrati nas na login*/}
     }
 
     return children;
   }
 
-  const AdminRoute = ({children}) => {
+  const AdminRoute = ({children}) => { {/*da ne bi mogao običan korisnik pristupiti adminu*/}
     if (!currentUser || currentUser.email !== "skillswap24@gmail.com") {
       return <Navigate to="/home-page" />;
     }
@@ -96,7 +95,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element:(
+      element:( 
         <>
           <Helmet>
             <title>Početna - SkillSwap</title>
@@ -214,11 +213,11 @@ function App() {
     {
       path: "/admin-page",
       element: (
-        <AdminRoute>
+        <AdminRoute> {/*da zaštitimo rute u adminu*/}
           <AdminLayout />
         </AdminRoute>
       ),
-      children: [
+      children: [ //ovdje navodimo djecu iz outlet - a
         {
           path: "/admin-page",
           element: <AdminPage />
@@ -237,7 +236,7 @@ function App() {
     {
       path: "/home-page",
       element: (
-        <ProtectedRoute>
+        <ProtectedRoute> {/*da zaštitimo rute korisnika*/}
           <Layout />
         </ProtectedRoute>
       ),
@@ -263,10 +262,6 @@ function App() {
           element: <Gallery />
         },
         {
-          path: "/home-page/requests",
-          element: <Requests />
-        },
-        {
           path: "/home-page/messages",
           element: <Messages />
         },
@@ -276,7 +271,7 @@ function App() {
   ]);
 
   return (
-    <RouterProvider router={router} /> 
+    <RouterProvider router={router} /> //renderujemo aplikaciju, navodimo ruter koji nas pomjera kroz rute
   );
 }
 

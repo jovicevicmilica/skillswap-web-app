@@ -67,20 +67,20 @@
   position: relative;
 }
 
-@keyframes moveUpDown {
+@keyframes moveUpDown { /*FLOAT EFEKAT*/
   0% {
-    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Početna transformacija */
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /*početna transformacija*/
   }
   50% {
-    transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Transformacija u sredini, gore */
+    transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /*transformacija u sredini, gore*/
   }
   100% {
-    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /* Krajnja transformacija, vraćanje na početak */
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); /*krajnja transformacija, vraćanje na početak*/
   }
 }
 
 .float {
-  animation: moveUpDown 2s infinite; /* 2s - trajanje animacije, infinite - beskonačna animacija */
+  animation: moveUpDown 2s infinite; /*2s - trajanje animacije, infinite - beskonačna animacija*/
 }
 
 .code {

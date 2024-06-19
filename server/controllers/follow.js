@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
+//da dobijemo ljude koji nas prate ali ih ne pratimo nazad, ovo ide u rightPart dio, kao zahtjevi za praćenje
 export const getFollowers = (req, res) => {
   const token = req.cookies.accessToken;
 
@@ -29,6 +30,7 @@ export const getFollowers = (req, res) => {
   });
 };
 
+//prihvatimo praćenje SAMO SA NAŠE STRANE se unosi
 export const acceptFollower = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Niste ulogovani!");
@@ -45,6 +47,7 @@ export const acceptFollower = (req, res) => {
   });
 };
 
+//odbijamo korisnika, jer se može desiti da ga pratimo, pa hoćemo da ga otpratimo
 export const rejectFollower = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Niste ulogovani!");

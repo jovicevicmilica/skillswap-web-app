@@ -2,6 +2,7 @@ import { db } from "../connect.js";
 import bcrypt from "bcryptjs";
 import moment from 'moment';
 
+//brojimo koliko ima ukupno korisnika sajta
 export const getTotalUsers = (req, res) => {
     const q = `SELECT COUNT(*) AS totalUsers FROM users WHERE email != "skillswap24@gmail.com"`;
     //ne brojimo admina u korisnike
@@ -13,7 +14,7 @@ export const getTotalUsers = (req, res) => {
     });
 };
 
-
+//brojimo koliko ima objava
 export const getTotalPosts = (req, res) => {
     const q = `SELECT COUNT(*) AS totalPosts FROM posts`;
 
@@ -24,6 +25,7 @@ export const getTotalPosts = (req, res) => {
     });
 };
 
+//brojimo u kom gradu ima najviše korisnika
 export const getMostUsersTown = (req, res) => {
     const q = `
         SELECT town, COUNT(*) as user_count 
@@ -54,9 +56,9 @@ export const getUsersAdmin = (req, res) => {
 };
 
 export const addUserAdmin = (req, res) => {
-  const { email, password, name, town, primarySkill, primarySkillLevel, learningPref } = req.body;
+  const { email, password, name, town, primarySkill, learningPref } = req.body;
   const profilePic = '1716245659166360_F_604795233_5zIpEvhWizTN7bUxSADUdrQQFGj315G3.jpg'; 
-  const coverPic = '1716245659157green-abstract-background_1134661-5251.png'; 
+  const coverPic = '1716245659157green-abstract-background_1134661-5251.png'; //podrazumijevana profilna i naslovna dok je ne promijenimo
   
   //provjerimo da li već postoji
   const q1 = "SELECT * FROM users WHERE email = ?";
@@ -70,7 +72,7 @@ export const addUserAdmin = (req, res) => {
 
     //unošenje novog korisnika
     const q2 = "INSERT INTO users (`email`, `password`, `name`, `town`, `profilePic`, `coverPic`, `primarySkill`, `primarySkillLevel`, `learningPref`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    const values = [email, hashedPassword, name, town, profilePic, coverPic, primarySkill, primarySkillLevel, learningPref];
+    const values = [email, hashedPassword, name, town, profilePic, coverPic, primarySkill, 'odličan', learningPref];
 
     db.query(q2, values, (err, result) => {
       if (err) return res.status(500).json(err);
@@ -85,18 +87,37 @@ export const addUserAdmin = (req, res) => {
   });
 };
 
-export const deleteUserAdmin = (req, res) => {
+export const deleteUserAdmin = (req, res) => { //kao i na user strani, provjeravamo da se izvrši svaki dio brisanja!!!
   const userId = req.params.userId;
 
-  const q = "DELETE FROM users WHERE id = ?";
-  db.query(q, [userId], (err, result) => {
-    if (err) return res.status(500).json(err);
-    if (result.affectedRows > 0) {
-      return res.status(200).json("Korisnik je uspješno obrisan.");
-    } else {
-      return res.status(404).json("Korisnik nije pronađen.");
-    }
-  });
+  const deleteQueries = [
+    { query: "DELETE FROM posts WHERE userId = ?", params: [userId] },
+    { query: "DELETE FROM comments WHERE userId = ?", params: [userId] },
+    { query: "DELETE FROM userSkills WHERE userId = ?", params: [userId] },
+    { query: "DELETE FROM likes WHERE userId = ?", params: [userId] },
+    { query: "DELETE FROM relationships WHERE followerUserId = ? OR followedUserId = ?", params: [userId, userId] },
+    { query: "DELETE FROM users WHERE id = ?", params: [userId] }
+  ];
+
+  const executeQuery = ({ query, params }) => {
+    return new Promise((resolve, reject) => {
+      db.query(query, params, (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      });
+    });
+  };
+
+  Promise.all(deleteQueries.map(executeQuery))
+    .then(results => {
+      const userResult = results[results.length - 1];
+      if (userResult.affectedRows > 0) {
+        return res.status(200).json("Korisnik je uspješno obrisan.");
+      } else {
+        return res.status(404).json("Korisnik nije pronađen.");
+      }
+    })
+    .catch(err => res.status(500).json(err.message || "Došlo je do greške."));
 };
 
 export const updateUserAdmin = (req, res) => {
@@ -106,12 +127,12 @@ export const updateUserAdmin = (req, res) => {
   let q = "UPDATE users SET `email`=?, `name`=?, `town`=?, `profilePic`=?, `coverPic`=?, `primarySkill`=?, `primarySkillLevel`=?, `learningPref`=? WHERE id=?";
   const values = [email, name, town, profilePic, coverPic, primarySkill, primarySkillLevel, learningPref, id];
 
-  //slična situacija kao apdejt korisnika, da se ne poremeti lozinka koja je već u bazi
+  //slična situacija kao apdejt korisnika, da se ne poremeti lozinka koja je već u bazi, mijenjanje je opcionalno
   if (password) {
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
     q = "UPDATE users SET `email`=?, `password`=?, `name`=?, `town`=?, `profilePic`=?, `coverPic`=?, `primarySkill`=?, `primarySkillLevel`=?, `learningPref`=? WHERE id=?";
-    values.splice(1, 0, hashedPassword); //unesemo na drugo mjesto
+    values.splice(1, 0, hashedPassword); //unesemo na drugo mjesto query - ja
   }
 
   db.query(q, values, (err, data) => {
@@ -121,7 +142,7 @@ export const updateUserAdmin = (req, res) => {
       const q2 = "SELECT * FROM users WHERE id = ?";
       db.query(q2, [id], (err, updatedUserData) => {
         if (err) return res.status(500).json(err);
-        const updatedUserInfo = updatedUserData[0];
+        const updatedUserInfo = updatedUserData[0]; //vraćemo korisnika
         console.log(updatedUserInfo);
         return res.json(updatedUserInfo);
       });
@@ -137,6 +158,7 @@ export const getPostsAdmin = (req, res) => {
         FROM posts
         JOIN users ON posts.userId = users.id
     `;
+
     db.query(q, (err, data) => {
         if (err) return res.status(500).json(err);
         return res.status(200).json(data);
@@ -185,7 +207,6 @@ export const updatePostAdmin = (req, res) => {
         }
     });
 };
-
 
 export const deletePostAdmin = (req, res) => {
     const { postId } = req.params;

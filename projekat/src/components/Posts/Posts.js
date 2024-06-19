@@ -3,10 +3,10 @@ import './Posts.css';
 import Post from '../Post/Post';
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
-import { toast } from 'react-toastify';
 
 const Posts = ({userId}) => {
-  const { isLoading, error, data } = useQuery({
+  //SVE OBJAVE KORISNIKA
+  const { isLoading, error, data } = useQuery({ //da dohvatimo sve objave
     queryKey: ['home-page/posts'],
     queryFn: () => makeRequest.get("/posts?userId=" + userId).then(res => res.data)
   });
@@ -22,7 +22,7 @@ const Posts = ({userId}) => {
   return (
     <div className="posts">
       {data && data.length > 0 ? (
-        data.map((post) => <Post key={post.id} post={post} />)
+        data.map((post) => <Post key={post.id} post={post} />) //provjera ima li objava, ako ima, postavimo ih
       ) : (
         <p>Nema dostupnih objava. Povežite se sa nekim već sada!</p>
       )}

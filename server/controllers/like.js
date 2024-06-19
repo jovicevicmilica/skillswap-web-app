@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
+//da pridobijemo lajk
 export const getLikes = (req, res) => {
     const q = "SELECT userId FROM likes WHERE postId = ?";
 
@@ -10,6 +11,7 @@ export const getLikes = (req, res) => {
     });
 };
 
+//da lajkujemo nešto
 export const addLike = (req, res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Niste ulogovani!");
@@ -26,6 +28,7 @@ export const addLike = (req, res) => {
     });
 };
 
+//da obrišemo lajk
 export const deleteLike = (req, res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Niste ulogovani!");

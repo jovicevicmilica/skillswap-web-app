@@ -4,14 +4,16 @@ import './AdminPage.css';
 import { makeAdminRequest } from '../../axiosAdm';
 
 const AdminPage = () => {
-    const [totalUsers, setTotalUsers] = useState(0);
-    const [totalPosts, setTotalPosts] = useState(0);
-    const [mostUsersTown, setMostUsersTown] = useState('');
+    //POČETNA ADMIN STRANICA
+    const [totalUsers, setTotalUsers] = useState(0); //ukupan broj korisnika, početno stanje 0
+    const [totalPosts, setTotalPosts] = useState(0); //ukupan broj objava, početno stanje 0
+    const [mostUsersTown, setMostUsersTown] = useState(''); //najviše korisnika iz kog grada
 
     useEffect(() => {
         fetchTotalUsers().then(data => setTotalUsers(data.totalUsers)).catch(err => console.error(err));
         fetchTotalPosts().then(data => setTotalPosts(data.totalPosts)).catch(err => console.error(err));
         fetchMostUsersTown().then(data => setMostUsersTown(data.town)).catch(err => console.error(err));
+        //dobijemo sve te informacije
     }, []);
 
     const fetchTotalUsers = async () => {
@@ -29,7 +31,7 @@ const AdminPage = () => {
         return response.data;
     };
 
-    const handleViewRequests = () => {
+    const handleViewRequests = () => { //vodi direktno na mail radi lakšeg pregledanja
         window.open('https://mail.google.com/mail/', '_blank');
     };
 

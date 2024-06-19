@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Legal.css'; 
 
 function Legal() {
+  //DIO KOJI ČUVA USLOVE KORIŠĆENJA I POLITIKU PRIVATNOSTI
   return (
     <div className="legal">
         <div className="legal-main">

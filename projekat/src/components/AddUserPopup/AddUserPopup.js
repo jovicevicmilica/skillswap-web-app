@@ -85,6 +85,7 @@ const customStyles = {
 };
 
 const AddUserPopup = ({ setIsAddUserPopupOpen, onAddUser }) => {
+    //POPUP ZA DODAVANJE KORISNIKA, ADMIN
     const [newUser, setNewUser] = useState({
         name: '',
         email: '',
@@ -95,21 +96,21 @@ const AddUserPopup = ({ setIsAddUserPopupOpen, onAddUser }) => {
         primarySkillLevel: '',
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e) => { //promjena u input - u
         setNewUser({ ...newUser, [e.target.name]: e.target.value });
     };
 
-    const handleSelectChange = (selectedOption, { name }) => {
+    const handleSelectChange = (selectedOption, { name }) => { //promjena u select - u
         setNewUser({ ...newUser, [name]: selectedOption.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await makeAdminRequest.post('/users', newUser);
+            const response = await makeAdminRequest.post('/users', newUser); //dodamo korisnika
             console.log(response.data);
-            onAddUser(response.data); 
-            setIsAddUserPopupOpen(false);
+            onAddUser(response.data); //postavimo ga kao dodatog
+            setIsAddUserPopupOpen(false); //ugasimo dropdown
             toast.success("Korisnik uspješno dodat.");
         } catch (error) {
             console.error('Nije moguće dodati korisnika:', error);
@@ -165,15 +166,6 @@ const AddUserPopup = ({ setIsAddUserPopupOpen, onAddUser }) => {
                             value={transformedOptions.flatMap(group => group.options).find(option => option.value === newUser.primarySkill)}
                             onChange={handleSelectChange}
                             options={transformedOptions}
-                            styles={customStyles}
-                            className="update-form-select"
-                        />
-                        <label className="update-form-label">Nivo znanja primarne vještine</label>
-                        <Select
-                            name="primarySkillLevel"
-                            value={skillLevelOptions.find(option => option.value === newUser.primarySkillLevel)}
-                            onChange={handleSelectChange}
-                            options={skillLevelOptions}
                             styles={customStyles}
                             className="update-form-select"
                         />

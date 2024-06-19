@@ -7,6 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
+  //PRIJAVA
   const [inputs, setInputs] = useState({
     email:"",
     password:"",
@@ -18,17 +19,17 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e) => { //ako promijenimo nešto u input - u
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext); //uzimamo login iz AuthContext da bi mogli korisnika upisati u local storage
 
   const handleLogin = async (e) => {
     e.preventDefault(); /*da se stranica ne refreshuje*/
     try {
       const user = await login(inputs);
-      if(user.email === "skillswap24@gmail.com") {
+      if(user.email === "skillswap24@gmail.com") { //provjera je li admin ili nije, ako jeste, ide na admin - page
         navigate("/admin-page");
       } else {
         navigate("/home-page");
@@ -71,7 +72,7 @@ const Login = () => {
                                 <div className="password-input-container">
                                   <input className="login-form-input" type={showPassword ? "text" : "password"} name="password" placeholder="Unesite lozinku*" required onChange={handleChange} />
                                   <div className="password-icon" onClick={() => setShowPassword(!showPassword)}>
-                                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />} {/*vidi li se ili ne*/}
                                   </div>
                                 </div>
                             </div>

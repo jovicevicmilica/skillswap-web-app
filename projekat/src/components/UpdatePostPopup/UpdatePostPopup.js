@@ -8,12 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const UpdatePostPopup = ({ setIsUpdatePostPopupOpen, post, onPostUpdated }) => {
+  //AŽURIRANJE OBJAVE NA STRANI ADMINA
   const [desc, setDesc] = useState(post.desc);
   const [img, setImg] = useState(null);
 
   const upload = async (file) => {
     try {
-      const formData = new FormData();
+      const formData = new FormData(); //pravimo formu, dodajemo fajl, pravimo zahtjev za upload koji nam vraće taj fajl
       formData.append('file', file);
       const res = await makeAdminRequest.post('/upload', formData);
       return res.data;
@@ -24,15 +25,16 @@ const UpdatePostPopup = ({ setIsUpdatePostPopupOpen, post, onPostUpdated }) => {
 
   const queryClient = useQueryClient();
 
+  //mutacija za ažuriranje objava
   const mutation = useMutation({
     mutationFn: (updatedPost) => {
       return makeAdminRequest.put(`/posts/${post.id}`, updatedPost);
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['posts']);
+      queryClient.invalidateQueries(['posts']); //refreshujemo query
       toast.success('Objava je uspješno ažurirana.');
       onPostUpdated(data.data); //data.data da bi pristupili baš direktnim podacima
-      setIsUpdatePostPopupOpen(false);
+      setIsUpdatePostPopupOpen(false); //mičemo popup
     },
     onError: () => {
       toast.error('Greška prilikom ažuriranja objave.');
@@ -43,15 +45,15 @@ const UpdatePostPopup = ({ setIsUpdatePostPopupOpen, post, onPostUpdated }) => {
     e.preventDefault();
     let imgUrl = post.img; 
     if (img) {
-      imgUrl = await upload(img);
+      imgUrl = await upload(img); //da dobijemo sliku, ukoliko je ima
     }
 
-    const updatedPost = {
+    const updatedPost = { //novi post, ažuriran
       desc,
       img: imgUrl,
     };
 
-    mutation.mutate(updatedPost);
+    mutation.mutate(updatedPost); //mutiramo
   };
 
   return (
@@ -89,7 +91,17 @@ const UpdatePostPopup = ({ setIsUpdatePostPopupOpen, post, onPostUpdated }) => {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const townOptions = [
+const townOptions = [ //sve moguće opcije gradova
   { label: "Podgorica", value: "Podgorica" },
   { label: "Nikšić", value: "Nikšić" },
   { label: "Herceg Novi", value: "Herceg Novi" },
@@ -21,13 +21,13 @@ const townOptions = [
   { label: "Budva", value: "Budva" },
 ];
 
-const learningPrefOptions = [
+const learningPrefOptions = [ //preference učenja
   { label: "uživo", value: "uživo" },
   { label: "online", value: "online" },
   { label: "oboje", value: "oboje" },
 ];
 
-const skillOptions = {
+const skillOptions = { //vještine za Select
   'Poslovanje': [
     "Marketing", "Freelance", "Liderstvo", "Preduzetništvo", "Menadžment",
     "Trgovanje kriptovalutama", "Vođenje bloga", "Društveni mediji",
@@ -57,9 +57,10 @@ const skillOptions = {
   ]
 };
 
-const transformedOptions = Object.keys(skillOptions).map(category => ({
+const transformedOptions = Object.keys(skillOptions).map(category => ({ //transformišemo opcije u validan oblik za Select
   label: category,
   options: skillOptions[category].map(skill => ({ label: skill, value: skill }))
+  //transformiše ih tako da label bude kategorija, zatim imamo niz opcija, u kojima imamo tip { label: ..., value: ... }
 }));
 
 const skillLevelOptions = [
@@ -68,7 +69,7 @@ const skillLevelOptions = [
   { label: "odličan", value: "odličan" },
 ];
 
-const customStyles = {
+const customStyles = { //lični stilovi za Select komponentu u React - u
   control: (provided) => ({
     ...provided,
     border: '1px solid rgba(0, 0, 0, 0)', 
@@ -87,9 +88,10 @@ const customStyles = {
 };
 
 const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
+  //AŽURIRANJE KORISNIKA NA STRANI ADMINA
   const [cover, setCover] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [texts, setTexts] = useState({
+  const [profile, setProfile] = useState(null); //naslovna i profilna
+  const [texts, setTexts] = useState({ //inputi
     email: user.email,
     password: '', //radi sigurnosti!
     name: user.name,
@@ -101,9 +103,9 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
 
   const upload = async (file) => {
     try {
-      const formData = new FormData();
+      const formData = new FormData(); //pravimo formu i dodamo fajl na nju
       formData.append("file", file);
-      const res = await makeAdminRequest.post("/upload", formData);
+      const res = await makeAdminRequest.post("/upload", formData); //uploadujemo fajl i dobijemo ga
       return res.data;
     } catch (err) {
       console.log(err);
@@ -111,17 +113,18 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
   };
 
   const handleChange = (e) => {
-    setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value }));
+    setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value })); //sva prethodna stanja inputa mijenjamo tako što prethodna kopiramo
+    //u novi objekat, i dodamo/ažuriramo value za ključ koji odgovara name tipu input - a
   };
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (user) => {
-        return makeAdminRequest.put("/users", user);
+        return makeAdminRequest.put("/users", user); //ažuriramo profil korisnika
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['users']);
+      queryClient.invalidateQueries(['users']); //da nam 'zastari' i invalidira query kada više nije potreban
       toast.success('Profil je uspješno ažuriran.');
       console.log(data.data);
       onUserUpdated(data.data); //da bi nam se automatski uočile promjene nakon apdejta!
@@ -132,13 +135,13 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
   });
 
   const handleClick = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //preventujemo default način na koji se submit - uje forma
     let coverUrl;
     let profileUrl;
-    coverUrl = cover ? await upload(cover) : user.coverPic;
+    coverUrl = cover ? await upload(cover) : user.coverPic; //ako je stavljena profilna ili naslovna, uzimamo ih, da ih pretvorimo ispod u URL, inače ide stara slika korisnika
     profileUrl = profile ? await upload(profile) : user.profilePic;
     
-    const updatedUser = {
+    const updatedUser = { //stare ili ažurirane vrijednosti iz inputa
         ...texts,
         id: user.id,
         town: texts.town.value,
@@ -149,13 +152,13 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
         primarySkillLevel: texts.primarySkillLevel.value,
     };
 
-    if(texts.password) {
+    if(texts.password) { //provjera je li password unijet, ako nije, ostaje stari
         updatedUser.password = texts.password;
     };
 
     mutation.mutate(updatedUser);
     setIsUpdateUserPopupOpen(false);
-    setCover(null);
+    setCover(null); //vratimo ih na null za sljedeći apdejt
     setProfile(null);
   };
 
@@ -179,7 +182,7 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
             <label className="update-form-label" htmlFor='profile'>
                 <span>Profilna slika</span>
                 <div className="image-container-update">
-                    <img src={profile ? URL.createObjectURL(profile) : "./upload/" + user.profilePic} alt="" />
+                    <img src={profile ? URL.createObjectURL(profile) : "./upload/" + user.profilePic} alt="" /> {/*ako ima profilne pretvaramo je u url, inače ide stara iz upload - a*/}
                     <CloudUploadIcon />
                 </div>
             </label>
@@ -233,19 +236,21 @@ const UpdateUserPopup = ({ setIsUpdateUserPopupOpen, user, onUserUpdated }) => {
                 styles={customStyles}   
                 className='update-form-select'
             />
-            <label className="update-form-label">Nivo primarne vještine</label>
-            <Select
-                value={ texts.primarySkillLevel }
-                onChange={value => setTexts(prev => ({ ...prev, primarySkillLevel: value }))}
-                options={skillLevelOptions}
-                styles={customStyles}   
-                className='update-form-select'
-            />
             <button className="profile-button-update" onClick={handleClick}>Ažuriraj</button>
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

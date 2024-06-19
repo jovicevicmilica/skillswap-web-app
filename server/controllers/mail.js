@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 //asinhrono slanje mejla
-export const sendEmail = async (req, res) => {
+export const sendEmail = async (req, res) => { //asinhrona je, dakle ne blokira glavni tok izvršavanja programa, a await se koristi da sačekamo rezultat promjene stanja
     const { email, subject, message } = req.body;
 
     //nodemailer transporter

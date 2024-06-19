@@ -2,6 +2,7 @@ import React from 'react';
 import './TermsOfUse.css';
 
 function TermsOfUse() {
+  //USLOVI KORIŠĆENJA
   const items=[
     "postavljati, otpremati, objavljivati, podnositi ili prenositi bilo koji materijal koji: (a) krši, prisvaja ili narušava patent treće strane, autorska prava, trgovačku marku, tajnu trgovine, moralna prava ili druga prava intelektualne svojine, ili prava na publicitet ili privatnost; (b) krši ili podstiče bilo koje ponašanje koje bi kršilo bilo koji primenljivi zakon ili propis ili bi izazvalo građansku odgovornost; (c) je prevaran, lažan, obmanjujući ili varljiv; (d) je klevetnički, nepristojan, vulgaran ili uvredljiv; (e) promoviše diskriminaciju, netrpeljivost, rasizam, mržnju, uznemiravanje ili štetu protiv bilo koje osobe ili grupe; (f) je nasilan ili prijeteći ili promoviše nasilje ili radnje koje su prijeteće bilo kojoj drugoj osobi; ili (g) promoviše ilegalne ili štetne aktivnosti ili supstance;",
     "ometati ili oštetiti Sajt, uključujući, bez ograničenja, kroz upotrebu virusa, cancel botova, Trojanskih konja, štetnog koda, poplava pingova, napada odbijanja usluge, paket ili IP spoofing, falsifikovanog rutiranja ili elektronskih adresnih informacija ili sličnih metoda ili tehnologija;",

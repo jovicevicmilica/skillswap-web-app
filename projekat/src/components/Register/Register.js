@@ -70,7 +70,8 @@ const isValidEmail = (email) => {
 };
 
 function Register() {
-  const recaptchaRef = useRef();
+  //REGISTRACIJA
+  const recaptchaRef = useRef(); //referenca za reCAPTCHA - u
   const [selectedSkill, setSelectedSkill] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [inputs, setInputs] = useState({
@@ -82,11 +83,11 @@ function Register() {
 
   const [showPassword, setShowPassword] = useState(false); //dodato stanje za prikaz lozinke, da li je otkrivena ili sakrivena
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [err, setErr] = useState(null);
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext); //uzimamo login iz AuthContext - a, da nakon registracije unesemo korisnika u local storage
 
-  const handleSkillChange = selectedOption => {
+  const handleSkillChange = selectedOption => { //promijenimo primatnu vještinu
     const event = {
       target: {
         name: "primarySkill",
@@ -98,15 +99,15 @@ function Register() {
     setSelectedSkill(selectedOption);
   };
 
-  const handleTermsChange = () => {
+  const handleTermsChange = () => { //da li su uslovi prihvaćeni ili ne
     setTermsAccepted(!termsAccepted);
   };
 
-  const handleChange = e => {
+  const handleChange = e => { //promjena u select - u
     setInputs(prev => ({...prev, [e.target.name]:e.target.value}))
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async e => { //da se registrujemo
     e.preventDefault(); /*jer ne refreshujemo stranicu*/
     if (!termsAccepted) {
       toast.error("Morate prihvatiti uslove korišćenja i politiku privatnosti.");
@@ -130,7 +131,7 @@ function Register() {
     try {
       const response = await axios.post("http://localhost:8800/api/auth/register", inputs);
       toast.success("Uspješno ste se registrovali!");
-      await login({ email: inputs.email, password: inputs.password });
+      await login({ email: inputs.email, password: inputs.password }); 
       //da se automatski ulogujemo poslije registracije, a ne da idemo na login
       navigate("/home-page");
     }
@@ -195,7 +196,7 @@ function Register() {
                             <input type="checkbox" id="terms" checked={termsAccepted} onChange={handleTermsChange} className="register-checkbox"/>
                             <label htmlFor="terms">Prihvatam uslove korišćenja i politiku privatnosti*</label>
                         </div>
-                        <div className="recaptcha-reg">
+                        <div className="recaptcha-reg"> {/*postavimo reCAPTCHA - u na osnovu ključa*/}
                             <ReCAPTCHA ref={recaptchaRef} sitekey="6Lc1BKQpAAAAAF5SgOg59OstzLMGK5vWtwpgRvGy" style={{ marginBottom: '20px' }} className="g-recaptcha-reg" />
                         </div>
                         <button type="submit" className="register-button" onClick={handleSubmit}>Registrujte se</button>

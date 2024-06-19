@@ -8,10 +8,11 @@ const fetchExchangeUsers = () => {
 };
 
 const ExchangeList = () => {
+  //LISTA PREDLOŽENIH ZA PRAĆENJE NA OSNOVU VJEŠTINA KOJE IMA
   const navigate = useNavigate();
 
   const { data: users, isLoading, isError } = useQuery({
-    queryKey: ['fetchExchangeUsers'],
+    queryKey: ['fetchExchangeUsers'], //pozivamo prikaz ljudi koji imaju vještine koje tražimo
     queryFn: fetchExchangeUsers
   });
 
@@ -40,7 +41,7 @@ const ExchangeList = () => {
               ? user.skills.filter(skill => skill).join(', ') 
               : (user.skills && user.skills[0] ? user.skills[0] : '')
             }
-          </span> {/*prikazuje sve vještine koje korisnik ima, a koje su nama potrebne, uklanja null vrijednosti*/}
+          </span> {/*prikazuje sve vještine koje korisnik ima, a koje su nama potrebne, uklanja null vrijednosti, spaja ih zarezom*/}
         </div>
         ))
       )}

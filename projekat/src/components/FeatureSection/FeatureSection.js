@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'; //ikonica za štrik
 
 function FeatureSection() {
+  //SEKCIJA PREDNOSTI
   return (
     <div className="feature-section" id="feature-section">
       <div className="feature-container">

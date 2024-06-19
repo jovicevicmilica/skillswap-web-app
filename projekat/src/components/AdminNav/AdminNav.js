@@ -7,15 +7,16 @@ import { AuthContext } from '../../context/authContext';
 import { toast } from 'react-toastify';
 
 const AdminNav = () => {
-    const { currentUser, logout } = useContext(AuthContext);
-    const [dropdownVisible, setDropdownVisible] = useState(false);
+    //NAVBAR ADMINA
+    const { currentUser, logout } = useContext(AuthContext); //trenutni korisnik i logout, da ga obrišemo iz local storage
+    const [dropdownVisible, setDropdownVisible] = useState(false); //dropdown za mobilne uređaje
     const navigate = useNavigate();
 
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
             await logout();
-            navigate("/login");
+            navigate("/login"); //izlogujemo se i vodi nas na login
         } catch (err) {
             toast.error(err.response.data);
             return;
@@ -27,7 +28,7 @@ const AdminNav = () => {
     };
 
     const toggleDropdown = () => {
-        setDropdownVisible(!dropdownVisible);
+        setDropdownVisible(!dropdownVisible); //na klik otvaramo/zatvaramo dropdown
     };
 
     const closeDropdown = () => {
@@ -35,7 +36,7 @@ const AdminNav = () => {
     };
 
     useEffect(() => {
-        const closeDropdown = (e) => {
+        const closeDropdown = (e) => { //da omogućimo da klikom lijevo zatvorimo dropdown
             if (!e.target.closest('.admin-left')) {
                 setDropdownVisible(false);
             }

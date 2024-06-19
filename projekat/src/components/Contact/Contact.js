@@ -6,13 +6,15 @@ import axios from "axios"; /*znatno olakšava slanje HTTP zahtjeva*/
 import ReCAPTCHA from 'react-google-recaptcha';
 
 function Contact() {
+  //KONTAKT
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(''); //inputi, mail, predmet, poruka
   const [captchaValue, setCaptchaValue] = useState(null); //za recaptchu
   const [isLoading, setIsLoading] = useState(false); //za loading bar
   const recaptchaRef = useRef(); /*zapamtimo recaptcha referencu da bi je kasnije vratili na to stanje*/
 
+  //da bi lakše prolazili kroz polja, klikom na arrow
   const handleKeyDown = (e, field) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault(); //zaustavimo defaultno ponašanje

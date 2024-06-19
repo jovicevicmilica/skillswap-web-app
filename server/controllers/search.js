@@ -10,21 +10,24 @@ export const searchUsers = (req, res) => {
         LEFT JOIN userSkills ON users.id = userSkills.userId
         WHERE users.email != 'skillswap24@gmail.com'
     `;
+
     //isključujemo admina iz pretrage, on nije korisnik
+    //za sve stringove koristimo % kako bi mogli da koristimo LIKE, da nam pretraga izbacuje sve što sadrži to što unosimo
     const values = [];
      //koristimo lower da bi podržavalo i kada kucamo malim slovima
     if (query) { //ako je išta pretraženo
         sql += " AND (LOWER(users.name) LIKE LOWER(?) OR LOWER(users.primarySkill) LIKE LOWER(?))";
         values.push(`%${query}%`, `%${query}%`);
     }
+    //pretražujemo po imenu ili primarnoj vještini
 
-    //ako je izabran, biramo i po njemu
+    //ako je izabran, biramo i po njemu, ovo je DETALJNA PRETRAGA
     if (town) {
         sql += " AND LOWER(users.town) LIKE LOWER(?)";
         values.push(`%${town}%`);
     }
 
-    if (hasSkill) {
+    if (hasSkill) { //ako je odabrana vještina tipa 'imam'
         sql += `
             AND (
                 (userSkills.type = 'imam' AND LOWER(userSkills.skill) LIKE LOWER(?))
@@ -34,6 +37,7 @@ export const searchUsers = (req, res) => {
         values.push(`%${hasSkill}%`, `%${hasSkill}%`);
     }
 
+    //za level nam ne ide % jer biramo tačnu vrijednost
     if (hasSkillLevel) {
         sql += `
             AND (
@@ -53,19 +57,20 @@ export const searchUsers = (req, res) => {
         values.push(wantsSkillLevel);
     }
 
+    //grupišemo
     sql += " GROUP BY users.id";
 
     console.log('SQL Query:', sql);
-    console.log('Values:', values);
+    console.log('Vrijednosti:', values);
 
     db.query(sql, values, (err, results) => {
         if (err) {
             console.error('Greška u pretrazi:', err);
             return res.status(500).json(err);
         }
-        console.log('Search results:', results);
+        console.log('Rezultati pretrage:', results);
         if (results.length === 0) {
-            return res.status(404).json("Nije pronađeno.");
+            return res.status(404).json("Nije pronađeno."); //ako ništa nismo našli
         }
         res.json(results);
     });

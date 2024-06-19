@@ -85,7 +85,7 @@
     color: var(--white);
 }
 
-.post-delete::hover {
+.post-delete:hover {
     background-color: var(--black);
     transform: all 5ms ease;
 }

@@ -12,6 +12,7 @@ import './HomeDropdown.css';
 import { useContext } from 'react';
 
 const HomeDropdown = ({ onClose }) => {
+  //DROPDOWN NA NAVBAR - U, PRIKAZUJE SVE ONO ŠTO SE NA TELEFONU NE VIDI
   const { currentUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 

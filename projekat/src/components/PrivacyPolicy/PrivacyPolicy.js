@@ -2,6 +2,7 @@ import React from 'react';
 import './PrivacyPolicy.css';
 
 function PrivacyPolicy() {
+  //POLITIKA PRIVATNOSTI
   const items=[
     "Koje lične podatke prikupljamo sa naše web stranice na skillswap.com („Sajt“);",
     "Kako koristimo podatke;",

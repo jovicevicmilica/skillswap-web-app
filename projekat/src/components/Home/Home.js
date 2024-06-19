@@ -4,7 +4,7 @@ import Posts from '../Posts/Posts';
 import Share from '../Share/Share';
 
 const Home = () => {
-
+  //HOME KORISNIKA, SHARE I OBJAVE
   return (
     <div className="home">
         <Share />

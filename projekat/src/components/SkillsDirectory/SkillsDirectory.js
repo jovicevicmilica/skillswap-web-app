@@ -4,13 +4,14 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import './SkillsDirectory.css';
 
 function SkillsDirectory() {
-  const [openDropdown, setOpenDropdown] = useState(null);
+  //DIO GDJE SE GLEDAJU SVE VJEŠTINE PO KATEGORIJI
+  const [openDropdown, setOpenDropdown] = useState(null); //da provjerimo je li dropdown spušen
 
-  function toggleDropdown(category) {
+  function toggleDropdown(category) { //category ide da bi znali za koju kategoriju je otvoren dropdown
     setOpenDropdown(openDropdown === category ? null : category);
   } 
 
-  function renderSkills(skills) {
+  function renderSkills(skills) { //renderujemo vještine na osnovu ključa, za određeni ključ vraćemo skup vještina
     return skills.map(skill => (
       <button className="skill-tag" key={skill}>
         {skill}
@@ -49,13 +50,6 @@ function SkillsDirectory() {
     "Šminkanje", "Dizajn nakita",
   ];
 
-  const categories = [ /*kategorije*/
-    { name: 'Poslovanje', skills: poslovanjeSkills },
-    { name: 'Kreativnost', skills: kreativnostSkills },
-    { name: 'Tehnologija', skills: tehnologijaSkills },
-    { name: 'Životni Stil', skills: zivotniStilSkills },
-  ];
-
   return (
     <div className="skills-section" id="skills-directory">
       <div className="skills-container">
@@ -78,7 +72,7 @@ function SkillsDirectory() {
                   </button> 
                 </div>
               </div>
-              {openDropdown === 'Kreativnost' && (
+              {openDropdown === 'Kreativnost' && ( //ako je dropdown otvoren, renderujemo vještine za njega
                 <div className="skill-dropdown open">
                   {renderSkills(kreativnostSkills)}
                 </div>

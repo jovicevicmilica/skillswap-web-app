@@ -36,17 +36,18 @@ const customStyles = {
 };
 
 const SelectPopup = ({ type, closePopup, addTag }) => {
+  //POPUP KOJI NAM OMOGUĆAVA DA TAGUJEMO PRIJATELJA ILI MJESTO
   const [friends, setFriends] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const res = await makeRequest.get('/friends/showFriends');
+        const res = await makeRequest.get('/friends/showFriends'); //da pridobijemo prijatelje korisnika, da od njih bira koga taguje
         const friendOptions = res.data.map(friend => ({
           label: friend.name,
           value: friend.id,
-          link: `/home-page/profile/${friend.id}`
+          link: `/home-page/profile/${friend.id}` //link nam vodi na njihov profil
         }));
         setFriends(friendOptions);
       } catch (err) {
@@ -54,16 +55,16 @@ const SelectPopup = ({ type, closePopup, addTag }) => {
       }
     };
 
-    if (type === 'friend') {
+    if (type === 'friend') { //provjera tipa popup - a
       fetchFriends();
     }
   }, [type]);
 
-  const options = type === 'friend' ? friends : townOptions;
+  const options = type === 'friend' ? friends : townOptions; //ako nam je popup za mjesto, onda se bira od opcija gradova
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    addTag(option);
+    addTag(option); //odaberemo neku od opcija
     closePopup();
   };
 

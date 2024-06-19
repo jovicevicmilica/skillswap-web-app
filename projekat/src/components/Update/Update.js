@@ -66,6 +66,7 @@ const skillOptions = {
 const transformedOptions = Object.keys(skillOptions).map(category => ({
   label: category,
   options: skillOptions[category].map(skill => ({ label: skill, value: skill }))
+  //transformišemo opcije iz selecta, tako da imamo kao label kategoriju, zatim ide niz opcija u kojima je { label: ..., value: ... }
 }));
 
 const skillLevelOptions = [
@@ -74,7 +75,7 @@ const skillLevelOptions = [
   { label: "odličan", value: "odličan" },
 ];
 
-const customStyles = {
+const customStyles = { //stilovi za Select
   control: (provided) => ({
     ...provided,
     border: '1px solid rgba(0, 0, 0, 0)', 
@@ -93,22 +94,24 @@ const customStyles = {
 };
 
 const Update = ({ setOpenUpdate, user }) => {
+  //AŽURIRANJE PROFILA NA STRANI KORISNIKA
   const [cover, setCover] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [userSkills, setUserSkills] = useState([]);
-  const { updateUser } = useContext(AuthContext);
+  const [userSkills, setUserSkills] = useState([]); //niz parova ključ - vrijednost
+  const { updateUser } = useContext(AuthContext); //da kad ažuriramo korisnika, automatski ažuriramo i currentUser - a zbog prikaza detalja na ekranu
   const [texts, setTexts] = useState({
     email: user.email,
     password: '', //radi sigurnosti!
     name: user.name,
-    town: { label: user.town, value: user.town },
+    town: { label: user.town, value: user.town }, //jer se uzima iz Select - a
     primarySkill: { label: user.primarySkill, value: user.primarySkill},
     primarySkillLevel: { label: user.primarySkillLevel, value: user.primarySkillLevel},
     learningPref: { label: user.learningPref, value: user.learningPref }
   });
   const [newSkill, setNewSkill] = useState({ type: '', skill: '', skillLevel: '' });
+  //da bi dodali novu vještinu, donji dio apdejta
 
-  useEffect(() => {
+  useEffect(() => { //da nam se automatski dohvate vještine kada otvorimo Update, pozivamo fetchSkills
     const fetchSkills = async () => {
       try {
         const res = await makeRequest.get(`/skills/${user.id}`);
@@ -125,7 +128,7 @@ const Update = ({ setOpenUpdate, user }) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post("/upload", formData);
+      const res = await makeRequest.post("/upload", formData); //funkcija za pozivanje upload zahtjeva iz index.js, da se slika pridobije i postavi u storage multer - a
       return res.data;
     } catch (err) {
       console.log(err);
@@ -134,8 +137,10 @@ const Update = ({ setOpenUpdate, user }) => {
 
   const handleChange = (e) => {
     setTexts((prev) => ({ ...prev, [e.target.name] : e.target.value }));
+    //da se sve opcije na Select - u postave na nove, tj. prethodna vr. zamijenjena novom opcijom ukoliko je odabrana
   };
 
+  //FUNKCIJE ZA SPREČAVANJE DUPLIKATA
   const getFilteredOptionsForPrimary = () => {
     //opcije za primarnu vještinu, sve one koje već nisu označene kao 'imam'
     const existingImamSkills = userSkills.filter(skill => skill.type === 'imam').map(skill => skill.skill);
@@ -143,18 +148,19 @@ const Update = ({ setOpenUpdate, user }) => {
       ...category,
       options: category.options.filter(option => !existingImamSkills.includes(option.value))
     }));
+    //filterišemo Select, tako da kod biranja primarne nema vještine tipa 'imam' ponuđene
   };
 
   const getFilteredOptionsForSkillType = () => {
     //prvo dobijemo sve vještine tog tipa
     let existingSkills = userSkills.filter(skill => skill.type === newSkill.type).map(skill => skill.skill);
 
-    //onda, ako je tip 'imam', dodamo takođe i primarne u skup
+    //onda, ako je tip 'imam', dodamo takođe i primarne u skup, jer ne želimo da nam nudi primarnu kada je tipa 'imam'
     if (newSkill.type === 'imam') {
       existingSkills.push(texts.primarySkill.value);
     }
 
-    //filterišemo da maknemo te opcije iz selecta
+    //filterišemo da maknemo te opcije iz select - a, kako ne bi mogle biti odabrane
     return transformedOptions.map(category => ({
       ...category,
       options: category.options.filter(option => !existingSkills.includes(option.value))
@@ -163,8 +169,8 @@ const Update = ({ setOpenUpdate, user }) => {
 
   const handleDeleteSkill = async (skillId) => {
     try {
-      await makeRequest.delete(`/skills/${skillId}`);
-      setUserSkills(currentSkills => currentSkills.filter(skill => skill.id !== skillId));
+      await makeRequest.delete(`/skills/${skillId}`); //pokušamo obrisati vještinu
+      setUserSkills(currentSkills => currentSkills.filter(skill => skill.id !== skillId)); //ažuriramo skup vještina tako da nema ovu više
       toast.success("Vještina je uspješno obrisana.");
     } catch (error) {
       console.error('Greška prilikom brisanja vještine:', error);
@@ -183,12 +189,12 @@ const Update = ({ setOpenUpdate, user }) => {
     }
 
     try {
-      const res = await makeRequest.post('/skills', {
+      const res = await makeRequest.post('/skills', { //dodamo vještinu
         userId: user.id,
         ...newSkill
       });
-      setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]);
-      setNewSkill({ type: '', skill: '', skillLevel: '' }); // Reset form after adding
+      setUserSkills(currentSkills => [...currentSkills, { ...newSkill, id: res.data.skillId }]); //ažuriramo skup vještina
+      setNewSkill({ type: '', skill: '', skillLevel: '' }); //resetujemo formu nakon dodavanja
       toast.success('Vještina je uspješno dodana.');
     } catch (error) {
       console.error('Greška u dodavanju vještine:', error);
@@ -198,7 +204,7 @@ const Update = ({ setOpenUpdate, user }) => {
 
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const mutation = useMutation({ //mutacija za ažuriranje korisnika
     mutationFn: (user) => {
         return makeRequest.put("/users", user);
     },
@@ -218,7 +224,7 @@ const Update = ({ setOpenUpdate, user }) => {
     coverUrl = cover ? await upload(cover) : user.coverPic;
     profileUrl = profile ? await upload(profile) : user.profilePic;
     
-    const updatedUser = {
+    const updatedUser = { //ažurirani korisnik na osnovu input - a, svi stari input - i i promjene
         ...texts,
         town: texts.town.value,
         coverPic: coverUrl,
@@ -229,10 +235,10 @@ const Update = ({ setOpenUpdate, user }) => {
     };
 
     if(texts.password) {
-        updatedUser.password = texts.password;
+        updatedUser.password = texts.password; //ako je lozinka promijenjena
     };
 
-    mutation.mutate(updatedUser);
+    mutation.mutate(updatedUser); //ažuriramo, resetujemo formu, slike i input - e
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
@@ -314,6 +320,14 @@ const Update = ({ setOpenUpdate, user }) => {
               styles={customStyles}
               className='update-form-select'
             />
+            {/*<label className="update-form-label">Nivo primarne vještine</label>
+            <Select
+                value={texts.primarySkillLevel}
+                onChange={value => setTexts(prev => ({ ...prev, primarySkillLevel: value }))}
+                options={skillLevelOptions}
+                styles={customStyles}   
+                className='update-form-select'
+            />*/}
             <button className="profile-button-update" onClick={handleClick}>Ažuriraj</button>
             <h1>Ažuriraj vještine</h1>
             <p>Uzmite u obzir da smijete imati ukupno 3 vještine koje posjedujete (uključujući primarnu) i ukupno 3 koje vas interesuju! Preko nećete moći dodati!</p>
@@ -345,8 +359,8 @@ const Update = ({ setOpenUpdate, user }) => {
             />
             <button onClick={handleAddSkill} className="profile-button-smaller" disabled={
               (newSkill.type === 'imam' && userSkills.filter(skill => skill.type === 'imam').length >= 2) ||
-              (newSkill.type === 'želim' && userSkills.filter(skill => skill.type === 'želim').length >= 3) ||
-              userSkills.some(skill => skill.skill === newSkill.skill) ||
+              (newSkill.type === 'želim' && userSkills.filter(skill => skill.type === 'želim').length >= 3) || /*da ograničimo broj vještina na 2 i 3*/
+              userSkills.some(skill => skill.skill === newSkill.skill) || //da ograničimo duplikate!
               texts.primarySkill.value === newSkill.skill ||
               (newSkill.type === 'želim' && userSkills.some(skill => skill.type === 'želim' && skill.skill === newSkill.skill))
             }>
@@ -356,7 +370,7 @@ const Update = ({ setOpenUpdate, user }) => {
               <label className="update-form-label">OSTALE VJEŠTINE</label>
               {userSkills.map((skill, index) => (
                 <div key={index} className="update-items">
-                  {skill.skill} ({skill.skillLevel}) - {skill.type}
+                  {skill.skill} ({skill.skillLevel}) - {skill.type} {/*prikaz ostalih vještina*/}
                   <button onClick={() => handleDeleteSkill(skill.id)} className="profile-button-smaller">Obriši</button>
                 </div>
               ))}
@@ -364,7 +378,17 @@ const Update = ({ setOpenUpdate, user }) => {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

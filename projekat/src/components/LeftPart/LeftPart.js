@@ -14,14 +14,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 const LeftPart = () => {
-  const { currentUser, logout } = useContext(AuthContext); 
+  const { currentUser, logout } = useContext(AuthContext); //uzimamo trenutnog korisnika i logout, da bi ga obrisali iz local storage - a
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
     e.preventDefault(); /*da se stranica ne refreshuje*/
     try {
       await logout();
-      navigate("/login");
+      navigate("/login"); //izlogujemo se i vrati nas na login
     } 
 
     catch(err) {
@@ -30,15 +30,15 @@ const LeftPart = () => {
     }
   };
 
-  const goToFriends = () => {
+  const goToFriends = () => { //vodi nas na dio za prijatelje
     navigate("/home-page/friends");
   };
 
-  const goToExchange = () => {
+  const goToExchange = () => { //vodi nas na dio za razmjenu
     navigate("/home-page/exchange");
   };
 
-  const goToGallery = () => {
+  const goToGallery = () => { //vodi nas na dio za galeriju
     navigate("/home-page/gallery");
   };
 

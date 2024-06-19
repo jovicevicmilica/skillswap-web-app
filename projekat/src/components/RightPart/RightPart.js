@@ -7,32 +7,33 @@ import { makeRequest } from '../../axios';
 import { Link } from 'react-router-dom';
 
 const RightPart = () => {
+  //ZAHTJEVI ZA PRAĆENJE
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['followers'],
-    queryFn: () => makeRequest.get('/follows/followers').then(res => res.data),
+    queryFn: () => makeRequest.get('/follows/followers').then(res => res.data), //pridobijemo zahtjeve
   });
 
   const acceptMutation = useMutation({
-    mutationFn: (userId) => makeRequest.post('/follows/followers/accept', { userId }),
+    mutationFn: (userId) => makeRequest.post('/follows/followers/accept', { userId }), //prihvatimo zahtjev
     onSuccess: () => {
       queryClient.invalidateQueries(['followers']);
     },
   });
 
   const rejectMutation = useMutation({
-    mutationFn: (userId) => makeRequest.delete('/follows/followers/reject', { data: { userId } }),
+    mutationFn: (userId) => makeRequest.delete('/follows/followers/reject', { data: { userId } }), //odbijemo zahtjev
     onSuccess: () => {
       queryClient.invalidateQueries(['followers']);
     },
   });
 
-  const handleAccept = (userId) => {
+  const handleAccept = (userId) => { //ukoliko je prihvaćeno, mutiramo tu mutaciju
     acceptMutation.mutate(userId);
   };
 
-  const handleReject = (userId) => {
+  const handleReject = (userId) => { //inače odbijamo
     rejectMutation.mutate(userId);
   };
 

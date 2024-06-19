@@ -10,9 +10,10 @@ import SelectPopup from "../SelectPopup/SelectPopup";
 import { toast, ToastContainer } from "react-toastify";
 
 const Share = () => {
+  //BLOK ZA OBJAVU NOVOG POST - A
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
-  const [popupType, setPopupType] = useState(null); //za kontrolu pop-up prozora
+  const [popupType, setPopupType] = useState(null); //za kontrolu pop-up prozora (da li je za tag/mjesto)
   const [tags, setTags] = useState([]); //za čuvanje tagova
   const [place, setPlace] = useState(""); //za čuvanje mjesta
 
@@ -23,13 +24,13 @@ const Share = () => {
         formData.append("file", file); 
 
         const res = await makeRequest.post("/upload", formData);
-        return res.data; /*vraće taj url*/
+        return res.data; /*vraće taj url, tj. mi ga kasnije pretvaramo u URL, a dobijamo fajl i čuvamo ga u folderu*/
     } catch(err) {
         console.log(err);
     }
   };
 
-  const {currentUser} = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext); //dobijemo trenutnog korisnika, radi profilne slike i da bi se znalo ko kači objavu
 
   const queryClient = useQueryClient();
 
@@ -37,7 +38,8 @@ const Share = () => {
   const mutation = useMutation({
     mutationFn: (newPost) => {
         /*šaljemo deskripciju i sliku, i ako je uspješno, možemo ponovo učitati akciju*/
-            return makeRequest.post("/posts", newPost);
+        //tj. kačimo novu objavu
+        return makeRequest.post("/posts", newPost);
     },
     onSuccess: () => {
       /*refreshujemo da bi mogli objaviti opet*/
@@ -58,9 +60,10 @@ const Share = () => {
     if(file) 
         imgUrl = await upload(); /*slika nam je url koji vratimo iz upload funkcije*/
 
+    //formatiramo deskripciju da bude tag koji vodi na profil, plave boje
     const formattedDesc = tags.reduce((acc, tag) => {
       return acc.replace(`@${tag.label}`, `<a href="${tag.link}" class="no-underline" style="color: blue;">@${tag.label}</a>`);
-    }, desc); //formatiramo tag da se ističe
+    }, desc); 
 
     /*sada počinjemo koristiti react query mutacije*/
     mutation.mutate({ desc : formattedDesc, img: imgUrl, place }); /*pozivamo funkciju od gore sa našom objavom, koja je zapravo slika i opis*/
@@ -73,15 +76,16 @@ const Share = () => {
   };
 
   const handleAddTag = (option) => {
+    //ako nam je popup za friend, onda dodajemo tag na objavu
     if (popupType === 'friend') {
-      const newTag = {
+      const newTag = { //tag ima label, tj. ime korisnika, i link koji vodi do profila
         label: option.label,
         link: option.link || ''
       };
-      setTags([...tags, newTag]);
-      setDesc(desc + ` @${option.label}`);
+      setTags([...tags, newTag]); //postavimo tagove
+      setDesc(desc + ` @${option.label}`); //pridodamo tag na deskripciju
     } else if (popupType === 'place') {
-      setPlace(option.label);
+      setPlace(option.label); //ako je popup za place, dodajemo mjesto na objavu
     }
   };
 
@@ -132,9 +136,10 @@ const Share = () => {
             <button onClick={handleClick}>Podijeli</button>
           </div>
         </div>
-        {place && <div className="share-place">Mjesto: {place}</div>}
+        {place && <div className="share-place">Mjesto: {place}</div>} {/*dio za mjesto ide na dno*/}
       </div>
       {popupType && <SelectPopup type={popupType} closePopup={() => setPopupType(null)} addTag={handleAddTag} />}
+      {/*provjeravamo je li odabran popup, ako jeste dodamo da se na closePopup zatvara, i dodamo funkciju koja radi nešto sa tim tagom/mjestom*/}
       <ToastContainer 
         position="top-right"
         autoClose={5000}

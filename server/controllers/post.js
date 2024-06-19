@@ -2,6 +2,7 @@ import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
+//da dobijemo objave korisnika
 export const getPosts = (req, res) => {
   const userId = req.query.userId;
   const token = req.cookies.accessToken;
@@ -50,7 +51,7 @@ export const addPost = (req, res) => {
 export const deletePost = (req, res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Niste ulogovani!");
-    /*moramo biti ulogovani da bi kačili objave pa je ovaj dio nepromijenjen od gore*/
+    /*moramo biti ulogovani da bi brisali objave pa je ovaj dio nepromijenjen od gore*/
 
     jwt.verify(token, "secretkey", (err, userInfo) => {
         if(err) return res.status(403).json("Token nije validan.");
@@ -65,6 +66,7 @@ export const deletePost = (req, res) => {
     });
 };
 
+//za GALERIJU, da dobijemo objave koje samo imaju SLIKE!
 export const getPostsWithImages = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Niste ulogovani!");

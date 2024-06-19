@@ -2,11 +2,13 @@ import React from 'react';
 import './Container.css';
 
 function Container() {
+  //GLAVNI CONTAINER
   function scrollToSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
+    //da glatko skrolujemo do određene sekcije
   }
 
   return (

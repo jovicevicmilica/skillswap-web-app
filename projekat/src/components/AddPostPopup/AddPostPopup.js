@@ -9,18 +9,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddPostPopup = ({ setIsAddPostPopupOpen, onPostAdded }) => {
+  //POPUP ZA DODAVANJE OBJAVE, ADMIN
   const [desc, setDesc] = useState('');
   const [img, setImg] = useState(null);
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null); //za kojeg korisnika dodajemo objavu
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await makeAdminRequest.get('/users');
-        setUsers(response.data);
+        const response = await makeAdminRequest.get('/users'); //da dobijemo sve korisnike
+        setUsers(response.data); //postavimo sve korisnike, kako bi mogli da biramo za kojeg ćemo da postavimo obajvu
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Greška pri dobijanju korisnika:', error);
       }
     };
 
@@ -29,9 +30,9 @@ const AddPostPopup = ({ setIsAddPostPopupOpen, onPostAdded }) => {
 
   const upload = async (file) => {
     try {
-      const formData = new FormData();
+      const formData = new FormData(); //kreiramo formu na koju dodajemo fajl
       formData.append('file', file);
-      const res = await makeAdminRequest.post('/upload', formData);
+      const res = await makeAdminRequest.post('/upload', formData); //upload postavlja taj fajl u folder, i vraće nam ga, da bismo generisali URL
       return res.data;
     } catch (err) {
       console.log(err);
@@ -42,14 +43,14 @@ const AddPostPopup = ({ setIsAddPostPopupOpen, onPostAdded }) => {
 
   const mutation = useMutation({
     mutationFn: (newPost) => {
-      return makeAdminRequest.post('/posts', newPost);
+      return makeAdminRequest.post('/posts', newPost); //dodajemo objavu
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['posts']);
+      queryClient.invalidateQueries(['posts']); //refreshujemo
       toast.success('Objava je uspješno dodata.');
       console.log(data.data);
-      onPostAdded(data.data);
-      setIsAddPostPopupOpen(false);
+      onPostAdded(data.data); //označavamo dodati post
+      setIsAddPostPopupOpen(false); //gasimo dropdown
     },
     onError: () => {
       toast.error('Greška prilikom dodavanja objave.');
@@ -60,7 +61,7 @@ const AddPostPopup = ({ setIsAddPostPopupOpen, onPostAdded }) => {
     e.preventDefault();
     let imgUrl;
     if (img) {
-      imgUrl = await upload(img);
+      imgUrl = await upload(img); //ako je slika odabrana, postavi se, inače bude bez slike
     }
 
     const newPost = {
@@ -73,7 +74,7 @@ const AddPostPopup = ({ setIsAddPostPopupOpen, onPostAdded }) => {
     mutation.mutate(newPost);
   };
 
-  const customStyles = {
+  const customStyles = { //stilovi za select
     control: (provided) => ({
       ...provided,
       border: '1px solid rgba(0, 0, 0, 0)',

@@ -8,8 +8,9 @@ const fetchPostsWithImages = () => {
 };
 
 const Gallery = () => {
+  //GALERIJA
   const { data: posts, isLoading, isError } = useQuery({
-    queryKey: ['fetchPostsWithImages'],
+    queryKey: ['fetchPostsWithImages'], //pridobijemo sve objave koje imaju slike
     queryFn: fetchPostsWithImages
   });
 
@@ -19,11 +20,11 @@ const Gallery = () => {
   if (isError) return <div>Greška prilikom učitavanja.</div>;
 
   const handleImageClick = (post) => {
-    setSelectedImage(post);
+    setSelectedImage(post); //ako smo odabrali sliku iz galerije
   };
 
   const closeImage = () => {
-    setSelectedImage(null);
+    setSelectedImage(null); //ako smo izašli iz slike
   };
 
   return (
@@ -34,13 +35,13 @@ const Gallery = () => {
       ) : (
         <div className="gallery-grid">
           {posts.map(post => (
-            <div key={post.id} className="gallery-item" onClick={() => handleImageClick(post)}>
+            <div key={post.id} className="gallery-item" onClick={() => handleImageClick(post)}> {/*klikom na sliku se ona zumira*/}
               <img src={"/upload/" + post.img} alt={post.desc} />
             </div>
           ))}
         </div>
       )}
-      {selectedImage && (
+      {selectedImage && ( /*ako je odabrana slika, pojavljuje se modal*/
         <div className="modal" onClick={closeImage}>
           <span className="close" onClick={closeImage}>&times;</span>
           <div className="modal-content-container">

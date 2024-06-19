@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SearchIcon from '@mui/icons-material/Search';
 
 const AdminPosts = () => {
+    //PRIKAZ OBJAVA NA STRANI ADMINA
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [isAddPostPopupOpen, setIsAddPostPopupOpen] = useState(false);
@@ -22,28 +23,28 @@ const AdminPosts = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        fetchPosts();
+        fetchPosts(); //dobijemo objave
     }, []);
 
     const fetchPosts = async () => {
         try {
-            const response = await makeAdminRequest.get('/posts'); 
+            const response = await makeAdminRequest.get('/posts'); //api za dobijanje objava
             setPosts(response.data); 
             setFilteredPosts(response.data);
         } catch (error) {
-            console.error('Neuspješno dohvaćeni postovi:', error);
+            console.error('Neuspješno dohvaćene objave:', error);
         }
     };
 
     const handleUpdate = (postId) => {
-        const post = posts.find(post => post.id === postId);
+        const post = posts.find(post => post.id === postId); //nađemo selektovanu objavu, postavimo je, i otvaramo popup
         setSelectedPost(post);
         setIsUpdatePostPopupOpen(true);
     };
 
     const handleDelete = async (postId) => {
         try {
-            await makeAdminRequest.delete(`/posts/${postId}`);
+            await makeAdminRequest.delete(`/posts/${postId}`); //brišemo određenu objavu, i ažuriramo objave i filterovane objave
             setPosts(posts.filter(post => post.id !== postId));
             setFilteredPosts(filteredPosts.filter(post => post.id !== postId));
             toast.success("Objava je uspješno obrisana.");
@@ -56,32 +57,34 @@ const AdminPosts = () => {
     const handleUpdatePost = (updatedPost) => {
         setPosts(prevPosts => prevPosts.map(post => post.id === updatedPost.id ? updatedPost : post));
         setFilteredPosts(prevPosts => prevPosts.map(post => post.id === updatedPost.id ? updatedPost : post));
+        //na mjestu stare objave ide nova
     };
 
     const handleAddPost = (newPost) => {
         setPosts(prevPosts => [...prevPosts, newPost]);
         setFilteredPosts(prevPosts => [...prevPosts, newPost]);
+        //među stare objave se dodaje nova
     };
 
     const handlePreview = (postId) => {
         const post = posts.find(post => post.id === postId);
         console.log(post);
-        setSelectedPost(post);
-        setIsPreviewPostPopupOpen(true);
+        setSelectedPost(post); //odabran je post za preview
+        setIsPreviewPostPopupOpen(true); //otvaramo popup
     };
 
     const handleSearch = async (e) => {
         const query = e.target.value.toLowerCase();
-        setSearchQuery(query);
+        setSearchQuery(query); //pretraga objava po korisnicima
 
         if (query.trim() === '') {
-            setFilteredPosts(posts);
+            setFilteredPosts(posts); //ako ništa nije unijeto, prikažemo sve objave
             return;
         }
 
         try {
-            const response = await makeAdminRequest.get(`/search-posts?query=${query}`);
-            setFilteredPosts(response.data);
+            const response = await makeAdminRequest.get(`/search-posts?query=${query}`); //vršimo pretragu
+            setFilteredPosts(response.data); //filterišemo objave
         } catch (error) {
             console.error('Greška u pretrazi objava:', error);
             setFilteredPosts([]);
@@ -93,7 +96,7 @@ const AdminPosts = () => {
         tempDiv.innerHTML = desc;
 
         tempDiv.querySelectorAll('a').forEach(anchor => {
-            anchor.removeAttribute('href');
+            anchor.removeAttribute('href'); //kao i za preview, mičemo da admin može da posjeti profile
             anchor.style.color = 'blue';
             anchor.style.textDecoration = 'none';
         });

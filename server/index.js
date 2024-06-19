@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cors({
     origin: "http://localhost:3000",
 }));
-app.use(cookieParser());
+app.use(cookieParser()); /*obrada podataka u kolačićima, čuvanje identifikatora sesije*/
 
 /*koristimo multer da uploadujemo fajl na server*/
 const storage = multer.diskStorage({
@@ -41,7 +41,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }); //pravimo multer i obezbjeđujemo mu storage
 
 app.post("/api/home-page/upload", upload.single("file"), (req, res) => {
     const file = req.file; /*dobijemo fajl*/

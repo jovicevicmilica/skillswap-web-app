@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Discover.css';
 
 function Discover() {
+  //DISCOVER BLOK
   return (
     <div className="discover-block">
         <div className="discover-container">
@@ -23,7 +24,7 @@ function Discover() {
                     <div className="title">PRIJAVA</div>
                     <div className="discover-links">
                       <a href="/login" className="discover-link">Prijavi se</a>
-                      <a href="/sign-up" className="discover-link">Registruj se</a>
+                      <a href="/register" className="discover-link">Registruj se</a>
                     </div>
                   </div>  
                   <div className="discover-box-inner">

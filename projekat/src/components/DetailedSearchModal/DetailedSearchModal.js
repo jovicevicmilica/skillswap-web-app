@@ -49,6 +49,7 @@ const skillOptions = {
 const transformedOptions = Object.keys(skillOptions).map(category => ({
   label: category,
   options: skillOptions[category].map(skill => ({ label: skill, value: skill }))
+  //transformacija onoga što odaberemo u select - u u željeni oblik
 }));
 
 const skillLevelOptions = [
@@ -57,7 +58,7 @@ const skillLevelOptions = [
   { label: "odličan", value: "odličan" },
 ];
 
-const customStyles = {
+const customStyles = { //stilovi za select
   control: (provided) => ({
     ...provided,
     border: '1px solid rgba(0, 0, 0, 0)', 
@@ -76,16 +77,17 @@ const customStyles = {
 };
 
 const DetailedSearchModal = ({ setShowDetailedSearch, executeDetailedSearch }) => {
+    //MODAL ZA DETALJNU PRETRAGU
     const [town, setTown] = useState('');
     const [hasSkill, setHasSkill] = useState('');
     const [hasSkillLevel, setHasSkillLevel] = useState('');
     const [wantsSkill, setWantsSkill] = useState('');
-    const [wantsSkillLevel, setWantsSkillLevel] = useState('');
+    const [wantsSkillLevel, setWantsSkillLevel] = useState(''); //filteri za detailed search
 
     const handleSearch = () => {
         const criteria = { town: town.value, hasSkill: hasSkill.value, hasSkillLevel: hasSkillLevel.value, wantsSkill: wantsSkill.value, wantsSkillLevel: wantsSkillLevel.value };
-        executeDetailedSearch(criteria);
-        setShowDetailedSearch(false);
+        executeDetailedSearch(criteria); //izvršimo pretragu, ovo je u HomeNav dijelu definisano
+        setShowDetailedSearch(false); //mičemo modal
     };
 
     return (

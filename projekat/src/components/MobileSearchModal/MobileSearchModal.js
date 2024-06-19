@@ -79,6 +79,8 @@ const customStyles = {
 };
 
 const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
+    //MODAL ZA PRETRAGU NA UŽIM UREĐAJIMA, TELEFONIMA, TABLETIMA
+    //ujedno je i obični i detailed search
     const [town, setTown] = useState(null);
     const [hasSkill, setHasSkill] = useState(null);
     const [hasSkillLevel, setHasSkillLevel] = useState(null);
@@ -90,6 +92,7 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
     const navigate = useNavigate();
 
     const debouncedSearch = debounce(async (query, filters) => {
+        //koristimo debouncedSearch, tj. zovemo ovu funkciju na svakih 300ms da ne preopteretimo prekomjerno pozivanje API
         const params = {
             query: query.trim(),
             town: filters.town ? filters.town.value : '',
@@ -100,21 +103,21 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
         };
         if (params.query || params.town || params.hasSkill || params.hasSkillLevel || params.wantsSkill || params.wantsSkillLevel) {
             try {
-                const response = await makeRequest.get(`/search/users`, { params });
-                setSearchResults(response.data);
-                setShowDropdown(true);
+                const response = await makeRequest.get(`/search/users`, { params }); //pretražimo po parametrima koji su unijeti
+                setSearchResults(response.data); //postavimo rezultate pretrage
+                setShowDropdown(true); //pojavi se dropdown koji izbaci rezultate
             } catch (error) {
                 console.error('Greška u pretrazi:', error);
-                setSearchResults([]);
-                setShowDropdown(true);
+                setSearchResults([]); //resetujemo
+                setShowDropdown(true); //prikažemo dropdown
             }
         } else {
-            setShowDropdown(false);
+            setShowDropdown(false); //ako ništa nije unijeto onda ne iskače dropdown, i nema rezultata pretrage
             setSearchResults([]);
         }
     }, 300);
 
-    useEffect(() => {
+    useEffect(() => { //provjerava promjene u filterima, kada se doda novi filter, poziva debouncedSearch
         const filters = {
             town: town,
             hasSkill: hasSkill,
@@ -122,12 +125,12 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
             wantsSkill: wantsSkill,
             wantsSkillLevel: wantsSkillLevel
         };
-        if (searchQuery.trim() !== '') {
+        if (searchQuery.trim() !== '') { //ako je nešto unijeto u običnu pretragu
             debouncedSearch(searchQuery, filters);
-        } else if (Object.values(filters).some(filter => filter)) {
+        } else if (Object.values(filters).some(filter => filter)) { //ako nije, nego samo radimo po filterima
             debouncedSearch('', filters);
         } else {
-            setShowDropdown(false);
+            setShowDropdown(false); //zatvaramo dropdown
             setSearchResults([]);
         }
     }, [searchQuery, town, hasSkill, hasSkillLevel, wantsSkill, wantsSkillLevel]);
@@ -135,7 +138,7 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
     return (
         <div className="mobile-search-overlay">
             <div className="mobile-search-content">
-                <button className="mobile-close-button" onClick={() => setShowMobileSearch(false)}>
+                <button className="mobile-close-button" onClick={() => setShowMobileSearch(false)}> {/*zatvaramo modal*/}
                     <CloseIcon />
                 </button>
                 <h1>Pretraga</h1>
@@ -144,7 +147,7 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
                         type="text"
                         placeholder="Pretražite vještine ili osobe..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={(e) => setSearchQuery(e.target.value)} /*obična pretraga, postavimo search query*/
                     />
                 </div>
                 <h1>Detaljna pretraga</h1>
@@ -199,12 +202,12 @@ const MobileSearchModal = ({ setShowMobileSearch, executeDetailedSearch }) => {
                             {searchResults.length > 0 ? (
                                 searchResults.map((result) => (
                                     <div key={result.id} className="mobile-search-item" onClick={() => {
-                                        navigate(`/home-page/profile/${result.id}`);
-                                        setShowDropdown(false);
+                                        navigate(`/home-page/profile/${result.id}`); //ako kliknemo na ono što se pojavi, vodi nas na profil
+                                        setShowDropdown(false); //zatvara dropdown, resetuje search i gasi mobile search
                                         setSearchQuery('');
                                         setShowMobileSearch(false);
                                     }}>
-                                        <img src={"/upload/" + result.profilePic} alt={result.name} />
+                                        <img src={"/upload/" + result.profilePic} alt={result.name} /> {/*prikaz korisnika koji iskoče*/}
                                         <div className="mobile-search-item-text">
                                             <strong className="mobile-search-item-name">{result.name}</strong>
                                             <span>-</span>

@@ -7,7 +7,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Posts from '../Posts/Posts';
 import Brightness1Icon from '@mui/icons-material/Brightness1';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import HelpIcon from '@mui/icons-material/Help';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { toast } from 'react-toastify'; 
@@ -17,26 +16,28 @@ import Update from '../Update/Update';
 import { useNavigate } from 'react-router';
 
 const Profile = () => {
-  const [openUpdate, setOpenUpdate] = useState(false);
-  const userId = parseInt(useLocation().pathname.split("/")[3]); 
-  const { currentUser } = useContext(AuthContext); 
+  //PROFIL KORISNIKA
+  const [openUpdate, setOpenUpdate] = useState(false); //ako kliknemo, otvori se popup za ažuriranje
+  const userId = parseInt(useLocation().pathname.split("/")[3]); //dobijamo korisnički id parsiranjem URL - a profila, jer možda
+  //ne gledamo svoj profil, nego tuđi
+  const { currentUser } = useContext(AuthContext); //trenutni korisnik
 
   const [showSkills, setShowSkills] = useState(false);
-  const [showMoreOptions, setShowMoreOptions] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false); //da nam se otvori dio sa prikazom vještina
 
-  const toggleMoreOptions = () => {
-      setShowMoreOptions(!showMoreOptions);
+  const toggleMoreOptions = () => { //da aktiviramo dio za prikazivanje ostatka vještina
+    setShowMoreOptions(!showMoreOptions);
   };
 
-  const toggleSkills = () => {
+  const toggleSkills = () => { 
     setShowSkills(!showSkills);
   };
 
   const navigate = useNavigate();
 
-  const reportUser = () => { //šaljemo mejl adminu
+  const reportUser = () => { //šaljemo mejl adminu, ukoliko nije naš profil
     const mailto = `mailto:skillswap24@gmail.com?subject=Prijava korisnika ${data.name}&body=Poštovani,%0D%0A%0D%0AObraćam vam se kako bih skrenuo pažnju na ponašanje korisnika ${data.name}.%0D%0A%0D%0A[Ovdje napišite detalje prijave.]%0D%0A%0D%0AS poštovanjem,%0D%0A${currentUser.name}`;
-    window.location.href = mailto;
+    window.location.href = mailto; //otvara nam drugi prozor u mail - u
   };
 
   const deleteUser = () => { //ukoliko je naš profil, umjesto prijave možemo da obrišemo profil
@@ -52,39 +53,40 @@ const Profile = () => {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['home-page/user', userId],
-    queryFn: () => makeRequest.get(`/users/find/${userId}`).then(res => res.data)
+    queryFn: () => makeRequest.get(`/users/find/${userId}`).then(res => res.data) //da pridobijemo podatke o korisniku čiji je profil
   });
 
   const { isLoading: isRelationshipLoading, error: relationshipError, data: relationshipData } = useQuery({
     queryKey: ['home-page/relationship', userId],
-    queryFn: () => makeRequest.get(`/relationships?followedUserId=${userId}`).then(res => res.data)
+    queryFn: () => makeRequest.get(`/relationships?followedUserId=${userId}`).then(res => res.data) //da pridobijemo informacije o praćenju
   });
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (following) => {
-      if(following) return makeRequest.delete("/relationships?userId=" + userId);
-      return makeRequest.post("/relationships", { userId });
+      if(following) return makeRequest.delete("/relationships?userId=" + userId); //da otpratimo ukoliko pratimo
+      return makeRequest.post("/relationships", { userId }); //da zapratimo ako ne pratimo
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['home-page/relationship', userId]);
     }
   });
 
-  const ownedSkills = useMemo(() => {
-    if (!data) return [];
-    const primarySkill = {
+  const ownedSkills = useMemo(() => { //useMemo osigurava da se poziva samo pri određenoj promjeni 
+    if (!data) return []; //pridobijamo vještine i njihove nivoe tipa 'imam'
+    const primarySkill = { //prvo primarna
       skill: data.primarySkill,
       skillLevel: data.primarySkillLevel,
       type: 'imam'  
     };
   
-    const additionalSkills = data.skills.filter(skill => skill.type === 'imam');
-    return [primarySkill, ...additionalSkills];
+    const additionalSkills = data.skills.filter(skill => skill.type === 'imam'); //zatim ostale tipa 'imam'
+    return [primarySkill, ...additionalSkills]; //vraćemo ih spojeno
   }, [data]);
 
   const desiredSkills = useMemo(() => data?.skills.filter(skill => skill.type === 'želim') || [], [data]);
+  //analogno za vještine tipa 'želim'
 
   useEffect(() => { //da lakše zatvorimo opciju obriši/prijavi klikom bilo gdje pored
     const closeMenu = (e) => {
@@ -120,16 +122,16 @@ const Profile = () => {
     return <div>Greška: {relationshipError.message}</div>;
   }
 
-  const handleFollow = () => {
+  const handleFollow = () => { //da zapratimo/otpratimo
     const isFollowing = relationshipData.isFollowing;
     mutation.mutate(isFollowing);
   };
 
   const getRelationshipStatus = (relationshipData, currentUser, userId) => {
-    const isFollowing = relationshipData.isFollowing;
+    const isFollowing = relationshipData.isFollowing; //provjerimo da li pratimo datog korisnika, i da li on prati nas
     const isFollowedBy = relationshipData.followers.some(rel => rel.followerUserId === currentUser.id && rel.isMutual);
 
-    if (isFollowing && isFollowedBy) {
+    if (isFollowing && isFollowedBy) { //ako je obostrano, piše povezani
       return 'Povezani';
     } else if (isFollowing) {
       return 'Razmjena zatražena';
@@ -166,7 +168,7 @@ const Profile = () => {
               <div className="column-right">
                 <h3>Vještine koje tražim:</h3>
                 <div className="bio-list">
-                  {desiredSkills.map((skill, index) => (
+                  {desiredSkills.map((skill, index) => ( //mapiramo vještine iz skupa
                     <div key={index} className="bio-skill">
                       <Brightness1Icon className={`bio-icon ${skill.skillLevel}`} /> {skill.skill}
                     </div>
@@ -193,10 +195,10 @@ const Profile = () => {
                 </div>
               </div>
               {userId === currentUser.id ? (
-                <button className="profile-button" onClick={() => setOpenUpdate(true)}>Ažuriraj profil</button>
+                <button className="profile-button" onClick={() => setOpenUpdate(true)}>Ažuriraj profil</button> /*otvaramo Update popup*/
               ) : (
                 <button className="profile-button" onClick={handleFollow}>
-                  {getRelationshipStatus(relationshipData, currentUser, userId)}
+                  {getRelationshipStatus(relationshipData, currentUser, userId)} {/*da vidimo šta će pisati u vezi sa statusom*/}
                 </button>
               )}
             </div>
@@ -208,7 +210,7 @@ const Profile = () => {
                       {userId === currentUser.id ? (
                           <button onClick={deleteUser}>Obriši profil</button>
                       ) : (
-                          <button onClick={reportUser}>Prijavi profil</button>
+                          <button onClick={reportUser}>Prijavi profil</button> /*ako nije naš profil, može se prijaviti*/
                       )}
                   </div>
               )}

@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
+//da dobijemo sve pratioce
 export const getRelationships = (req, res) => {
   const userId = req.query.followedUserId;
   const token = req.cookies.accessToken;
@@ -32,6 +33,7 @@ export const getRelationships = (req, res) => {
   });
 };
 
+//da zapratimo nekog
 export const addRelationship = (req, res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Niste ulogovani!");
@@ -48,6 +50,7 @@ export const addRelationship = (req, res) => {
     });
 };
 
+//da otpratimo nekog
 export const deleteRelationship = (req, res) => {
     const token = req.cookies.accessToken;
     if(!token) return res.status(401).json("Niste ulogovani!");

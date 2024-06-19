@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
+//da pridobijemo poruke nakon što se obostrano zapratimo s nekim
 export const getMessages = (req, res) => {
     const token = req.cookies.accessToken;
     if (!token) return res.status(401).json("Niste ulogovani!");
@@ -8,7 +9,7 @@ export const getMessages = (req, res) => {
     jwt.verify(token, "secretkey", (err, userInfo) => {
         if (err) return res.status(403).json("Token nije validan.");
 
-        const userId = userInfo.id;  //koristimo ID iz tokena umjesto iz req.user
+        const userId = userInfo.id; //koristimo ID iz tokena umjesto iz req.user
 
         const query = `
             SELECT u.id AS userId, u.name, u.email
@@ -26,7 +27,7 @@ export const getMessages = (req, res) => {
             if (err) {
                 return res.status(500).json({ message: "Greška pri dobijanju poruka", error: err });
             }
-            const messages = results.map(row => {
+            const messages = results.map(row => { //za svakog korisnika s kojim se međusobno pratimo šaljemo ovu poruku preko json - a, i pojavi se u dropdown
                 return {
                     name: row.name,
                     email: row.email, //vraćemo ime i email radi nekih stvari na front - u, hoću da omogućim generisanje mejla i neka css uljepšavanja

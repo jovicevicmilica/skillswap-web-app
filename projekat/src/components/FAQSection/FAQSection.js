@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './FAQSection.css'; 
 
 const FAQSection = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  //PITANJA I ODGOVORI
+  const [activeIndex, setActiveIndex] = useState(null); //je li otvoreno pitanje ili ne
 
   {/*navodimo pitanja i odgovore*/}
   const faqs = [ 
@@ -25,16 +26,10 @@ const FAQSection = () => {
       <span>
         Ukoliko smatrate da je neki profil lažan ili obmanjujući, možete nas <a href="/contact">kontaktirati</a>. Naš tim će pregledati slučaj i preduzeti odgovarajuće mjere kako bi očuvali integritet naše zajednice. Moguće je prijaviti profil direktno, kao i objave.
       </span>
-            ) },
-    { question: "I dalje ne znam kako da upravljam profilom...", 
-      answer: (
-      <span>
-        Nema problema! Možete pogledati detaljan tutorijal (vodič) <a href="/tutorial">ovdje</a>. Ukoliko i dalje imate pitanja, javite se!
-      </span>
-            ) },
+      ) },
   ];
 
-  const toggleFAQ = index => {
+  const toggleFAQ = index => { //da li je otvoren, i koji
     setActiveIndex(activeIndex === index ? null : index); /*da li je otvoreno*/
   };
 
@@ -51,7 +46,7 @@ const FAQSection = () => {
             <div className="faq-question-title" onClick={() => toggleFAQ(index)}>
               <h2 className="faq-question">{faq.question}</h2>
               <button className="faq-toggle">
-                {activeIndex === index ? '-' : '+'} {/*ako je aktivan ide minus, inace plus*/}
+                {activeIndex === index ? '-' : '+'} {/*ako je aktivan ide minus, inače plus*/}
               </button>
             </div>
             <div className="faq-answer" style={{ display: activeIndex === index ? 'block' : 'none' }}>
